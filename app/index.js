@@ -3,7 +3,7 @@ const { createConfig } = require('./config');
 
 try {
   const config = createConfig(process.env)
-  const server = createServer();
+  const server = createServer({ config });
 
   server.listen(config.appPort, () => {
     console.info(`App is running on port ${config.appPort}`);
