@@ -5,6 +5,8 @@ exports.createServer = ({ config, logger }) => {
 
   _express.locals = { config, logger };
 
+  _express.use('/health', (_, res) => res.status(200).end());
+
   return _express;
 };
 
