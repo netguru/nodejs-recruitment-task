@@ -6,7 +6,8 @@ exports.createServer = ({ config, logger }) => {
 
   _express
     .disable('x-powered-by')
-    .use('/health', (_, res) => res.status(200).end());
+    .use('/health', (_, res) => res.status(200).end())
+    .use((_, res) => res.status(404).json('not found'));
 
   _express.locals = { config, logger };
 
