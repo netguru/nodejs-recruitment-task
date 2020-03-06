@@ -1,6 +1,10 @@
 const express = require('express');
 
-exports.createServer = () => {
-  return express();
+exports.createServer = ({ config }) => {
+  const _express = express();
+
+  _express.locals = { config };
+
+  return _express;
 };
 
