@@ -5,7 +5,7 @@ const logger = console;
 
 try {
   const config = createConfig(process.env)
-  const server = createServer({ config });
+  const server = createServer({ config, logger });
 
   server.listen(config.appPort, () => {
     logger.info(`App is running on port ${config.appPort}`);
