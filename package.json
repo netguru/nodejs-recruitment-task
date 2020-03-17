@@ -10,6 +10,7 @@
     "mongoose": "^5.9.5"
   },
   "scripts": {
-    "start:dev": "node -r dotenv/config app/index.js"
+    "start:dev": "node -r dotenv/config app/index.js",
+    "db:seed": "node -r dotenv/config scripts/loadSeeds.js"
   }
 }
