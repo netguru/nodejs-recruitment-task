@@ -1,0 +1,17 @@
+[
+  {
+    "username": "fizzbuzz",
+    "token": "a5c9700a-684e-11ea-bc55-0242ac130003",
+    "permissions": [
+      "read"
+    ]
+  },
+  {
+    "username": "foobar",
+    "token": "a5c973fc-684e-11ea-bc55-0242ac130003",
+    "permissions": [
+      "read",
+      "delete"
+    ]
+  }
+]
