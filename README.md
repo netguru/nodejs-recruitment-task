@@ -10,7 +10,9 @@
 1. install dependencies - `yarn`
 1. start server - `yarn start:dev`
 
-If app is setup correctly then running `curl -v 127.0.0.1:5000/health` will return `200 OK` with empty body. Every other route will return `404`
+If app is setup correctly then running `curl -v 127.0.0.1:3000/health` will
+return `200 OK` with empty body. Assuming default port is used. Every other
+route will return `404`
 
 ## Env vars
 
