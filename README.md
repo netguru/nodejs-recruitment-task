@@ -111,7 +111,7 @@ Please use:
 
 ## Seeding database
 
-Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
+Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel free to adjust it and use it in the DB of your choice.
 
 ## Log file
 
