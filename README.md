@@ -101,48 +101,17 @@ There will be evaluated whether:
 
 You may also gain extra points if your solution will be somehow extraordinary and will use best practices
 
-### Task III
-
-The micro service from task #1 is planned to change the database to a more efficient one.
-How would you refactor your application code so that you can implement the new database?
-
-### Task IV
-
-In last couple of months, the company has grown a lot and more and more websites often and eagerly use the logs of our micro site. Unfortunately the reading from the file is very slow. Provide a way that allows you to serve logs more efficiently.
-
 ## Skeleton requirements
 
-Feel free to use skeleton from the repo but it is not obligatory. You may choose any framework or database up to your will. Have a fun and good luck!
+Please use:
 
-- `node 12.14.1`
-- `yarn 1.21.1`
-
-## Setup
-
-1. prepare env file - `cp .env.example .env`
-1. add required env vars to `.env` file
-1. install dependencies - `yarn`
-1. start server - `yarn start:dev`
-
-If app is setup correctly then running `curl -v 127.0.0.1:3000/health` will
-return `200 OK` with empty body. Assuming default port is used. Every other
-route will return `404`
-
-## Env vars
-
-Required by app:
-
-- `APP_PORT` application port; default to `3000`
-
-Required by seeding script:
-
-- `MONGO_DB_URL` mongo db connection string; required for seeding db with users data
+- `node` (can be LTS of current)
+- `yarn`
+- `jest`
 
 ## Seeding database
 
-Seeds are located in `data/users.json`. You can load them to mongo db using
-`script/loadSeeds.js` script or by running `yarn db:seed`. Don't forget to
-setup `MONGO_DB_URL` env var
+Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
 
 ## Log file
 
