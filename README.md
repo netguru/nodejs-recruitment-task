@@ -84,7 +84,7 @@ Response:
   Status: 201
 ```
 
-#### Mandatory requirement is to publish the application on AWS. Please use your own account and services with free tiers.
+#### Mandatory requirement is to publish the application in one of the popular hosting services e.g. Heroku, AWS, etc
 
 There will be evaluated whether:
 * your solution realizes task assumptions
