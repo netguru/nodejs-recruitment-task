@@ -1,5 +1,22 @@
 ## Tasks
 
+## Requirements
+
+Please use:
+
+- `node` (can be LTS of current)
+- `yarn`
+- `jest`
+
+## Seeding database
+
+Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
+
+## Log file
+
+Sample log file is located in `data/events.log`
+
+
 ### Task I
 Your task is to create a micro service application that will allow authorized requests to read logs processed by the application server.
 
@@ -100,19 +117,3 @@ There will be evaluated whether:
 * environment variables are passed correctly
 
 You may also gain extra points if your solution will be somehow extraordinary and will use best practices
-
-## Skeleton requirements
-
-Please use:
-
-- `node` (can be LTS of current)
-- `yarn`
-- `jest`
-
-## Seeding database
-
-Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel free to adjust it and use it in the DB of your choice.
-
-## Log file
-
-Sample log file is located in `data/events.log`
