@@ -8,16 +8,20 @@ Please use:
 - `yarn`
 - `jest`
 
-## Seeding database
+### Mandatory requirement is to publish the application in one of the popular hosting services e.g. Heroku, AWS, etc
+
+### Seeding database
 
 Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
 
-## Log file
+### Log file
 
 Sample log file is located in `data/events.log`
 
+## Task
 
-### Task I
+### Part 1
+
 Your task is to create a micro service application that will allow authorized requests to read logs processed by the application server.
 
 Additional information:
@@ -84,8 +88,6 @@ Response:
   Status: 201
 ```
 
-#### Mandatory requirement is to publish the application in one of the popular hosting services e.g. Heroku, AWS, etc
-
 There will be evaluated whether:
 * your solution realizes task assumptions
 * your code is consistent or using a linter
@@ -99,7 +101,7 @@ There will be evaluated whether:
 
 You may also gain extra points if your solution will be somehow extraordinary and will use best practices
 
-### Task II
+### Part 2
 
 The management decided to dockerize the application. Your task is to prepare the application from task #1 so that it works in development environment in the Docker container.
 
