@@ -19,9 +19,9 @@ Seeds are located in `data/users.json`. The format is tightly coupled with mongo
 Sample log file is located in `data/events.log`
 
 
-### Task
+## Task
 
-#### Part 1
+### Part 1
 
 Your task is to create a micro service application that will allow authorized requests to read logs processed by the application server.
 
@@ -102,7 +102,7 @@ There will be evaluated whether:
 
 You may also gain extra points if your solution will be somehow extraordinary and will use best practices
 
-#### Part 2
+### Part 2
 
 The management decided to dockerize the application. Your task is to prepare the application from task #1 so that it works in development environment in the Docker container.
 
