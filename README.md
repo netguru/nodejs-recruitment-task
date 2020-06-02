@@ -10,14 +10,13 @@ Please use:
 
 ### Mandatory requirement is to publish the application in one of the popular hosting services e.g. Heroku, AWS, etc
 
-## Seeding database
+### Seeding database
 
 Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
 
-## Log file
+### Log file
 
 Sample log file is located in `data/events.log`
-
 
 ## Task
 
