@@ -1,121 +1,142 @@
-## Tasks
+# Node.js recruitment task
 
-## Requirements
+We'd like you to build a simple Movie API. It should provide two endpoints:
 
-Please use:
+1. `POST /movies`
+   1. Allows creating a movie object based on movie title passed in the request body
+   2. Bade on title additional movie details should be fetched from
+      https://omdbapi.com/ and saved to the database. Data we would like you to
+      fetch from OMDb API:
+   ```
+     Title: string
+     Released: date
+     Genre: string
+     Directory: string
+   ```
+   3. Only authorized users can create a movie.
+   4. `Basic` users are restricted to create a 5 movies per month (calendar
+      month). `Premium` users have no limits.
+1. `GET /movies`
+   1. Should fetch a list of all movies created by an authorized user.
 
-- `node` (can be LTS of current)
-- `yarn`
-- `jest`
+⚠️ Don't forget to verify user's authorization token before processing the
+request. The token should be passed in request's `Authorization` header.
 
-### Mandatory requirement is to publish the application in one of the popular hosting services e.g. Heroku, AWS, etc
-
-### Seeding database
-
-Seeds are located in `data/users.json`. The format is tightly coupled with mongodb, but feel fre to adjust it and use it in the DB of your choice.
-
-### Log file
-
-Sample log file is located in `data/events.log`
-
-## Task
-
-### Part 1
-
-Your task is to create a micro service application that will allow authorized requests to read logs processed by the application server.
-
-Additional information:
-* The credentials are in the users.json file in the data folder in this repository
-* For the purposes of the application, we use the generated events.log file with samples located in the data folder in this repository. The structure of the logs looks like this:
-
-example log entry:
-
-| timestamp | UUIDv4 | type | message |
-|---|---|---|---|
-| 1584969745903 | eab576a7-ea7f-4ce1-acfb-4e97d3a4a5bb | warn | AccessDenied: You are not authorize |
-
-Implement the following requests:
-
-1. The ability to download the entire list of logs or specific range from/to based on timestamp
 ```
-Request:
-  Header:
-  authorization-token: String (UUIDv4)
-  GET /public/logs?from=...&to=...
-Response:
-  [
-    {
-      uuid:    String (UUIDv4)
-      time:    String (format ISO)
-      type:    String (info|warn|error)
-      message: String
-    }
-  ]
-  Status: 200
-```
-2. The possibility to find a specific entry with a given UUID
+Authorization: Bearer <token>
 ```
 
-Request:
-  Header:
-  authorization-token: String (UUIDv4)
-  GET /public/logs/:uuid
-Response:
-  {
-    time:    String (format ISO)
-    type:    String (info|warn|error)
-    message: String
-  }
-  Status: 200
+# Authorization service
+
+To authorize users please use our simple auth service based on JWT tokens.
+Auth service code is located under `./src` directory
+
+## Prerequisites
+
+You need to have `docker` and `docker-compose` installed on your computer to run the service
+
+## Run locally
+
+1. Clone this repository
+1. Run from root dir
+
 ```
-3. The ability for admin user to create a new one (non-admin) with a list of permissions (only read and create permissions should be possible)
-```
-Request:
-  Header:
-  authorization-token: String (UUIDv4)
-  POST /internal/users
-  Body:
-  {
-    username:    String
-    permissions: [String] (read|create)
-  }
-Response:
-  {
-    username:    String
-    token:       String   (UUIDv4)
-    permissions: [String] (read|create)
-  }
-  Status: 201
+JWT_SECRET=secret docker-compose up -d
 ```
 
-There will be evaluated whether:
-* your solution realizes task assumptions
-* your code is consistent or using a linter
-* app is covered to the point we may assume you know how to write specs
-* you avoid a procedural code
-* requests are properly handled
-* git log structure is consistent
-* project structure is well thought out
-* exceptions are properly handled
-* inputs are validated
+By default the auth service will start on port `3000` but you can override
+the default value by setting the `APP_PORT` env var
 
-You may also gain extra points if your solution will be somehow extraordinary and will use best practices
+```
+APP_PORT=8081 JWT_SECRET=secret docker-compose up -d
+```
 
-### Part 2
+To stop the authorization service run
 
-The management decided to dockerize the application. Your task is to prepare the application from task #1 so that it works in development environment in the Docker container.
+```
+docker-compose down
+```
 
-We want to be able to change the database connection string depending on the environment (development/test)
+## JWT Secret
 
-The result should be a script that will allow:
-* run a working application server in the container
-* run application tests in the container
+To generate tokens in auth service you need to provide env variable
+`JWT_SECRET`. It should be a string value. You should use the same secret in
+the API you're building to verify the JWT tokens.
 
-e.g. with the help of docker-compose
+## Users
 
-There will be evaluated whether:
-* your solution realizes task assumptions
-* npm modules are cached properly during docker image building
-* environment variables are passed correctly
+The auth service defines two user accounts that you should use
 
-You may also gain extra points if your solution will be somehow extraordinary and will use best practices
+1. `Basic` user
+
+```
+ username: 'basic-thomas'
+ password: 'sR-_pcoow-27-6PAwCD8'
+```
+
+1. `Premium` user
+
+```
+username: 'premium-jim'
+password: 'GBLtTyq3E_UNjFnpo9m6'
+```
+
+## Token payload
+
+Decoding the auth token will give you access to basic information about the
+user including its role.
+
+```
+{
+  "userId": 123,
+  "name": "Basic Thomas",
+  "role": "basic",
+  "iat": 1606221838,
+  "exp": 1606223638,
+  "iss": "https://www.netguru.com/",
+  "sub": "123"
+}
+```
+
+## Example request
+
+To authorize user call the auth service using for example `curl`. We assume
+that the auth service is running of the default port `3000`.
+
+Request
+
+```
+curl --location --request POST '0.0.0.0:3080/auth' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "basic-thomas",
+    "password": "sR-_pcoow-27-6PAwCD8"
+}'
+```
+
+Response
+
+```
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTYwNjIyMTgzOCwiZXhwIjoxNjA2MjIzNjM4LCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.KjZ3zZM1lZa1SB8U-W65oQApSiC70ePdkQ7LbAhpUQg"
+}
+```
+
+## Rules
+
+- Database and framework choice are on your side.
+- Your API has to be dockerized. Create `Dockerfile` and `docker-compose` and document the process of running it locally.
+- Test your code.
+- Provide documentation of your API.
+- Application should be pushed to the public git repository and should have a
+  working CI/CD pipeline that runs the tests. For example you can use GitHub
+  Actions or CircleCI. Create a sample PR to show us the working CI/CD pipeline.
+
+## What will be evaluated?
+
+- Task completeness
+- Architecture
+- Code quality
+- Tests quality
+- Database design
+- Technology stack
