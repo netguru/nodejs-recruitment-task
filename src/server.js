@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const { authFactory, AuthError } = require("./auth");
 
 const PORT = 3000;
+
 const { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
@@ -50,3 +51,4 @@ app.use((error, _, res, __) => {
 app.listen(PORT, () => {
   console.log(`auth svc running at port ${PORT}`);
 });
+module.exports = app
