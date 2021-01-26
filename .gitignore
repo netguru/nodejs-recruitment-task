@@ -1,2 +1,4 @@
 .aws-sam/
 node_modules/
+.idea
+build/
