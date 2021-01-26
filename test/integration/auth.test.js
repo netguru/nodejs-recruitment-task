@@ -13,7 +13,6 @@ describe("authorization API", () => {
     username: basicUser.username,
     password: basicUser.password + faker.random.number(),
   };
-
   it("empty request should respond with 404 code", (done) => {
     request.post("/auth").end((err, response) => {
       expect(response.statusCode).to.equal(400);
@@ -62,7 +61,7 @@ describe("authorization API", () => {
     request
       .post("/auth")
       .set("Accept", "application/json")
-      .send({ username: "", password: "" })
+      .send({username: "", password: ""})
       .end((err, response) => {
         expect(response.statusCode).to.equal(400);
         expect(response.body).to.deep.equal(errorResponses.invalidPayload);

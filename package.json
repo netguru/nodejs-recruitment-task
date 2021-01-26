@@ -2,9 +2,11 @@
   "name": "node-auth-svc",
   "version": "1.0.0",
   "description": "",
+  "main": "src/server.ts",
   "scripts": {
-    "test": "JWT_SECRET=test mocha  ./test/**/*.test.js --exit",
-    "start": "node src/server.js"
+    "test": "JWT_SECRET=test TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register './test/**/*.test.js'",
+    "transpile": "tsc -p .",
+    "start": "tsc -p . && node build/server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +18,15 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/express": "^4.17.11",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mocha": "^8.2.0",
     "chai": "^4.2.0",
     "faker": "^5.1.0",
     "mocha": "^8.2.1",
-    "supertest": "^6.1.2"
+    "supertest": "^6.1.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^3.8.3"
   }
 }
