@@ -18,6 +18,7 @@ const users = [
 ];
 
 export class AuthError extends Error {
+  type = 'AuthError';
 }
 
 export const authFactory = (secret: Secret) => (username: string, password: string) => {

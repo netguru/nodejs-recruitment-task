@@ -1,14 +1,12 @@
 import express, {NextFunction, Request, Response} from "express";
 import bodyParser from "body-parser";
 import {authFactory, AuthError} from "./auth";
-
+import authMiddleware from './controllers/AuthMiddleware';
+import moviesController from './controllers/MoviesController';
+import getSecretJWT from "./lib/getSecretJWT";
 const PORT = 3000;
 
-const {JWT_SECRET} = process.env;
-
-if (!JWT_SECRET) {
-  throw new Error("Missing JWT_SECRET env var. Set it and restart the server");
-}
+const JWT_SECRET = getSecretJWT();
 
 const auth = authFactory(JWT_SECRET);
 const app = express();
@@ -31,7 +29,8 @@ app.post("/auth", (req, res, next) => {
 
     return res.status(200).json({token});
   } catch (error) {
-    if (error instanceof AuthError) {
+    //unfortunately, instanceof is not working properly in typescript, source: https://github.com/Microsoft/TypeScript/issues/13965
+    if (error.hasOwnProperty('type') && error.type === 'AuthError') {
       return res.status(401).json({error: error.message});
     }
 
@@ -47,6 +46,8 @@ app.use(async (error: unknown, _: Request, res: Response, __: NextFunction) => {
 
   return res.status(500).json({error: "internal server error"});
 });
+
+app.use('/movies', authMiddleware, moviesController);
 
 app.listen(PORT, () => {
   console.log(`auth svc running at port ${PORT}`);
