@@ -1,14 +1,13 @@
-version: "3.2"
+version: '3.2'
 services:
-  app:
-    command: node src/server.js
+  auth-service:
     build:
-      context: .
+      context: ./auth-service
       dockerfile: Dockerfile
     ports:
-      - published: ${APP_PORT:-3000}
-        target: 3000
+      - '8081:3000'
     volumes:
-      - .:/app/
+      - ./auth-service:/app
+      - /app/node_modules
     environment:
-      JWT_SECRET: ${JWT_SECRET}
+      - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
