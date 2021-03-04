@@ -26,6 +26,6 @@ jobs:
       - name: Check Out Repo
       - uses: actions/checkout@v2
       
-      # Runs a single command using the runners shell
-      - name: Run unit tests
-        run: docker-compose -f docker-compose.test.yml -p nodejs-recruitment-task-test up
+#       # Runs a single command using the runners shell
+#       - name: Run unit tests
+#         run: docker-compose -f docker-compose.test.yml -p nodejs-recruitment-task-test up
