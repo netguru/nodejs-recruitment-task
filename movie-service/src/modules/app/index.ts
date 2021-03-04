@@ -15,6 +15,6 @@ import { MovieModule } from 'modules/movie';
     MovieModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [MongooseConfigService],
 })
 export class AppModule {}

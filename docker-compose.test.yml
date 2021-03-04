@@ -1,0 +1,30 @@
+version: '3.2'
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - '8081:3000'
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    environment:
+      - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
+
+  movie-service:
+    build:
+      context: ./movie-service
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./movie-service:/app
+      - /app/dist
+      - /app/node_modules
+    environment:
+      - NODE_ENV=test
+      - PORT=3000
+      - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
+      - JWT_ISS=https://www.netguru.com/
+    ports:
+      - '9082:3000'
+    command: npm run test:watch
