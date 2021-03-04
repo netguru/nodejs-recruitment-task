@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+#   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,10 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check Out Repo
       - uses: actions/checkout@v2
-
+      
       # Runs a single command using the runners shell
       - name: Run unit tests
         run: docker-compose -f docker-compose.test.yml -p nodejs-recruitment-task-test up
-        
-      - name: Success
-        run: echo Success!
