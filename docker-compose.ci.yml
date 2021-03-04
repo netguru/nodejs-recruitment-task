@@ -1,7 +1,4 @@
 version: '3.2'
 services:
-  auth-service:
-    command: npm run test
-
   movie-service:
     command: npm run test

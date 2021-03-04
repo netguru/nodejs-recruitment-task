@@ -11,6 +11,7 @@ services:
       - /app/node_modules
     environment:
       - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
+    command: npm run test
 
   movie-service:
     build:
