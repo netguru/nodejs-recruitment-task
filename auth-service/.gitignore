@@ -1,4 +1,2 @@
 .aws-sam/
 node_modules/
-/data
-/dist

@@ -1,12 +1,5 @@
 version: '3.2'
 services:
-  mongo:
-    image: 'mongo:latest'
-    ports:
-      - '28017:27017'
-    volumes:
-      - ./data:/data/db
-
   auth-service:
     build:
       context: ./auth-service
@@ -18,6 +11,7 @@ services:
       - /app/node_modules
     environment:
       - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
+    command: npm run test
 
   movie-service:
     build:
@@ -25,14 +19,13 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./movie-service:/app
+      - /app/dist
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=test
       - PORT=3000
       - JWT_SECRET=c4VJW6YavdKjhi10ltjF5UTd9utI8qb4
       - JWT_ISS=https://www.netguru.com/
-      - MONGO_URL=mongodb://mongo:27017/movie-db
     ports:
-      - '8082:3000'
-    depends_on:
-      - mongo
+      - '9082:3000'
+    command: npm run test:e2e:watch

@@ -33,29 +33,45 @@ Auth service code is located under `./src` directory
 
 ## Prerequisites
 
-You need to have `docker` and `docker-compose` installed on your computer to run the service
+You need to have `docker` and `docker-compose` installed on your computer to run the services
 
-## Run locally
+## Running the app
 
 1. Clone this repository
-1. Run from root dir
+2. Run from root dir
 
-```
-JWT_SECRET=secret docker-compose up -d
-```
-
-By default the auth service will start on port `3000` but you can override
-the default value by setting the `APP_PORT` env var
-
-```
-APP_PORT=8081 JWT_SECRET=secret docker-compose up -d
+```bash
+# development
+$ docker-compose up
 ```
 
-To stop the authorization service run
+## Test
 
+### Unit tests
+Change `command` property in `docker-compose.test.yml` file for
+```yaml
+command: npm run test:watch
 ```
-docker-compose down
+And run command
+```bash
+$ docker-compose -f docker-compose.test.yml -p nodejs-recruitment-task-test up
 ```
+
+### E2E tests
+Change `command` property in `docker-compose.test.yml` file for
+```yaml
+command: npm run test:e2e:watch
+```
+And run the same command as for unit tests
+```bash
+$ docker-compose -f docker-compose.test.yml -p nodejs-recruitment-task-test up
+```
+
+### Continuous Integration
+```bash
+$ docker-compose -f docker-compose.test.yml -f docker-compose.ci.yml up
+```
+
 
 ## JWT Secret
 
