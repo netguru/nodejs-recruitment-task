@@ -28,4 +28,4 @@ services:
       - JWT_ISS=https://www.netguru.com/
     ports:
       - '9082:3000'
-    command: npm run test:watch
+    command: npm run test:e2e:watch
