@@ -2,6 +2,7 @@
 import { HttpModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MovieController } from './controllers';
+import { MovieRepository } from './repositories/movie.repository';
 import { Movie, MovieSchema } from './schemas';
 
 @Module({
@@ -19,6 +20,6 @@ import { Movie, MovieSchema } from './schemas';
   ],
   controllers: [MovieController],
   exports: [],
-  providers: [],
+  providers: [MovieRepository],
 })
 export class MovieModule {}
