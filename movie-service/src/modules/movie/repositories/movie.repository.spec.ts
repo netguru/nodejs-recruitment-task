@@ -37,12 +37,4 @@ describe('MovieRepository', () => {
   it('model should be defined', () => {
     expect(model).toBeDefined();
   });
-
-  describe('createMovie', () => {
-    it('should', async () => {});
-  });
-
-  describe('getMovies', () => {
-    it('should', async () => {});
-  });
 });

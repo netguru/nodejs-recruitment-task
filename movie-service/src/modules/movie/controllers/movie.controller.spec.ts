@@ -1,28 +1,27 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Movie } from '../schemas';
-import { Model } from 'mongoose';
 import { MovieController } from '.';
-import { getModelToken } from '@nestjs/mongoose';
+import { MovieService } from '../services';
 
 describe('MovieController', () => {
   let controller: MovieController;
-  let model: Model<Movie>;
+  let service: MovieService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [MovieController],
       providers: [
         {
-          provide: getModelToken('Movie'),
+          provide: MovieService,
           useValue: {
-            create: jest.fn(),
+            createMovie: jest.fn(),
+            getUserMovies: jest.fn(),
           },
         },
       ],
     }).compile();
 
     controller = module.get<MovieController>(MovieController);
-    model = module.get<Model<Movie>>(getModelToken('Movie'));
+    service = module.get<MovieService>(MovieService);
   });
 
   afterEach(() => {
@@ -33,8 +32,8 @@ describe('MovieController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('model should be defined', () => {
-    expect(model).toBeDefined();
+  it('service should be defined', () => {
+    expect(service).toBeDefined();
   });
 
   describe('getMovies', () => {
