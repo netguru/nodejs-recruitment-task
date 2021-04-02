@@ -128,7 +128,7 @@ Response
 - Your API has to be dockerized. Create `Dockerfile` and `docker-compose` and document the process of running it locally.
 - Provided solution should consist of two microservices.
   - `Authentication Service` - provided by us to auth users
-  - `Movies Service` - created by you to handle with movies data
+  - `Movies Service` - created by you to handle movies data
 - Test your code.
 - Provide documentation of your API.
 - Application should be pushed to the public git repository and should have a
