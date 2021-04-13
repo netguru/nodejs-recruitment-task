@@ -11,7 +11,7 @@ We'd like you to build a simple Movie API. It should provide two endpoints:
      Title: string
      Released: date
      Genre: string
-     Directory: string
+     Director: string
    ```
    3. Only authorized users can create a movie.
    4. `Basic` users are restricted to create a 5 movies per month (calendar
@@ -106,7 +106,7 @@ that the auth service is running of the default port `3000`.
 Request
 
 ```
-curl --location --request POST '0.0.0.0:3080/auth' \
+curl --location --request POST '0.0.0.0:3000/auth' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "basic-thomas",
