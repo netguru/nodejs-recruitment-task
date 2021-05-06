@@ -1,11 +1,11 @@
 version: "3.2"
 services:
-  app:
-    container_name: auth_svc
-    command: node src/server.js
+  svc_auth:
+    container_name: svc_auth
+    command: node svc_auth/server.js
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: svc_auth/Dockerfile
     ports:
       - published: ${APP_PORT:-3000}
         target: 3000
@@ -13,7 +13,20 @@ services:
       - .:/app/
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
-      DATABASE: mongodb://mongo:27017/auth_svc
+  svc_movie:
+    container_name: svc_movie
+    command: node svc_movie/server.js
+    build:
+      context: .
+      dockerfile: svc_movie/Dockerfile
+    ports:
+      - published: ${APP_PORT:-8000}
+        target: 8000
+    volumes:
+      - .:/app/
+    environment:
+      JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
+      DATABASE: mongodb://mongo:27017/svc_movie
     links:
       - mongo
   mongo:
