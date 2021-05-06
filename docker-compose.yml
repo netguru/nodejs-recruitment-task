@@ -1,6 +1,7 @@
 version: "3.2"
 services:
   app:
+    container_name: auth_svc
     command: node src/server.js
     build:
       context: .
@@ -11,4 +12,12 @@ services:
     volumes:
       - .:/app/
     environment:
-      JWT_SECRET: ${JWT_SECRET}
+      JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
+      DATABASE: mongodb://mongo:27017/auth_svc
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
