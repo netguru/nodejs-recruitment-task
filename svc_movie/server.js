@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./routes/swagger.json");
+const swaggerDocument = require("./routes/openapi.json");
 
 const { APP_PORT } = process.env;
 
