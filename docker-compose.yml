@@ -13,6 +13,8 @@ services:
       - .:/app/
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
+      APP_PORT: 3000
+
   svc_movie:
     container_name: svc_movie
     command: node svc_movie/server.js
@@ -27,10 +29,12 @@ services:
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
       DATABASE: mongodb://mongo:27017/svc_movie
+      APP_PORT: 8000
     links:
       - mongo
+
   mongo:
     container_name: mongo
     image: mongo
     ports:
-      - "27017:27017"
+      - "27017:8001"

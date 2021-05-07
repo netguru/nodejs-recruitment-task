@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const PORT = 3000;
+const { APP_PORT } = process.env;
 
 // routes
 const movieRoutes = require("./routes/movie");
@@ -37,6 +37,6 @@ app.use((error, _, res, __) => {
   return res.status(500).json({ error: "internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`auth svc running at port ${PORT}`);
+app.listen(APP_PORT, () => {
+  console.log(`auth svc running at port ${APP_PORT}`);
 });
