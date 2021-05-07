@@ -28,6 +28,7 @@ services:
       - .:/app/
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
+      MOVIES_LIMIT: 5
       DATABASE: mongodb://mongo:27017/svc_movie
       APP_PORT: 8000
     links:

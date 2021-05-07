@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./routes/swagger.json");
 
 const { APP_PORT } = process.env;
 
@@ -26,6 +28,7 @@ mongoose
 app.use(bodyParser.json());
 
 // routes middleware
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/movies", movieRoutes);
 
 app.use((error, _, res, __) => {
