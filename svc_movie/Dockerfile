@@ -2,9 +2,10 @@ FROM node:14.15-alpine
 
 WORKDIR /app
 
-COPY ./package*.json ./
+COPY package*.json ./
 RUN npm install
 
+RUN mkdir ./src
 COPY . .
 
-CMD ["node", "./server.js"]
+CMD ["node", "./src/server.js"]

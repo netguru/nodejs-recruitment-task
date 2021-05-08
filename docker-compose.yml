@@ -2,7 +2,7 @@ version: "3.2"
 services:
   svc_auth:
     container_name: svc_auth
-    command: node svc_auth/server.js
+    command: node svc_auth/src/server.js
     build:
       context: .
       dockerfile: svc_auth/Dockerfile
@@ -17,7 +17,7 @@ services:
 
   svc_movie:
     container_name: svc_movie
-    command: node svc_movie/server.js
+    command: node svc_movie/src/server.js
     build:
       context: .
       dockerfile: svc_movie/Dockerfile
