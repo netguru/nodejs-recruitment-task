@@ -16,6 +16,11 @@ jobs:
     # Build the docker-compose stack
     - name: Build the docker-compose stack
       run: docker-compose up -d
+      
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '14.x'
     
     # Install the newman command line utility and also install the html extra reporter
     - name: Install newman
