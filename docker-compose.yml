@@ -1,31 +1,29 @@
 version: "3.2"
 services:
   svc_auth:
-    container_name: svc_auth
-    command: node svc_auth/src/server.js
     build:
-      context: .
-      dockerfile: svc_auth/Dockerfile
+      context: ./svc_auth
+      dockerfile: Dockerfile
     ports:
       - published: ${APP_PORT:-3000}
         target: 3000
     volumes:
-      - .:/app/
+      - ./svc_auth:/app
+      - /app/node_modules
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
       APP_PORT: 3000
 
   svc_movie:
-    container_name: svc_movie
-    command: node svc_movie/src/server.js
     build:
-      context: .
-      dockerfile: svc_movie/Dockerfile
+      context: ./svc_movie
+      dockerfile: Dockerfile
     ports:
       - published: ${APP_PORT:-8000}
         target: 8000
     volumes:
-      - .:/app/
+      - ./svc_movie:/app
+      - /app/node_modules
     environment:
       JWT_SECRET: tUC724CNsa5dGeSL2fmrLQrCDqvBawjCHnKaYTFtdbCsXFhufz
       MOVIES_LIMIT: 5
