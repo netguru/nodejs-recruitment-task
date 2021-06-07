@@ -41,7 +41,12 @@ const authFactory = (secret) => (username, password) => {
   );
 };
 
+const verifyUserFactory = (secret) => (token) => {
+  return jwt.verify(token, secret);
+};
+
 export {
   authFactory,
+  verifyUserFactory,
   AuthError
 };
