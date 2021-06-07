@@ -1,6 +1,5 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const { authFactory, AuthError } = require("./auth");
+import express from "express";
+import { authFactory, AuthError } from "./auth.js";
 
 const PORT = 3000;
 const { JWT_SECRET, OMDB_API_KEY } = process.env;
@@ -13,9 +12,12 @@ if (!OMDB_API_KEY) {
 }
 
 const auth = authFactory(JWT_SECRET);
-const app = express();
 
-app.use(bodyParser.json());
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 app.post("/auth", (req, res, next) => {
   if (!req.body) {

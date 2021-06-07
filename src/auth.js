@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const users = [
   {
@@ -6,14 +6,14 @@ const users = [
     role: "basic",
     name: "Basic Thomas",
     username: "basic-thomas",
-    password: "sR-_pcoow-27-6PAwCD8",
+    password: "sR-_pcoow-27-6PAwCD8"
   },
   {
     id: 434,
     role: "premium",
     name: "Premium Jim",
     username: "premium-jim",
-    password: "GBLtTyq3E_UNjFnpo9m6",
+    password: "GBLtTyq3E_UNjFnpo9m6"
   },
 ];
 
@@ -30,18 +30,18 @@ const authFactory = (secret) => (username, password) => {
     {
       userId: user.id,
       name: user.name,
-      role: user.role,
+      role: user.role
     },
     secret,
     {
       issuer: "https://www.netguru.com/",
       subject: `${user.id}`,
-      expiresIn: 30 * 60,
+      expiresIn: 30 * 60
     }
   );
 };
 
-module.exports = {
+export {
   authFactory,
-  AuthError,
+  AuthError
 };
