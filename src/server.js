@@ -1,5 +1,5 @@
 import express from "express";
-import { authFactory, AuthError } from "./auth.js";
+import { authFactory, verifyUserFactory, AuthError } from "./auth.js";
 
 const PORT = 3000;
 const { JWT_SECRET, OMDB_API_KEY } = process.env;
@@ -12,12 +12,41 @@ if (!OMDB_API_KEY) {
 }
 
 const auth = authFactory(JWT_SECRET);
+const verify = verifyUserFactory(JWT_SECRET);
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
+const movies = {};
+
+const verifyUser = (req, res, next) => {
+  const bearerHeader = req.headers["authorization"];
+  if (bearerHeader) {
+    const bearerToken = bearerHeader.split(" ")[1];
+    try {
+      res.locals.user = verify(bearerToken);
+      next();
+    } catch (err) {
+      return res.status(401).json({ error: "Invalid or expired authentication token" });
+    }
+  } else {
+    return res.status(401).json({ error: "Missing authentication token" });
+  }
+};
+
+app.get("/movies", verifyUser, (req, res) => {
+  return res.status(200).json({ movies: movies });
+});
+
+app.post("/movies", verifyUser, (req, res) => {
+  console.log(req.body.title);
+  console.log(res.locals.user);
+  // make request to omdb, get result, and push to movies
+  return res.status(200).json({ status: "dog" });
+});
 
 app.post("/auth", (req, res, next) => {
   if (!req.body) {
