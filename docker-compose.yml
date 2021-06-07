@@ -12,3 +12,4 @@ services:
       - .:/app/
     environment:
       JWT_SECRET: ${JWT_SECRET}
+      OMDB_API_KEY: ${OMDB_API_KEY}
