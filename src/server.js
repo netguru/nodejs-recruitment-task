@@ -1,4 +1,5 @@
 import express from "express";
+import fetch from "node-fetch";
 import { authFactory, verifyUserFactory, AuthError } from "./auth.js";
 
 const PORT = 3000;
@@ -22,6 +23,11 @@ app.use(express.urlencoded({
 
 const movies = {};
 
+const getOMDBData = async (omdbApiKey, title) => {
+  const response = await fetch(`https://www.omdbapi.com/?apikey=${omdbApiKey}&t=${title}`);
+  return await response.json();
+};
+
 const verifyUser = (req, res, next) => {
   const bearerHeader = req.headers["authorization"];
   if (bearerHeader) {
@@ -41,11 +47,24 @@ app.get("/movies", verifyUser, (req, res) => {
   return res.status(200).json({ movies: movies });
 });
 
-app.post("/movies", verifyUser, (req, res) => {
-  console.log(req.body.title);
+app.post("/movies", verifyUser, async (req, res) => {
+  const title = req.body.title;
   console.log(res.locals.user);
-  // make request to omdb, get result, and push to movies
-  return res.status(200).json({ status: "dog" });
+  if (!title || title.trim() === "") {
+    return res.status(400).json({ error: "Title is a required body parameter" });
+  }
+  // call OMDB
+  const omdbResult = await getOMDBData(OMDB_API_KEY, title);
+  const movie = {
+    Title: omdbResult.Title,
+    Released: omdbResult.Released,
+    Genre: omdbResult.Genre,
+    Director: omdbResult.Director
+  };
+
+  movies[movie.Title] = movie;
+
+  return res.status(200).json(movie);
 });
 
 app.post("/auth", (req, res, next) => {
