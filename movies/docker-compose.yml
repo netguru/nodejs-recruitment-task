@@ -1,5 +1,12 @@
 version: "3.2"
 services:
+  postgres:
+    image: "postgres:latest"
+    ports:
+      - published: ${POSTGRES_PORT:-5432}
+        target: 5432
+    environment: 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   app:
     build:
       context: .
@@ -9,6 +16,8 @@ services:
         target: 3001
     volumes:
       - .:/app/
+    depends_on: 
+      - "postgres"  
     environment:
       JWT_SECRET: ${JWT_SECRET}
       OMDB_API_KEY: ${OMDB_API_KEY}
