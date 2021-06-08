@@ -1,7 +1,8 @@
 import express from "express";
 import fetch from "node-fetch";
 import verifyUserFactory from "./auth.js";
-import Limits from "./limits.js";
+import limits from "./limits.js";
+import db from "./db/db.js";
 
 const PORT = 3001;
 const { JWT_SECRET, OMDB_API_KEY } = process.env;
@@ -48,7 +49,7 @@ app.get("/movies", verifyUser, (req, res) => {
 });
 
 app.post("/movies", verifyUser, async (req, res) => {
-  if (Limits.isLimited(res.locals.user)) {
+  if (limits.isLimited(res.locals.user)) {
     return res.status(403).json({ error: "User reached quota limits"});
   }
   const title = req.body.title;
@@ -65,7 +66,7 @@ app.post("/movies", verifyUser, async (req, res) => {
   };
 
   movies[movie.Title] = movie;
-  Limits.decrementLimits(res.locals.user);
+  limits.decrementLimits(res.locals.user);
   return res.status(200).json(movie);
 });
 

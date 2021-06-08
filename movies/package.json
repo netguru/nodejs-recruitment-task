@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "node-fetch": "^2.6.1"
+    "knex": "^0.95.6",
+    "node-fetch": "^2.6.1",
+    "pg": "^8.6.0"
   }
 }
