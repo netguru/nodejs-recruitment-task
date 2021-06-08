@@ -1,7 +1,7 @@
 const quotaPerMonth = 5;
 const quotas = {};
 
-const Limits = {
+const limits = {
     isLimited: (user) => {
         if (user.role === "premium") {
             return false;
@@ -20,4 +20,4 @@ const Limits = {
     }
 };
 
-export default Limits;
+export default limits;
