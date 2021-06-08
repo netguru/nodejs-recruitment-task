@@ -1,7 +1,6 @@
 version: "3.2"
 services:
   app:
-    command: node src/server.js
     build:
       context: .
       dockerfile: Dockerfile
