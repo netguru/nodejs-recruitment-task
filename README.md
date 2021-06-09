@@ -1,145 +1,109 @@
-# Node.js recruitment task
+# Movies and Auth microservices
 
-We'd like you to build a simple Movie API. It should provide two endpoints:
+A collection of small `node` based services that allow the user to fetch and add movies with movie details from the [OMDB api](https://omdbapi.com/). A description of the original assignment is [here](assignment/README.md).
+There are two services:
 
-1. `POST /movies`
-   1. Allows creating a movie object based on movie title passed in the request body
-   2. Based on the title additional movie details should be fetched from
-      https://omdbapi.com/ and saved to the database. Data we would like you to
-      fetch from OMDb API:
-   ```
-     Title: string
-     Released: date
-     Genre: string
-     Director: string
-   ```
-   3. Only authorized users can create a movie.
-   4. `Basic` users are restricted to create 5 movies per month (calendar
-      month). `Premium` users have no limits.
-1. `GET /movies`
-   1. Should fetch a list of all movies created by an authorized user.
+- `auth` authorizes users and provides them with a `JWT` token
+- `movies` allows users to add movies based on a title and to subsequently fetch them
 
-⚠️ Don't forget to verify user's authorization token before processing the
-request. The token should be passed in request's `Authorization` header.
+**Note:**
+This project is still (as of 09-06-2021) under development and is missing:
+- Unit tests
+- CI/CD
 
-```
-Authorization: Bearer <token>
-```
+## 1. `auth` service
 
-# Authorization service
+The `auth` service allows for two types of users:
+- `basic` can fetch movie list unlimited times, but can only insert **five** movies per month
+- `premium` can fetch movie list unlimited times and can insert **unlimited** movies per month
 
-To authorize users please use our simple auth service based on JWT tokens.
-Auth service code is located under `./src` directory
+You can find the source code for the service in [auth](auth/src)
 
-## Prerequisites
+#### How to start the `auth` service
 
-You need to have `docker` and `docker-compose` installed on your computer to run the service
+The service is dockerized. 
+Make sure to have `docker` and `docker-compose` installed. Check out this repository, then navigate to the `auth` directory and run:
 
-## Run locally
-
-1. Clone this repository
-1. Run from root dir
-
-```
-JWT_SECRET=secret docker-compose up -d
+```bash
+sudo JWT_SECRET=secret docker-compose up -d --build 
 ```
 
-By default the auth service will start on port `3000` but you can override
-the default value by setting the `APP_PORT` env var
+Where you need to specify the same `JWT_SECRET` variable value as the one you use to run the `movies` service.
 
-```
-APP_PORT=8081 JWT_SECRET=secret docker-compose up -d
-```
+#### Testing whether the `auth` service is up
 
-To stop the authorization service run
+With a tool like `postman` or `curl`, make a request to `localhost:3000`
 
-```
-docker-compose down
-```
+For example:
 
-## JWT Secret
-
-To generate tokens in auth service you need to provide env variable
-`JWT_SECRET`. It should be a string value. You should use the same secret in
-the API you're building to verify the JWT tokens.
-
-## Users
-
-The auth service defines two user accounts that you should use
-
-1. `Basic` user
-
-```
- username: 'basic-thomas'
- password: 'sR-_pcoow-27-6PAwCD8'
-```
-
-1. `Premium` user
-
-```
-username: 'premium-jim'
-password: 'GBLtTyq3E_UNjFnpo9m6'
-```
-
-## Token payload
-
-Decoding the auth token will give you access to basic information about the
-user including its role.
-
-```
-{
-  "userId": 123,
-  "name": "Basic Thomas",
-  "role": "basic",
-  "iat": 1606221838,
-  "exp": 1606223638,
-  "iss": "https://www.netguru.com/",
-  "sub": "123"
-}
-```
-
-## Example request
-
-To authorize user call the auth service using for example `curl`. We assume
-that the auth service is running of the default port `3000`.
-
-Request
-
-```
-curl --location --request POST '0.0.0.0:3000/auth' \
+- Basic user
+```bash
+curl --location --request POST 'localhost:3000/auth' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "username": "basic-thomas",
     "password": "sR-_pcoow-27-6PAwCD8"
 }'
+``` 
+
+- Premium user:
+```bash
+curl --location --request POST 'localhost:3000/auth' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "premium-jim",
+    "password": "GBLtTyq3E_UNjFnpo9m6"
+}'
 ```
 
-Response
+## 2. `movies` service
 
+The `movies` service takes a token that one can obtain from the `auth` service, and allows the user to add movies and get the results back. Movie adding requires only a title, but the added movie is enriched with details from the [OMDB api](https://omdbapi.com/). 
+
+- Only authorized users can either add or fetch movies.
+- `basic` users can add only 5 movies per month but can fetch unlimited times
+- `premium` users can add unlimited number of movies and can also fetch movies unlimited times
+
+#### How to start the `movies` service
+
+The service is dockerized. It contains an `express` server and a `postgres` database.
+- Make sure to have `docker` and `docker-compose` installed. 
+- Obtain a free api key from the OMDB API.
+- Check out this repository, then navigate to the `movies` directory and run:
+
+```bash
+sudo POSTGRES_PASSWORD=postgrespassword JWT_SECRET=secret OMDB_API_KEY=omdbapikey docker-compose up --build -d
 ```
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTYwNjIyMTgzOCwiZXhwIjoxNjA2MjIzNjM4LCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.KjZ3zZM1lZa1SB8U-W65oQApSiC70ePdkQ7LbAhpUQg"
-}
+
+Where:
+- `POSTGRES_PASSWORD` is the password with which the `postgres` container will be started.
+- `JWT_SECRET` needs to be the same as the one specified to the `auth` service
+- `OMDB_API_KEY` is the value of the api key obtained from the OMDB API
+
+
+#### Testing whether the `movies` service is up
+
+With a tool like `postman` or `curl`, make a request to `localhost:3001/movies`.
+
+The service exposes two endpoints:
+
+- `GET/movies`
+- `POST/movies`
+
+For example, this is how you can list all the currently added movies:
+
+```bash
+curl --location --request GET 'localhost:3001/movies' \
+--header 'Authorization: Bearer <auth_token>'
 ```
 
-## Rules
+And this is how you can add "Happy Feet" to the collection of movies:
 
-- Database and framework choice are on your side.
-- Your API has to be dockerized. Create `Dockerfile` and `docker-compose` and document the process of running it locally.
-- Provided solution should consist of two microservices.
-  - `Authentication Service` - provided by us to auth users
-  - `Movies Service` - created by you to handle movies data
-- Test your code.
-- Provide documentation of your API.
-- Application should be pushed to the public git repository and should have a
-  working CI/CD pipeline that runs the tests. For example you can use GitHub
-  Actions or CircleCI. Create a sample PR to show us the working CI/CD pipeline.
-
-## What will be evaluated?
-
-- Task completeness
-- Architecture
-- Code quality
-- Tests quality
-- Database design
-- Technology stack
+```bash
+curl --location --request POST 'localhost:3001/movies' \
+--header 'Authorization: Bearer <auth_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "title": "happy feet"
+}'
+```
