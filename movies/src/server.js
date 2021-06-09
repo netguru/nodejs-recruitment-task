@@ -2,7 +2,7 @@ import express from "express";
 import fetch from "node-fetch";
 import verifyUserFactory from "./auth.js";
 import limits from "./limits.js";
-import db from "./db/db.js";
+import movies from "./movies.js";
 
 const PORT = 3001;
 const { JWT_SECRET, OMDB_API_KEY } = process.env;
@@ -21,8 +21,6 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-
-const movies = {};
 
 const getOMDBData = async (omdbApiKey, title) => {
   const response = await fetch(`https://www.omdbapi.com/?apikey=${omdbApiKey}&t=${title}`);
@@ -44,12 +42,13 @@ const verifyUser = (req, res, next) => {
   }
 };
 
-app.get("/movies", verifyUser, (req, res) => {
-  return res.status(200).json({ movies: movies });
+app.get("/movies", verifyUser, async (req, res) => {
+  const result = await movies.getMovies();
+  return res.status(200).json({ movies: result });
 });
 
 app.post("/movies", verifyUser, async (req, res) => {
-  if (limits.isLimited(res.locals.user)) {
+  if (await limits.isLimited(res.locals.user)) {
     return res.status(403).json({ error: "User reached quota limits"});
   }
   const title = req.body.title;
@@ -58,15 +57,23 @@ app.post("/movies", verifyUser, async (req, res) => {
   }
   // call OMDB
   const omdbResult = await getOMDBData(OMDB_API_KEY, title);
+  if (omdbResult.Error) {
+    return res.status(404).json({ error: "Movie not found" });
+  }
   const movie = {
     Title: omdbResult.Title,
     Released: omdbResult.Released,
     Genre: omdbResult.Genre,
     Director: omdbResult.Director
   };
-
-  movies[movie.Title] = movie;
-  limits.decrementLimits(res.locals.user);
+  const movieExists = await movies.movieExistsByTitle(movie.Title);
+  if (movieExists) {
+    return res.status(400).json({ error: "Movie already exists" });
+  } else {
+    movies.insertMovie(movie);
+  }
+  
+  await limits.decrementLimits(res.locals.user);
   return res.status(200).json(movie);
 });
 
