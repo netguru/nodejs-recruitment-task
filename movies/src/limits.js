@@ -14,7 +14,7 @@ const limitsDBConnection = {
             .where("monthyear", getCurrentMonthYear())
             .first();
     }, 
-    insertQuota: async (userId, howMuch) => {
+    insertQuota: async (userId) => {
         return await db("limits")
             .insert({
                 userid: userId,
@@ -41,7 +41,7 @@ const limits = {
             const userId = user.userId;
             const userLimits = await limitsDBConnection.getUserLimits(userId);
             if (!userLimits) {
-                limitsDBConnection.insertQuota(userId, quotaPerMonth);
+                limitsDBConnection.insertQuota(userId);
                 return false;
             } else {
                 return userLimits.quota <= 0;
