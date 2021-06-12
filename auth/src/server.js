@@ -53,3 +53,5 @@ app.use((error, _, res, __) => {
 app.listen(PORT, () => {
   console.log(`auth svc running at port ${PORT}`);
 });
+
+export default app;
