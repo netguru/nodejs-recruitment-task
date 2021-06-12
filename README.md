@@ -30,6 +30,14 @@ sudo JWT_SECRET=secret docker-compose up -d --build
 
 Where you need to specify the same `JWT_SECRET` variable value as the one you use to run the `movies` service.
 
+#### How to test the `auth` service
+
+Navigate to the `auth` directory and run:
+
+```bash
+npm test
+```
+
 #### Testing whether the `auth` service is up
 
 With a tool like `postman` or `curl`, make a request to `localhost:3000`
