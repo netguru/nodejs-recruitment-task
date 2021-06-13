@@ -1,6 +1,6 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const { authFactory, AuthError } = require("./auth");
+import express from "express";
+import { authFactory, AuthError } from "./auth.js";
+
 
 const PORT = 3000;
 const { JWT_SECRET } = process.env;
@@ -10,9 +10,12 @@ if (!JWT_SECRET) {
 }
 
 const auth = authFactory(JWT_SECRET);
-const app = express();
 
-app.use(bodyParser.json());
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 app.post("/auth", (req, res, next) => {
   if (!req.body) {
@@ -50,3 +53,5 @@ app.use((error, _, res, __) => {
 app.listen(PORT, () => {
   console.log(`auth svc running at port ${PORT}`);
 });
+
+export default app;
