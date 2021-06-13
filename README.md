@@ -7,9 +7,9 @@ There are two services:
 - `movies` allows users to add movies based on a title and to subsequently fetch them
 
 **Note:**
-This project is still (as of 09-06-2021) under development and is missing:
-- Unit tests
-- CI/CD
+This project is still (as of 13-06-2021) under development and is missing:
+- Unit tests (for the `movies` service)
+- CI/CD (for the `movies` service)
 
 ## 1. `auth` service
 
