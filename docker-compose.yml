@@ -15,3 +15,21 @@ services:
     environment:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i && npm start"
+  movies:
+    container_name: netguru-movies
+    image: node
+    working_dir: /app
+    tty: true
+    ports:
+      - published: ${APP_PORT:-3001}
+        target: 3001
+    volumes:
+      - ./services/movies/src:/app/src:ro
+      - ./services/movies/package.json:/app/package.json
+      - ./services/movies/package-lock.json:/app/package-lock.json
+      - ./services/movies/tsconfig.json:/app/tsconfig.json:ro
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+    command: bash -c "npm i --only=prod && npm start"
+    depends_on:
+      - authentication
