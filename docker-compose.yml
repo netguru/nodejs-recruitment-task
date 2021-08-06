@@ -9,9 +9,9 @@ services:
       - published: ${APP_PORT:-3000}
         target: 3000
     volumes:
-      - ./src:/app/src:ro
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
+      - ./services/authentication/src:/app/src:ro
+      - ./services/authentication/package.json:/app/package.json
+      - ./services/authentication/package-lock.json:/app/package-lock.json
     environment:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i && npm start"
