@@ -1,6 +1,6 @@
 version: "3.2"
 services:
-  app:
+  authentication:
     container_name: netguru-authentication
     image: node
     working_dir: /app
