@@ -1,14 +1,17 @@
 version: "3.2"
 services:
   app:
-    command: node src/server.js
-    build:
-      context: .
-      dockerfile: Dockerfile
+    container_name: netguru-authentication
+    image: node
+    working_dir: /app
+    tty: true
     ports:
       - published: ${APP_PORT:-3000}
         target: 3000
     volumes:
-      - .:/app/
+      - ./src:/app/src:ro
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
     environment:
       JWT_SECRET: ${JWT_SECRET}
+    command: bash -c "npm i && npm start"
