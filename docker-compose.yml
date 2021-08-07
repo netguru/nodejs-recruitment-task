@@ -14,7 +14,7 @@ services:
       - ./services/authentication/package-lock.json:/app/package-lock.json
     environment:
       JWT_SECRET: ${JWT_SECRET}
-    command: bash -c "npm i && npm start"
+    command: bash -c "npm i --only=prod && npm start"
   movies:
     container_name: netguru-movies
     image: node
