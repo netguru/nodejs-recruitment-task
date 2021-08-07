@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   authentication:
-    container_name: netguru-authentication
+    container_name: netguru-${NODE_ENV}-authentication
     image: node
     working_dir: /app
     tty: true
@@ -17,7 +17,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
   movies:
-    container_name: netguru-movies
+    container_name: netguru-${NODE_ENV}-movies
     image: node
     working_dir: /app
     tty: true
