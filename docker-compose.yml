@@ -9,13 +9,13 @@ services:
       - published: ${APP_PORT:-3000}
         target: 3000
     volumes:
-      - ./services/authentication/src:/app/services/service/src:ro
+      - ./services/authentication/src:/app/services/authentication/src:ro
       - ./services/authentication/package.json:/app/package.json
       - ./services/authentication/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
-    command: bash -c "npm i --only=prod && npm start"
+    command: bash -c "npm i --only=${NODE_ENV} && npm start"
   movies:
     container_name: netguru-movies
     image: node
@@ -25,12 +25,12 @@ services:
       - published: ${APP_PORT:-3001}
         target: 3001
     volumes:
-      - ./services/movies/src:/app/services/service/src:ro
+      - ./services/movies/src:/app/services/movies/src:ro
       - ./services/movies/package.json:/app/package.json
       - ./services/movies/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
-    command: bash -c "npm i --only=prod && npm start"
+    command: bash -c "npm i --only=${NODE_ENV} && npm start"
     depends_on:
       - authentication
