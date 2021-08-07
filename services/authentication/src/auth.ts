@@ -19,24 +19,26 @@ const users = [
 
 export class AuthError extends Error {}
 
-export const authFactory = (secret) => (username, password) => {
-  const user = users.find((u) => u.username === username);
+export const authFactory =
+  (secret: string) =>
+  (username: string, password: string): string => {
+    const user = users.find((u) => u.username === username);
 
-  if (!user || user.password !== password) {
-    throw new AuthError('invalid username or password');
-  }
+    if (!user || user.password !== password) {
+      throw new AuthError('invalid username or password');
+    }
 
-  return jwt.sign(
-    {
-      userId: user.id,
-      name: user.name,
-      role: user.role,
-    },
-    secret,
-    {
-      issuer: 'https://www.netguru.com/',
-      subject: `${user.id}`,
-      expiresIn: 30 * 60,
-    },
-  );
-};
+    return jwt.sign(
+      {
+        userId: user.id,
+        name: user.name,
+        role: user.role,
+      },
+      secret,
+      {
+        issuer: 'https://www.netguru.com/',
+        subject: `${user.id}`,
+        expiresIn: 30 * 60,
+      },
+    );
+  };
