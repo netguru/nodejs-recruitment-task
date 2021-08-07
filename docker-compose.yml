@@ -24,10 +24,10 @@ services:
       - published: ${APP_PORT:-3001}
         target: 3001
     volumes:
-      - ./services/movies/src:/app/src:ro
+      - ./services/movies/src:/app/services/service/src:ro
       - ./services/movies/package.json:/app/package.json
       - ./services/movies/package-lock.json:/app/package-lock.json
-      - ./services/movies/tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i --only=prod && npm start"
