@@ -1,0 +1,17 @@
+name: development CI
+on:
+  pull_request:
+    branches:
+      - development
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - name: Run npm ci
+      run: npm ci
+    - name: Run ESLint
+      run: npm run lint
