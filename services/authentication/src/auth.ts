@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const users = [
   {
@@ -17,9 +17,9 @@ const users = [
   },
 ];
 
-class AuthError extends Error {}
+export class AuthError extends Error {}
 
-const authFactory = (secret) => (username, password) => {
+export const authFactory = (secret) => (username, password) => {
   const user = users.find((u) => u.username === username);
 
   if (!user || user.password !== password) {
@@ -39,9 +39,4 @@ const authFactory = (secret) => (username, password) => {
       expiresIn: 30 * 60,
     },
   );
-};
-
-module.exports = {
-  authFactory,
-  AuthError,
 };

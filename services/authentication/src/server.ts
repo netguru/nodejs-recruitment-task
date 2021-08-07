@@ -1,6 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { authFactory, AuthError } = require('./auth');
+import express from 'express';
+import bodyParser from 'body-parser';
+
+import { authFactory, AuthError } from './auth';
 
 const PORT = 3000;
 const { JWT_SECRET } = process.env;

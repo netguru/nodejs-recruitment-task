@@ -1,10 +1,10 @@
 {
   "name": "nodejs-recruitment-task",
   "scripts": {
-    "lint:authentication": "eslint 'services/authentication/src/**/*.js'",
+    "lint:authentication": "eslint 'services/authentication/src/**/*.ts'",
     "lint:movies": "eslint 'services/movies/src/**/*.ts'",
-    "lint": "eslint 'services/*/src/**/*.{ts,js}'",
-    "format": "eslint 'services/*/src/**/*.{ts,js}' --fix"
+    "lint": "eslint 'services/*/src/**/*.ts'",
+    "format": "eslint 'services/*/src/**/*.ts' --fix"
   },
   "devDependencies": {
     "eslint-config-airbnb-base-ts": "^14.1.1",
