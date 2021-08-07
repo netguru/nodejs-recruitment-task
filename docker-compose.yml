@@ -15,7 +15,7 @@ services:
       - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
-    command: bash -c "npm i --only=${NODE_ENV} && npm start"
+    command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
   movies:
     container_name: netguru-movies
     image: node
@@ -31,6 +31,6 @@ services:
       - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
-    command: bash -c "npm i --only=${NODE_ENV} && npm start"
+    command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
     depends_on:
       - authentication

@@ -7,8 +7,10 @@
     "build:clean": "rimraf dist",
     "prebuild": "npm run build:clean",
     "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node ."
+    "preprod": "npm run build",
+    "prod": "node .",
+    "predev": "npm run build:clean",
+    "dev": "tsc -w & nodemon ."
   },
   "keywords": [],
   "author": "",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/jsonwebtoken": "^8.5.4"
+    "@types/jsonwebtoken": "^8.5.4",
+    "nodemon": "^2.0.12"
   }
 }
