@@ -1,0 +1,7 @@
+GET http://localhost:3001/movies
+###
+POST http://localhost:3001/movies
+Content-Type: application/json
+
+{}
+###
