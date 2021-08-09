@@ -11,6 +11,6 @@ export const getAllByUserId = async (req: Request, res: Response): Promise<void>
 };
 
 export const create = async (req: Request, res: Response): Promise<void> => {
-  const movie = await moviesService.create(req.body.user, req.body.title);
+  const movie = await moviesService.create(req.body.user, req.body.title, req.body.year);
   res.status(201).json({ data: movie });
 };

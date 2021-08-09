@@ -5,8 +5,8 @@ import { Movie } from '../models/Movie';
 import { NotFoundError } from '../utils/errors';
 import { formatDate } from '../utils/utils';
 
-async function fetchData(title: string): Promise<MovieOMDB> {
-  const params = { t: title, apikey: process.env.OMDB_API_KEY };
+async function fetchData(title: string, year: number): Promise<MovieOMDB> {
+  const params = { t: title, y: year, apikey: process.env.OMDB_API_KEY };
   const { data } = await axios.get(process.env.OMDB_API_URL, { params });
 
   if (data.Response === 'False') {
@@ -16,8 +16,8 @@ async function fetchData(title: string): Promise<MovieOMDB> {
   return data;
 }
 
-export async function fetchMovieDetails(title: string): Promise<Movie> {
-  const data = await fetchData(title);
+export async function fetchMovieDetails(title: string, year: number): Promise<Movie> {
+  const data = await fetchData(title, year);
 
   const movie = new Movie();
   movie.title = data.Title;
