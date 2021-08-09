@@ -2,8 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import { authFactory, AuthError } from './auth';
+import config from './default';
 
-const PORT = 3000;
+const { PORT } = config;
 const { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {

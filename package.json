@@ -1,14 +1,22 @@
 {
   "name": "nodejs-recruitment-task",
   "scripts": {
-    "lint:authentication": "eslint 'services/authentication/src/**/*.ts'",
-    "lint:movies": "eslint 'services/movies/src/**/*.ts'",
-    "lint": "eslint 'services/*/src/**/*.ts'",
-    "format": "eslint 'services/*/src/**/*.ts' --fix"
+    "prepare": "husky install",
+    "lint:authentication": "eslint 'services/authentication/{src,test}/**/*.ts'",
+    "lint:movies": "eslint 'services/movies/{src,test}/**/*.ts'",
+    "lint": "eslint 'services/*/{src,test}/**/*.ts'",
+    "format:authentication": "eslint 'services/authentication/{src,test}/**/*.ts' --fix",
+    "format:movies": "eslint 'services/movies/{src,test}/**/*.ts' --fix",
+    "format": "eslint 'services/*/{src,test}/**/*.ts' --fix",
+    "test:authentication": "jest 'services/authentication'",
+    "test:movies": "jest 'services/movies'",
+    "test": "jest"
   },
   "devDependencies": {
     "eslint-config-airbnb-base-ts": "^14.1.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0"
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "ts-jest": "^27.0.4"
   }
 }
