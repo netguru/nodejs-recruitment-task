@@ -4,8 +4,7 @@ import bodyParser from 'body-parser';
 import { authFactory, AuthError } from './auth';
 import config from './default';
 
-const { PORT } = config;
-const { JWT_SECRET } = process.env;
+const { PORT, JWT_SECRET } = config;
 
 if (!JWT_SECRET) {
   throw new Error('Missing JWT_SECRET env var. Set it and restart the server');
