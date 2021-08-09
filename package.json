@@ -15,6 +15,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "typeorm": "^0.2.36"
   },
   "devDependencies": {
