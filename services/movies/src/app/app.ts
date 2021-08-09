@@ -6,6 +6,8 @@ import * as db from '../../../../shared/src/providers/db';
 
 const app = express();
 
+app.use(express.json());
+
 mountRoutes(app, '');
 
 app.init = () => {
