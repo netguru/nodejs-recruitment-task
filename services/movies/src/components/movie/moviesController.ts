@@ -11,6 +11,6 @@ export const getAll = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const create = async (req: Request, res: Response): Promise<void> => {
-  const movie = await moviesService.create('Sample title', new Date(), 'Action', 'Spielberg');
+  const movie = await moviesService.create('Sample title');
   res.status(201).json({ data: movie });
 };
