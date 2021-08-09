@@ -16,7 +16,7 @@ services:
       - ./nodemon.json:/app/nodemon.json:ro
       - ./.env:/app/.env:ro
     environment:
-      JWT_SECRET: ${JWT_SECRET}
+      PORT: 3000
     command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
     depends_on:
       - postgres
@@ -37,7 +37,7 @@ services:
       - ./nodemon.json:/app/nodemon.json:ro
       - ./.env:/app/.env:ro
     environment:
-      JWT_SECRET: ${JWT_SECRET}
+      PORT: 3001
     command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
     depends_on:
       - authentication

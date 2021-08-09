@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 import { UserJWT } from '../../../../shared/src/interfaces/User';
 import { ForbiddenError, UnAuthorizedError } from '../../../../shared/src/utils/errors';
-import config from '../config/default';
 
 export default (req: Request, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;
@@ -11,7 +10,7 @@ export default (req: Request, res: Response, next: NextFunction): void => {
 
   if (!token) throw new UnAuthorizedError('Missing token');
   else
-    jwt.verify(token, config.JWT_SECRET, (err: jwt.VerifyErrors, user: UserJWT): void => {
+    jwt.verify(token, process.env.JWT_SECRET, (err: jwt.VerifyErrors, user: UserJWT): void => {
       if (err) throw new ForbiddenError('Bad token');
       else {
         req.body.user = user;

@@ -1,10 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
-import config from './config/default';
+import './config/default';
 import { authFactory, AuthError } from './auth';
 
-const { PORT, JWT_SECRET } = config;
+const { PORT, JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
   throw new Error('Missing JWT_SECRET env var. Set it and restart the server');

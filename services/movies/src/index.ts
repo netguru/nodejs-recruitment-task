@@ -1,9 +1,9 @@
 import 'express-async-errors';
 
-import config from './config/default';
+import './config/default';
 import app from './app/app';
 
-const { PORT } = config;
+const { PORT } = process.env;
 
 app.init();
 
