@@ -1,7 +1,7 @@
 import 'express-async-errors';
 
-import app from './app/app';
 import config from './config/default';
+import app from './app/app';
 
 const { PORT } = config;
 
