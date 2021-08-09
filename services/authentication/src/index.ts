@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
 import { authFactory, AuthError } from './auth';
@@ -43,9 +43,9 @@ app.post('/auth', (req, res, next) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((error, _, res, __) => {
-  console.error(`Error processing request ${error}. See next message for details`);
-  console.error(error);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(`Error processing request ${err}. See next message for details`);
+  console.error(err);
 
   return res.status(500).json({ error: 'internal server error' });
 });
