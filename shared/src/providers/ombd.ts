@@ -1,11 +1,29 @@
+import axios from 'axios';
+import { MovieOMDB } from '../interfaces/Movie';
+
 import { Movie } from '../models/Movie';
+import { NotFoundError } from '../utils/errors';
 import { formatDate } from '../utils/utils';
 
-export function fetchMovieDetails(title: string): Movie {
+async function fetchData(title: string): Promise<MovieOMDB> {
+  const params = { t: title, apikey: process.env.OMDB_API_KEY };
+  const { data } = await axios.get(process.env.OMDB_API_URL, { params });
+
+  if (data.Response === 'False') {
+    throw new NotFoundError(data.Error);
+  }
+
+  return data;
+}
+
+export async function fetchMovieDetails(title: string): Promise<Movie> {
+  const data = await fetchData(title);
+
   const movie = new Movie();
-  movie.title = title;
-  movie.released = formatDate(new Date('25 Jun 1982'));
-  movie.genre = 'Action';
-  movie.director = 'Spielberg';
+  movie.title = data.Title;
+  movie.released = formatDate(new Date(data.Released));
+  movie.genre = data.Genre.split(', ');
+  movie.director = data.Director;
+
   return movie;
 }

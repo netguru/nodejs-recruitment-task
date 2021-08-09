@@ -11,8 +11,8 @@ export class Movie {
   @Column({ type: 'date' })
   released: string;
 
-  @Column({ length: 255 })
-  genre: string;
+  @Column('varchar', { array: true, length: 255 })
+  genre: string[];
 
   @Column({ length: 255 })
   director: string;
