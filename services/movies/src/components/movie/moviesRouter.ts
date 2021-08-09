@@ -4,7 +4,7 @@ import * as moviesController from './moviesController';
 
 const router = Router();
 
-router.get('', moviesController.getAll);
+router.get('', moviesController.getAllByUserId);
 
 router.post('', moviesController.create);
 

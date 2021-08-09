@@ -12,8 +12,8 @@ function fetchData(title: string): Movie {
   return movie;
 }
 
-export const getAll = async (): Promise<Movie[]> => {
-  return moviesRepository.getAll();
+export const getAllByUserId = async (userId: number): Promise<Movie[]> => {
+  return moviesRepository.getAllByUserId(userId);
 };
 
 export const create = async (user: UserJWT, title: string): Promise<Movie> => {
