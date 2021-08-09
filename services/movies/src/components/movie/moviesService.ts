@@ -11,5 +11,6 @@ export const create = async (title: string, released: Date, genre: string, direc
   movie.released = released;
   movie.genre = genre;
   movie.director = director;
+  movie.userId = 1;
   return moviesRepository.create(movie);
 };
