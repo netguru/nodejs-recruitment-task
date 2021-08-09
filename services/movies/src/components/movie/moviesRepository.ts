@@ -5,6 +5,6 @@ export const getAllByUserId = async (userId: number): Promise<Movie[]> => {
   return getRepository(Movie).find({ userId });
 };
 
-export const create = async (movie: Movie): Promise<Movie> => {
+export const save = async (movie: Movie): Promise<Movie> => {
   return getRepository(Movie).save(movie);
 };

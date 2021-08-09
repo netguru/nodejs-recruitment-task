@@ -10,5 +10,5 @@ export const getAllByUserId = async (userId: number): Promise<Movie[]> => {
 export const create = async (user: UserJWT, title: string): Promise<Movie> => {
   const movie = fetchMovieDetails(title);
   movie.userId = user.userId;
-  return moviesRepository.create(movie);
+  return moviesRepository.save(movie);
 };
