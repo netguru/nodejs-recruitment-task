@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { UserDB } from '../../../shared/src/interfaces/User';
 
-const users = [
+const users: UserDB[] = [
   {
     id: 123,
     role: 'basic',
