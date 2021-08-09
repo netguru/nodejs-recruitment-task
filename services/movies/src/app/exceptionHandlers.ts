@@ -1,10 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { APIError, HttpStatusCode, NotFoundError } from '../../../../shared/src/utils/errors';
-
-export const notFoundErrorHandler = (): void => {
-  throw new NotFoundError('Endpoint not found');
-};
+import { APIError, HttpStatusCode } from '../../../../shared/src/utils/errors';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const genericExceptionHandler = (err: APIError, req: Request, res: Response, next: NextFunction): void => {
