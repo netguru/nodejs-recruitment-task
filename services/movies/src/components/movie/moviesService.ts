@@ -8,7 +8,7 @@ export const getAll = async (): Promise<Movie[]> => {
 export const create = async (title: string): Promise<Movie> => {
   const movie = new Movie();
   movie.title = title;
-  movie.released = new Date();
+  movie.released = '25 Jun 1982';
   movie.genre = 'Action';
   movie.director = 'Spielberg';
   movie.userId = 1;

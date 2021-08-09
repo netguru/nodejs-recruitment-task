@@ -8,8 +8,8 @@ export class Movie {
   @Column()
   title: string;
 
-  @Column()
-  released: Date;
+  @Column({ type: 'date' })
+  released: string;
 
   @Column()
   genre: string;
