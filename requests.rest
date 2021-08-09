@@ -2,6 +2,14 @@ POST http://localhost:3000/auth
 Content-Type: application/json
 
 {
+  "username": "wrongUser",
+  "password": "password"
+}
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
   "username": "basic-thomas",
   "password": "sR-_pcoow-27-6PAwCD8"
 }
@@ -13,19 +21,22 @@ Content-Type: application/json
   "username": "premium-jim",
   "password": "GBLtTyq3E_UNjFnpo9m6"
 }
+### ----------
+GET http://localhost:3001/movies
 ###
-POST http://localhost:3000/auth
+GET http://localhost:3001/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2Mjg1MTk2MTAsImV4cCI6MTYyODUyMTQxMCwiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.o9mTR1c_uxFD3t-E6CzA3ijP33APT_sW5mECgRg6lyp
+###
+GET http://localhost:3001/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2Mjg1MTk2MTAsImV4cCI6MTYyODUyMTQxMCwiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.o9mTR1c_uxFD3t-E6CzA3ijP33APT_sW5mECgRg6lyo
 Content-Type: application/json
 
 {
-  "username": "wrongUser",
-  "password": "password"
+  "property": "value"
 }
-###
-GET http://localhost:3001/movies
-###
+### ----------
 POST http://localhost:3001/movies
 Content-Type: application/json
 
 {}
-###
+### ----------
