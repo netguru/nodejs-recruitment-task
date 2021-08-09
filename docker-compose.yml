@@ -6,33 +6,64 @@ services:
     working_dir: /app
     tty: true
     ports:
-      - published: ${APP_PORT:-3000}
-        target: 3000
+      - 3000:3000
     volumes:
       - ./services/authentication/src:/app/services/authentication/src:ro
       - ./services/authentication/package.json:/app/package.json
       - ./services/authentication/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
       - ./nodemon.json:/app/nodemon.json:ro
+      - ./.env:/app/.env:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
+    depends_on:
+      - postgres
+      - pgadmin
   movies:
     container_name: netguru-${NODE_ENV}-movies
     image: node
     working_dir: /app
     tty: true
     ports:
-      - published: ${APP_PORT:-3001}
-        target: 3001
+      - 3001:3001
     volumes:
       - ./services/movies/src:/app/services/movies/src:ro
       - ./services/movies/package.json:/app/package.json
       - ./services/movies/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
       - ./nodemon.json:/app/nodemon.json:ro
+      - ./.env:/app/.env:ro
     environment:
       JWT_SECRET: ${JWT_SECRET}
     command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
     depends_on:
       - authentication
+  postgres:
+    container_name: netguru-${NODE_ENV}-postgres
+    image: postgres:12
+    tty: true
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: netguru-db
+  pgadmin:
+    container_name: netguru-${NODE_ENV}-pgadmin
+    image: dpage/pgadmin4
+    tty: true
+    ports:
+      - 8080:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@netguru.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - postgres
+volumes:
+  postgres:
+  pgadmin:

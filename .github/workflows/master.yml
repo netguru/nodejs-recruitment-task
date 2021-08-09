@@ -1,8 +1,8 @@
-name: development CI
+name: master CI
 on:
   pull_request:
     branches:
-      - development
+      - master
 jobs:
   test:
     runs-on: ubuntu-latest
