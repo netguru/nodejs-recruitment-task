@@ -10,7 +10,7 @@
   "include": [
     "services/*/src",
     "services/*/test",
-    "shared"
+    "shared/src"
   ],
   "exclude": ["services/*/src/**/*.spec.ts"]
 }
