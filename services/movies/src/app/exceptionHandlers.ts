@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { APIError, HttpStatusCode, NotFoundError } from '../utils/errors';
+import { APIError, HttpStatusCode, NotFoundError } from '../../../../shared/src/utils/errors';
 
 export const notFoundErrorHandler = (): void => {
   throw new NotFoundError('Endpoint not found');

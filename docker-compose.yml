@@ -9,6 +9,7 @@ services:
       - 3000:3000
     volumes:
       - ./services/authentication/src:/app/services/authentication/src:ro
+      - ./shared:/app/shared:ro
       - ./services/authentication/package.json:/app/package.json
       - ./services/authentication/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
@@ -29,6 +30,7 @@ services:
       - 3001:3001
     volumes:
       - ./services/movies/src:/app/services/movies/src:ro
+      - ./shared:/app/shared:ro
       - ./services/movies/package.json:/app/package.json
       - ./services/movies/package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json:ro
