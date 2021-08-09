@@ -5,6 +5,11 @@ export const getAll = async (): Promise<Movie[]> => {
   return moviesRepository.getAll();
 };
 
-export const create = async (): Promise<Movie> => {
-  return moviesRepository.create();
+export const create = async (title: string, released: Date, genre: string, director: string): Promise<Movie> => {
+  const movie = new Movie();
+  movie.title = title;
+  movie.released = released;
+  movie.genre = genre;
+  movie.director = director;
+  return moviesRepository.create(movie);
 };
