@@ -2,8 +2,8 @@ import { Response, Request } from 'express';
 
 import * as moviesService from './moviesService';
 
-export const getAllByUserId = async (req: Request, res: Response): Promise<void> => {
-  const allMovies = await moviesService.getAllByUserId(req.body.user.userId);
+export const getByUserId = async (req: Request, res: Response): Promise<void> => {
+  const allMovies = await moviesService.getByUserId(req.body.user.userId);
   if (!allMovies.length) {
     res.status(204);
   }
