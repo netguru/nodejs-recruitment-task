@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
 import { authFactory, AuthError } from './auth';
-import config from './default';
+import config from './config/default';
 
 const { PORT, JWT_SECRET } = config;
 
