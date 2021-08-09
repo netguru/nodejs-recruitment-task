@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import { Movie } from '../../models/Movie';
+import { Movie } from '../../../../../shared/src/models/Movie';
 
 export const getAll = async (): Promise<Movie[]> => {
   return getRepository(Movie).find();

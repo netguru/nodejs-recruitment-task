@@ -2,7 +2,7 @@ import express from 'express';
 
 import { mountRoutes } from '../providers/routes';
 import { genericExceptionHandler, notFoundErrorHandler } from './exceptionHandlers';
-import * as db from '../providers/db';
+import * as db from '../../../../shared/src/providers/db';
 
 const app = express();
 

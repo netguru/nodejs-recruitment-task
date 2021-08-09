@@ -4,13 +4,18 @@
     "prepare": "husky install",
     "lint:authentication": "eslint 'services/authentication/{src,test}/**/*.ts'",
     "lint:movies": "eslint 'services/movies/{src,test}/**/*.ts'",
+    "lint:shared": "eslint 'shared/src/**/*.ts'",
     "lint": "eslint 'services/*/{src,test}/**/*.ts'",
     "format:authentication": "eslint 'services/authentication/{src,test}/**/*.ts' --fix",
     "format:movies": "eslint 'services/movies/{src,test}/**/*.ts' --fix",
+    "format:shared": "eslint 'shared/src/**/*.ts' --fix",
     "format": "eslint 'services/*/{src,test}/**/*.ts' --fix",
     "test:authentication": "jest 'services/authentication'",
     "test:movies": "jest 'services/movies'",
     "test": "jest"
+  },
+  "dependencies": {
+    "typeorm": "^0.2.36"
   },
   "devDependencies": {
     "eslint-config-airbnb-base-ts": "^14.1.1",
