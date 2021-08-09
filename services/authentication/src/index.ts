@@ -17,13 +17,13 @@ app.use(bodyParser.json());
 
 app.post('/auth', (req, res, next) => {
   if (!req.body) {
-    return res.status(400).json({ error: 'invalid payload' });
+    return res.status(400).json({ error: 'Invalid payload' });
   }
 
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'invalid payload' });
+    return res.status(400).json({ error: 'Invalid payload' });
   }
 
   try {
@@ -46,7 +46,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(`Error processing request ${err}. See next message for details`);
   console.error(err);
 
-  return res.status(500).json({ error: 'internal server error' });
+  return res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {

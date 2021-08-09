@@ -25,7 +25,7 @@ export const authFactory =
     const user = users.find((u) => u.username === username);
 
     if (!user || user.password !== password) {
-      throw new AuthError('invalid username or password');
+      throw new AuthError('Invalid username or password');
     }
 
     return jwt.sign(
