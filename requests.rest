@@ -1,3 +1,27 @@
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "username": "basic-thomas",
+  "password": "sR-_pcoow-27-6PAwCD8"
+}
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "username": "premium-jim",
+  "password": "GBLtTyq3E_UNjFnpo9m6"
+}
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+  "username": "wrongUser",
+  "password": "password"
+}
+###
 GET http://localhost:3001/movies
 ###
 POST http://localhost:3001/movies
