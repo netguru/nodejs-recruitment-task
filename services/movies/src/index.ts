@@ -5,6 +5,8 @@ import config from './config/default';
 
 const { PORT } = config;
 
+app.init();
+
 app.listen(PORT, () => {
   console.log(`Movies service running at port ${PORT}`);
 });
