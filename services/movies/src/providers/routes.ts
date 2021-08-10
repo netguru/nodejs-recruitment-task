@@ -7,8 +7,8 @@ const healthCheckHandler = (req: Request, res: Response): void => {
   res.json({ message: 'Health check - status ok!' });
 };
 
-export const mountRoutes = (app: Express, prefix: string): void => {
-  app.get(`${prefix}/`, healthCheckHandler);
+export const mountApi = (app: Express): void => {
+  app.get('/', healthCheckHandler);
 
-  app.use(`${prefix}/movies`, jwtAuth, moviesRouter);
+  app.use('/movies', jwtAuth, moviesRouter);
 };
