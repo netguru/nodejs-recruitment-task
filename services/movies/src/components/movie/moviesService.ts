@@ -1,6 +1,6 @@
 import { UserJWT } from '../../../../../shared/src/interfaces/User';
 import { Movie } from '../../../../../shared/src/models/Movie';
-import { fetchMovieDetails } from '../../../../../shared/src/providers/ombd';
+import { fetchMovieDetails } from '../../../../../shared/src/providers/omdb';
 import { ForbiddenError } from '../../../../../shared/src/utils/errors';
 import * as moviesRepository from './moviesRepository';
 
