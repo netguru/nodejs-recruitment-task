@@ -17,7 +17,7 @@ services:
       - ./.env:/app/.env:ro
     environment:
       PORT: 3000
-    command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
+    command: bash -c "npm i --only=${NODE_ENV} && NODE_ENV=${NODE_ENV} npm run ${NODE_ENV}"
     depends_on:
       - postgres
       - pgadmin
@@ -40,7 +40,7 @@ services:
       PORT: 3001
       DB_HOST: netguru-${NODE_ENV}-postgres
       DB_PORT: 5432
-    command: bash -c "npm i --only=${NODE_ENV} && npm run ${NODE_ENV}"
+    command: bash -c "npm i --only=${NODE_ENV} && NODE_ENV=${NODE_ENV} npm run ${NODE_ENV}"
     depends_on:
       - authentication
   postgres:
