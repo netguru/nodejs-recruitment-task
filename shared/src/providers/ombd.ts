@@ -9,7 +9,7 @@ async function fetchData(title: string, year: number): Promise<MovieOMDB> {
   const params = { t: title, y: year, apikey: process.env.OMDB_API_KEY };
   const { data } = await axios.get(process.env.OMDB_API_URL, { params });
 
-  if (data.Response === 'False') {
+  if (data.Response.toLowerCase() === 'false') {
     throw new NotFoundError(data.Error);
   }
 
