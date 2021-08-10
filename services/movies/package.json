@@ -2,7 +2,7 @@
   "name": "node-movies-svc",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/services/movies/src/index.js",
   "scripts": {
     "build:clean": "rimraf 'dist'",
     "prebuild": "npm run build:clean",

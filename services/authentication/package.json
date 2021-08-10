@@ -2,7 +2,7 @@
   "name": "node-auth-svc",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/services/authentication/src/index.js",
   "scripts": {
     "build:clean": "rimraf 'dist'",
     "prebuild": "npm run build:clean",
