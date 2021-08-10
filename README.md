@@ -143,3 +143,73 @@ Response
 - Tests quality
 - Database design
 - Technology stack
+
+-----
+
+# Instructions
+
+### Run containers
+
+To start containers in production mode run:
+```
+NODE_ENV=prod docker-compose up -d
+```
+To start containers in development mode run:
+```
+NODE_ENV=dev docker-compose up -d
+```
+`JWT_SECRET` as well as other confidential data is stored in `.env` file, which is available to all services and for convenience is included in the repository.
+To stop all containers you can run:
+```
+docker-compose down
+```
+or, if you don't want to delete them:
+```
+docker stop $(docker ps -aq -f name=netguru)
+```
+and then you can later start them by:
+```
+docker start $(docker ps -aq -f name=netguru)
+```
+You can change `name` property from `netguru` to `netguru-prod` or `netguru-dev` appropriately.
+
+### Run tests
+
+You can run test locally if you have installed locally `node` and `npm`.
+Then go to main project directory and run:
+```
+npm run test:authentication
+```
+to run `authentication` service tests,
+```
+npm run test:movies
+```
+to run `movies` service tests,
+```
+npm run test
+```
+to run all tests.
+
+### Tools used
+
+- Linux OS
+- VSCode
+- Docker
+- TypeScript
+- Express
+- PostgreSQL
+- PGAdmin
+- TypeORM
+- PG
+- Express-Async-Errors
+- JsonWebToken
+- Nodemon
+- TS-Node
+- DotEnv
+- Jest
+- Axios
+- RimRaf
+- ESLint
+- Prettier
+- Airbnb-Base-Ts
+- Husky
