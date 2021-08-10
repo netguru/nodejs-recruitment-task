@@ -213,3 +213,5 @@ to run all tests.
 - Prettier
 - Airbnb-Base-Ts
 - Husky
+- REST Client for VSCode
+- PostMan
