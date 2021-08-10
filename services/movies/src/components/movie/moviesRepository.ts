@@ -10,7 +10,7 @@ export const countByUserIdCurMonth = async (userId: number): Promise<number> => 
   const month = new Date().getMonth();
 
   const where = {
-    createdAt: MoreThanOrEqual(`${year}-${month + 1}-01`),
+    createdAt: MoreThanOrEqual(`${year}-${month + 1}-1`),
     userId,
   };
 
