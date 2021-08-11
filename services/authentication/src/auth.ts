@@ -1,23 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { UserDB } from '../../../shared/src/interfaces/User';
 import { errorResponseMessages } from '../../../shared/src/utils/errors';
-
-const users: UserDB[] = [
-  {
-    id: 123,
-    role: 'basic',
-    name: 'Basic Thomas',
-    username: 'basic-thomas',
-    password: 'sR-_pcoow-27-6PAwCD8',
-  },
-  {
-    id: 434,
-    role: 'premium',
-    name: 'Premium Jim',
-    username: 'premium-jim',
-    password: 'GBLtTyq3E_UNjFnpo9m6',
-  },
-];
+import { users } from '../../../shared/src/utils/utils';
 
 export class AuthError extends Error {}
 
