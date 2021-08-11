@@ -225,6 +225,8 @@ This way of executing tests (instead of inside of docker containers) was choosen
 - TS-Node
 - DotEnv
 - Jest
+- SuperTest
+- Swagger
 - Axios
 - RimRaf
 - ESLint
@@ -233,4 +235,3 @@ This way of executing tests (instead of inside of docker containers) was choosen
 - Husky
 - REST Client for VSCode
 - PostMan
-- Swagger
