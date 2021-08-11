@@ -1,6 +1,5 @@
 import 'express-async-errors';
 
-import './config/default';
 import app from './app/app';
 
 const { PORT } = process.env;

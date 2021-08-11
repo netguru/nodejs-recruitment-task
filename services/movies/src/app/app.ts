@@ -1,5 +1,6 @@
 import express from 'express';
 
+import '../config/default';
 import { mountApi } from '../providers/routes';
 import { genericExceptionHandler, notFoundErrorHandler } from './exceptionHandlers';
 import * as db from '../../../../shared/src/providers/db';
