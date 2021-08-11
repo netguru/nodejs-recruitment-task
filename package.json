@@ -19,10 +19,12 @@
     "typeorm": "^0.2.36"
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.11",
     "eslint-config-airbnb-base-ts": "^14.1.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.1",
+    "supertest": "^6.1.4",
     "ts-jest": "^27.0.4"
   }
 }
