@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { checkEnvVarsExistence } from '../../../../shared/src/utils/utils';
 
 dotenv.config();
 
@@ -15,8 +16,4 @@ const environmentalVariables = [
   'OMDB_API_KEY',
 ];
 
-environmentalVariables.forEach((name: string) => {
-  if (!process.env[name]) {
-    throw new Error(`Missing ${name} environmental variable`);
-  }
-});
+checkEnvVarsExistence(environmentalVariables);
