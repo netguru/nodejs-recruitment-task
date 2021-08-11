@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { UserDB } from '../../../shared/src/interfaces/User';
+import { errorResponseMessages } from '../../../shared/src/utils/errors';
 
 const users: UserDB[] = [
   {
@@ -26,7 +27,7 @@ export const authFactory =
     const user = users.find((u) => u.username === username);
 
     if (!user || user.password !== password) {
-      throw new AuthError('Invalid username or password');
+      throw new AuthError(errorResponseMessages.invalidUsernamePassword);
     }
 
     return jwt.sign(

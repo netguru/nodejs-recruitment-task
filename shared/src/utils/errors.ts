@@ -1,3 +1,13 @@
+export const errorResponseMessages = {
+  internalError: 'Internal server error',
+  invalidPayload: 'Invalid payload',
+  missingToken: 'Missing token',
+  exceededQouta: 'You exceeded your monthly amount of 5 records for basic account',
+  badToken: 'Bad token',
+  endpointNotFound: 'Endpoint not found',
+  invalidUsernamePassword: 'Invalid username or password',
+};
+
 export const enum HttpStatusCode {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
@@ -11,7 +21,7 @@ export abstract class APIError extends Error {
   constructor(
     readonly name: string,
     readonly httpStatusCode = HttpStatusCode.INTERNAL_SERVER_ERROR,
-    message = 'Internal server error',
+    message = errorResponseMessages.internalError,
   ) {
     super(message);
   }

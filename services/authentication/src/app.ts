@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 
 import './config/default';
 import { authFactory, AuthError } from './auth';
+import { errorResponseMessages } from '../../../shared/src/utils/errors';
 
 const { JWT_SECRET } = process.env;
 
@@ -17,13 +18,13 @@ app.use(bodyParser.json());
 
 app.post('/auth', (req, res, next) => {
   if (!req.body) {
-    return res.status(400).json({ error: 'Invalid payload' });
+    return res.status(400).json({ error: errorResponseMessages.invalidPayload });
   }
 
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'Invalid payload' });
+    return res.status(400).json({ error: errorResponseMessages.invalidPayload });
   }
 
   try {
@@ -46,7 +47,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(`Error processing request ${err}. See next message for details`);
   console.error(err);
 
-  return res.status(500).json({ error: 'Internal server error' });
+  return res.status(500).json({ error: errorResponseMessages.internalError });
 });
 
 export default app;
