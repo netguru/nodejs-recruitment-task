@@ -1,3 +1,4 @@
+import { Role } from '../enums/Role';
 import { UserDB } from '../interfaces/User';
 
 export function formatDate(date: Date): string {
@@ -26,14 +27,14 @@ export function checkEnvVarsExistence(variablesArray: string[]): void {
 export const users: UserDB[] = [
   {
     id: 123,
-    role: 'basic',
+    role: Role.basic,
     name: 'Basic Thomas',
     username: 'basic-thomas',
     password: 'sR-_pcoow-27-6PAwCD8',
   },
   {
     id: 434,
-    role: 'premium',
+    role: Role.premium,
     name: 'Premium Jim',
     username: 'premium-jim',
     password: 'GBLtTyq3E_UNjFnpo9m6',
