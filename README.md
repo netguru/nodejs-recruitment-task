@@ -146,6 +146,10 @@ Response
 
 -----
 
+# Documentation
+
+Documentation is provided by Swagger on `/api-docs` on `movies` container.
+
 # Instructions
 
 There are no `Dockerfile` files, everything Docker related is configured inside `docker-compose.yml`. Thanks to that there is no need for building containers.
@@ -204,7 +208,7 @@ npm run test
 
 This way of executing tests (instead of inside of docker containers) was choosen for easier access to run tests separately for each service.
 
-## Tools used
+# Tools used
 
 - Linux OS
 - VSCode
@@ -229,3 +233,4 @@ This way of executing tests (instead of inside of docker containers) was choosen
 - Husky
 - REST Client for VSCode
 - PostMan
+- Swagger
