@@ -9,5 +9,6 @@ db.on("open", ()=>{
 })
 
 app.listen(port, ()=>{
+    console.log(process.env.secret)
     console.log(`listening on port ${port}`);
 })

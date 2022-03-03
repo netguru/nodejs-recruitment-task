@@ -1,0 +1,37 @@
+version: "3.2"
+services:
+  auth_service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - published: ${AUTH_SERVICE_APP_PORT:-3000}
+        target: 3000
+    volumes:
+      - ./auth-service:/app/
+    env_file: ./auth-service/.env
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+
+  movie_service:
+    build:
+      context: ./movie-service
+      dockerfile: Dockerfile
+    ports:
+      - published: ${MOVIE_SERVICE_APP_PORT:-4040}
+        target: 4000
+#    volumes:
+#      - ./movie-service:/app/
+    env_file: ./movie-service/.env
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: 4000
+      databaseUrl: mongodb://root:example@db:27017/
+      IMDB_API_KEY: fa828fd1
+
+
+  db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example

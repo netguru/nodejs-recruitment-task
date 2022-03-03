@@ -1,33 +1,25 @@
 import supertest from 'supertest'
 import {app} from "../../app";
-import authApp from "../../../../auth-service/src/app.js"
 const mongoose = require("mongoose");
 const databaseName = "test-movies";
 import {add5Movies} from "../seed/movies.seed";
+import {authMockFactory} from "../mocks/auth.mock";
 
 const request = supertest(app)
-const authAppRequest = supertest(authApp)
-describe('E2E Tests (Global)', () => {
+describe('E2E Tests (Global)',  () => {
+    let auth;
     let basicUserToken;
     let premiumUserToken;
     beforeAll(async()=>{
         const url = `mongodb://127.0.0.1/${databaseName}`;
         await mongoose.connect(url, { useNewUrlParser: true });
-        let basicToken = await authAppRequest.post('/auth').send({
-            username: "basic-thomas",
-            password: "sR-_pcoow-27-6PAwCD8",
-        })
-        let premiumToken = await authAppRequest.post('/auth').send({
-            username: "premium-jim",
-            password: "GBLtTyq3E_UNjFnpo9m6",
-        })
-
-        basicUserToken = JSON.parse(basicToken.text).token
-        premiumUserToken = JSON.parse(premiumToken.text).token
+        auth = await authMockFactory(process.env.JWT_SECRET)
+        basicUserToken =  auth("basic-thomas", "sR-_pcoow-27-6PAwCD8")
+        premiumUserToken = auth("premium-jim", "GBLtTyq3E_UNjFnpo9m6")
     })
 
     beforeEach(()=>{
-        jest.setTimeout(30000)
+        jest.setTimeout(60000)
     })
 
     afterAll(async ()=>{

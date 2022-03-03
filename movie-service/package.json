@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --detectOpenHandles",
+    "test": "cross-env NODE_ENV=test JWT_SECRET=123@#$@#AQWEss92!?& jest --runInBand --forceExit --detectOpenHandles",
     "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q src/server.ts\"",
-    "start": "tsc && node dist/app.js"
+    "start": "tsc && node dist/server.js",
+    "build": "rimraf dist && tsc"
   },
   "keywords": [],
   "author": "",

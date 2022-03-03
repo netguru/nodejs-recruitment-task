@@ -12,7 +12,7 @@ const authMiddleware = async (req: IRequestWithUser, res: Response, next: NextFu
     }
     const Authorization = req.header('Authorization').split('Bearer ')[1] || null;
     if (Authorization) {
-      const secretKey: string = process.env.secret;
+      const secretKey: string = process.env.JWT_SECRET;
       const verificationResponse = await jwt.verify(Authorization, secretKey);
       if (verificationResponse) {
         req.user = verificationResponse;
@@ -24,8 +24,7 @@ const authMiddleware = async (req: IRequestWithUser, res: Response, next: NextFu
       next(new HttpException(401, 'Authentication token missing'));
     }
   } catch (error) {
-    // console.log(error)
-    next(new HttpException(401, 'Wrong authentication token'));
+    next(new HttpException(401, `Wrong authentication token, ${error}`));
   }
 };
 

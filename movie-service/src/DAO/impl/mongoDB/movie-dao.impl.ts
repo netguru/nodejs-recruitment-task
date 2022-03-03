@@ -20,9 +20,7 @@ class MovieDAOImpl {
             throw new HttpException(404, "Movie not found")
         }
         const {Title, Released, Genre, Director} = result.data
-        console.log(user)
         if (user.role === "basic"){
-            console.log("in here!")
             await MovieDAOImpl.userCreateRestrictionCheck(user.userId)
         }
         await movieModel.create({
@@ -43,7 +41,6 @@ class MovieDAOImpl {
     private static  userCreateRestrictionCheck = async (userId)=> {
         const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
         const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
-        console.log(startOfMonth, endOfMonth)
         const moviesCount = await movieModel.count({userId, createdAt: {$gte: startOfMonth, $lte: endOfMonth}})
         if(moviesCount >= 5){
             throw new HttpException(401, "exceeded monthly movie creation for basic role")
