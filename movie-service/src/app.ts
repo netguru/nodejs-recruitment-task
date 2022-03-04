@@ -1,7 +1,7 @@
 import express from 'express';
-import cors from "cors";
+// import cors from "cors";
 import mongoose from  "mongoose";
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import path from  "path";
 import routes from  './routes';
 import { NextFunction, Request, Response } from 'express';
@@ -24,10 +24,10 @@ export const app = express();
 export const port = process.env.PORT || 4000;
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(helmet());
-app.use(cors({
-    origin: '*'
-}));
+// app.use(helmet());
+// app.use(cors({
+//     origin: '*'
+// }));
 
 
 // dynamically prepends "/api" to your routes.
