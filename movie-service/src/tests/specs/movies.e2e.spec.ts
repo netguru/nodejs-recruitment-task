@@ -5,7 +5,7 @@ const databaseName = "test-movies";
 import {add5Movies} from "../seed/movies.seed";
 import {authMockFactory} from "../mocks/auth.mock";
 
-const request = supertest(app)
+const request = supertest(app);
 describe('E2E Tests (Global)',  () => {
     let auth;
     let basicUserToken;
