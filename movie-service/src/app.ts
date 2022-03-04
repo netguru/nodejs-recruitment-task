@@ -1,6 +1,4 @@
 import express from 'express';
-import cors from "cors";
-import helmet from 'helmet';
 import routes from  './routes';
 import { dirname } from 'path';
 import errorMiddleware from "./middlewares/error.middleware";
@@ -14,10 +12,6 @@ export const app = express();
 export const port = process.env.PORT || 4000;
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(helmet());
-app.use(cors({
-    origin: '*'
-}));
 
 
 // dynamically prepends "/api" to your routes.
