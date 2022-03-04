@@ -19,7 +19,7 @@ app.get('/',  (req, res)=> {
     res.send('Welcome to movies API');
 })
 
-app.use('/api', routes)
+app.use('/api', routes);
 
 app.use((req, res, next)=>{
     const error: any = new Error('resource not found');
