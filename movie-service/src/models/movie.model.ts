@@ -20,7 +20,7 @@ const movieSchema: Schema = new Schema({
     }
 },{
     timestamps: true
-})
+});
 
 const movieModel = model("Movie", movieSchema)
 export default movieModel
