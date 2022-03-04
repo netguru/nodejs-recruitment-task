@@ -1,0 +1,47 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+env:
+  JWT_SECRET: 123@#$@#AQWEss92!?&
+  IMDB_API_KEY: fa828fd1
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    
+    - name: MongoDB in GitHub Actions
+        # You may pin to the exact commit or the version.
+        # uses: supercharge/mongodb-github-action@e815fd8a9dfede09fd6e6c144f2c9f4875e933df
+      uses: supercharge/mongodb-github-action@1.7.0
+      with:
+        # MongoDB db to create (default: none)
+        mongodb-db: test-movies
+        # MongoDB root username (default: none)
+ 
+    
