@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-recruitment-task",
+  "version": "1.0.0",
+  "description": "We'd like you to build a simple Movie API. It should provide two endpoints:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tooney92/nodejs-recruitment-task.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tooney92/nodejs-recruitment-task/issues"
+  },
+  "homepage": "https://github.com/tooney92/nodejs-recruitment-task#readme"
+}
