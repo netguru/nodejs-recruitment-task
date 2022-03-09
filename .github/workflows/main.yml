@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JWT_SECRET: secret
+      MONGO_USERNAME: dbnurudeen
+      MONGO_PASSWORD: nurudeen992
+      MONGO_HOST: cluster0.89qyi.mongodb.net/recruitment
 
     steps:
       - uses: actions/checkout@v2
