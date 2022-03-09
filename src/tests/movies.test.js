@@ -12,5 +12,4 @@ describe('Movies Endpoints', () => {
         expect(JSON.parse(res.text).data[0].title).toBe(movies[0].title);
         expect(JSON.parse(res.text).data[0].genre).toBe(movies[0].genre);
     });
-    
 });
