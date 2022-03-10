@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "nodemon src/server.js",
+    "watch": "nodemon movies/server.js",
     "test:dev": "jest",
     "test": "cross-env NODE_ENV=test jest --runInBand --force-exit --testTimeout=10000"
   },
