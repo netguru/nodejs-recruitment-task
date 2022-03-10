@@ -1,5 +1,5 @@
 const supertest = require('supertest')
-const { app } = require('../../src/server')
+const { app } = require('../server')
 const requestWithSupertest = supertest(app);
 const { Movies } = require("../models/movies")
 

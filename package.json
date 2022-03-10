@@ -6,7 +6,7 @@
     "start": "nodemon src/server.js",
     "watch": "nodemon movies/server.js",
     "test:dev": "jest",
-    "test": "cross-env NODE_ENV=test jest --runInBand --force-exit --testTimeout=10000"
+    "test": "cross-env NODE_ENV=test jest --runInBand --force-exit --testTimeout=20000"
   },
   "keywords": [],
   "author": "",
