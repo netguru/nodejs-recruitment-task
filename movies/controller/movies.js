@@ -25,7 +25,6 @@ const createMovies = async (req, res, next) => {
                   director: result.Director
                 })
   
-                console.log("Movie", authData)
                 const user = await Tracker.find({ userId: { $eq: authData.userId } })
                 if (user.length > 0) {
                   if (authData.role === 'basic') {
