@@ -1,16 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 const { authFactory, AuthError } = require("./auth");
+const app = express();
 
-const PORT = 3000;
+const PORT = 3009;
 const { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
   throw new Error("Missing JWT_SECRET env var. Set it and restart the server");
 }
-
 const auth = authFactory(JWT_SECRET);
-const app = express();
+
+app.use(express.json());
 
 app.use(bodyParser.json());
 
@@ -50,3 +53,5 @@ app.use((error, _, res, __) => {
 app.listen(PORT, () => {
   console.log(`auth svc running at port ${PORT}`);
 });
+
+module.exports = { app }

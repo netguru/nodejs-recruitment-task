@@ -3,14 +3,34 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/server.js",
+    "watch": "nodemon movies/server.js",
+    "test:dev": "jest",
+    "test": "cross-env NODE_ENV=test jest --runInBand --force-exit --testTimeout=20000"
   },
   "keywords": [],
   "author": "",
   "license": "",
   "dependencies": {
     "body-parser": "1.19.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0",
     "express": "4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "got": "^12.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "mongoose": "^6.2.4",
+    "nodemon": "^2.0.15",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
