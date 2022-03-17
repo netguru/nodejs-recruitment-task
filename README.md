@@ -4,7 +4,7 @@
 ## Run locally
 
 1. Clone this repository
-1. Run from root dir
+1. Go to movie folder and run docker-compose command
 
 
 By default the auth service will start on port `3003`. You can run the application using docker. 
