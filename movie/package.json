@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --watchAll --verbose --testTimeout=60000",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles --testTimeout=60000",
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js"
   },
