@@ -35,8 +35,8 @@ jobs:
         npm run test
       env: |
         JWT_SECRET:test
-        HOST=localhost
-        USER=user
-        PASSWORD=password
-        TEST_DB=test
-        DIALECT=postgres
+        HOST:localhost
+        USER:user
+        PASSWORD:password
+        TEST_DB:test
+        DIALECT:postgres
