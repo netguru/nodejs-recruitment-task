@@ -2,9 +2,9 @@ name: run integration testing
 
 on:
   push:
-    branches: [master, feature\movie-microservices]
+    branches: [master, develop]
   pull_request:
-    branches: [master, feature\movie-microservices]
+    branches: [master, develop]
 
 jobs:
   integration-test:
