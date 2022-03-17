@@ -7,11 +7,7 @@ const dbConfig = {
       dialect: process.env.DIALECT
     },
     test: {
-      HOST: process.env.HOST,
-      USER: process.env.USER,
-      PASSWORD: process.env.PASSWORD,
-      DB: process.env.TEST_DB,
-      dialect: process.env.DIALECT
+      db_url: process.env.TEST_DB_URL
     },
     production: {
       HOST: process.env.HOST,

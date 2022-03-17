@@ -7,11 +7,19 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = envConfigs[env];
 const db = {};
+let sequelize;
 
-const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
-  host: config.HOST,
-  dialect: config.dialect
-});
+if(env === 'test'){
+  sequelize = new Sequelize(config.db_url , {
+    dialect: config.dialect
+  })
+} else {
+  sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
+    host: config.HOST,
+    dialect: config.dialect
+  });
+}
+
 
 fs.readdirSync(__dirname)
 .filter(file => {

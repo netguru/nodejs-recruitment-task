@@ -1,38 +1,48 @@
-name: CI
+name: movie-svc-ci
 
 on:
   push:
-    branches: [master, dev]
+    branches: [ 'master', 'dev' ]
     paths:
       - 'movie/**'
   pull_request:
-    branches: [master, dev]
+    branches: [ 'master', 'dev' ]
     paths:
       - 'movie/**'
 
 jobs:
-  integration-test:
+  test:
+    name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: test_db        
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      NODE_ENV: test
+      TEST_DB_URL: postgres://postgres:postgres@0.0.0.0:5432/test_db
+      JWT_SECRET: secret
+
     strategy:
       matrix:
         node-version: [14.x]
-    services:
-      test_db:
-        image:  postgres:13.0-alpine
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test
-        ports:
-          - 5432:5432
-        
+
     steps:
-      - uses: actions/checkout@v2
-      - run: cd movie && npm install && npm run test
-        env: 
-          JWT_SECRET: test
-          HOST: localhost
-          USER: user
-          PASSWORD: password
-          TEST_DB: test
-          DIALECT: postgres
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: cd movie && npm install && npm run test

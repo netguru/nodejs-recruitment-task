@@ -33,7 +33,6 @@ exports.create = async (req, res) => {
       movieData.released = Released;
       movieData.genre = Genre;
       movieData.director = Director;
-      console.log(response.data)
     } else {
       return res.status(404).send({message: 'movie not found.'})
     }
