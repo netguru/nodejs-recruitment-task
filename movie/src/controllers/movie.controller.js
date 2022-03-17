@@ -19,8 +19,7 @@ exports.create = async (req, res) => {
   }
   
   const movieData = {
-    title: req.body.title,
-    userId: req.user.userId,
+    userId: req.user.userId
   };
   let newMovie;
 
@@ -29,7 +28,8 @@ exports.create = async (req, res) => {
       timeout: 30000
     });
     if(response && response.data && response.data.Response === 'True') {
-      const { Released, Genre, Director} = response.data;
+      const { Released, Genre, Director, Title} = response.data;
+      movieData.title= Title,
       movieData.released = Released;
       movieData.genre = Genre;
       movieData.director = Director;

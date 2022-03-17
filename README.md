@@ -39,7 +39,14 @@ Response
 
 ```
 {
-    "title": "titanic"
+    "id": 17,
+    "userId": 123,
+    "title": "Titanic",
+    "released": "1997-12-18T18:00:00.000Z",
+    "genre": "Drama, Romance",
+    "director": "James Cameron",
+    "updatedAt": "2022-03-17T15:53:44.759Z",
+    "createdAt": "2022-03-17T15:53:44.759Z"
 }
 ```
 
@@ -57,7 +64,16 @@ curl --location --request GET '0.0.0.0:3003/movies' \
 Response
 
 ```
-{
-    "title": "titanic"
-}
+[
+    {
+        "id": 17,
+        "title": "Titanic",
+        "released": "1997-12-18T18:00:00.000Z",
+        "genre": "Drama, Romance",
+        "director": "James Cameron",
+        "userId": 123,
+        "createdAt": "2022-03-17T15:53:44.759Z",
+        "updatedAt": "2022-03-17T15:53:44.759Z"
+    }
+]
 ```
