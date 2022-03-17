@@ -1,5 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
+var cors = require('cors');
+ 
 const { authFactory, AuthError } = require("./auth");
 
 const PORT = 3000;
@@ -11,6 +14,7 @@ if (!JWT_SECRET) {
 
 const auth = authFactory(JWT_SECRET);
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
 
@@ -29,6 +33,7 @@ app.post("/auth", (req, res, next) => {
     const token = auth(username, password);
 
     return res.status(200).json({ token });
+
   } catch (error) {
     if (error instanceof AuthError) {
       return res.status(401).json({ error: error.message });
