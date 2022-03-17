@@ -2,12 +2,10 @@ name: movie-svc
 
 on:
   push:
-    branches: [master, dev, develop]
     paths:
       - 'movie/**'
 
   pull_request:
-    branches: [master, dev, develop]
     paths:
       - 'movie/**'
 
