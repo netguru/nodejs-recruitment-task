@@ -1,0 +1,42 @@
+name: run integration testing
+
+on:
+  push:
+    branches: [master, feature\movie-microservices]
+  pull_request:
+    branches: [master, feature\movie-microservices]
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    services:
+      test_db:
+        image:  postgres:13.0-alpine
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies
+      run: npm install 
+    - name: Integration testing
+      run: |
+        npm run test
+      env: |
+        JWT_SECRET:test
+        HOST=localhost
+        USER=user
+        PASSWORD=password
+        TEST_DB=test
+        DIALECT=postgres
