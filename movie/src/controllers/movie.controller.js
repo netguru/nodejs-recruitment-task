@@ -21,27 +21,27 @@ exports.create = async (req, res) => {
   const movieData = {
     title: req.body.title,
     userId: req.user.userId,
-    released: '19 Dec 1997'
   };
   let newMovie;
 
   try {
-    // const response = await axios.get(`http://www.omdbapi.com/?t=${req.body.title}&apikey=${process.env.APIKEY}`);
-    // if(response && response.data) {
-    //   const { Released, Genre, Director} = response.data;
-    //   movieData.released = Released;
-    //   movieData.Genre = Genre;
-    //   movieData.Director = Director;
-    // } else {
-    //   movieData.released = '';
-    //   movieData.Genre = '';
-    //   movieData.Director = '';
-    // }
+    const response = await axios.get(`http://www.omdbapi.com/?t=${req.body.title}&apikey=${process.env.APIKEY}`, {
+      timeout: 30000
+    });
+    if(response && response.data && response.data.Response === 'True') {
+      const { Released, Genre, Director} = response.data;
+      movieData.released = Released;
+      movieData.genre = Genre;
+      movieData.director = Director;
+      console.log(response.data)
+    } else {
+      return res.status(404).send({message: 'movie not found.'})
+    }
     newMovie = await Movie.create(movieData)
     if(req.user.role === 'basic'){
       await checkMovieCreateDataRecord(req.user.userId, currentMonth, currentYear)
     }
-    res.send(newMovie);
+    res.status(201).send(newMovie);
   } catch(ex) {
     res.status(500).send({
       message:

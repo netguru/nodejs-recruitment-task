@@ -1,9 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require('cors');
-
-const PORT = 3002;
 
 const app = express();
 app.use(cors());
@@ -29,6 +27,4 @@ app.use((error, _, res, __) => {
   return res.status(500).json({ error: "internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`movie svc running at port ${PORT}`);
-});
+module.exports = app;

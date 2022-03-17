@@ -5,7 +5,6 @@ var cors = require('cors');
  
 const { authFactory, AuthError } = require("./auth");
 
-const PORT = 3000;
 const { JWT_SECRET } = process.env;
 
 if (!JWT_SECRET) {
@@ -52,6 +51,9 @@ app.use((error, _, res, __) => {
   return res.status(500).json({ error: "internal server error" });
 });
 
+
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`auth svc running at port ${PORT}`);
+    console.log(`movie svc running at port ${PORT}`);
 });

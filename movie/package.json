@@ -1,11 +1,18 @@
 {
-  "name": "node-auth-svc",
+  "name": "node-movie-svc",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/server.js",
-    "start": "node ./src/server.js"
+    "test": "cross-env NODE_ENV=test jest --watchAll --verbose --testTimeout=60000",
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
   },
   "keywords": [],
   "author": "",
@@ -22,6 +29,10 @@
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "coveralls": "^3.1.1",
+    "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
