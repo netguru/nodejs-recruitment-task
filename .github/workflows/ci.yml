@@ -1,4 +1,4 @@
-name: run integration testing
+name: CI
 
 on:
   push:
@@ -33,10 +33,10 @@ jobs:
     - name: Integration testing
       run: |
         npm run test
-      env: |
-        JWT_SECRET:test
-        HOST:localhost
-        USER:user
-        PASSWORD:password
-        TEST_DB:test
-        DIALECT:postgres
+      env: 
+        JWT_SECRET: test
+        HOST: localhost
+        USER: user
+        PASSWORD: password
+        TEST_DB: test
+        DIALECT: postgres
