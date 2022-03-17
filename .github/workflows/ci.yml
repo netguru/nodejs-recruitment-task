@@ -27,20 +27,12 @@ jobs:
           - 5432:5432
         
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install Dependencies
-      run: npm install 
-    - name: Integration testing
-      run: |
-        npm run test
-      env: 
-        JWT_SECRET: test
-        HOST: localhost
-        USER: user
-        PASSWORD: password
-        TEST_DB: test
-        DIALECT: postgres
+      - uses: actions/checkout@v2
+      - run: cd movie && npm install && npm run test
+        env: 
+          JWT_SECRET: test
+          HOST: localhost
+          USER: user
+          PASSWORD: password
+          TEST_DB: test
+          DIALECT: postgres
