@@ -15,12 +15,12 @@ services:
       - db
 
   db:
-    image: postgres:13.0-alpine
+    image: mongo
+    ports:
+      - 27017:27017
     volumes:
-      - postgres_netguru_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env.db
+      - mongodb:/data/db
     restart: "on-failure"
     
 volumes:
-  postgres_netguru_data:
+  mongodb:

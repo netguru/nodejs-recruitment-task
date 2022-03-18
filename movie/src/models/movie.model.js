@@ -1,37 +1,26 @@
-const {Model, Sequelize} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Movie extends Model {};
-  Movie.init({
-    title: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    released: {
-      type: Sequelize.DATE,
-      allowNull: true
-    },
-    genre: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    director: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    userId: {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    }
-  }, {
-    sequelize,
-    modelName: 'Movie',
-  });
-  return Movie;
-};
+const mongoose = require('mongoose');
 
-// {
-//   Title: "Titanic",
-//   Released: "19 Dec 1997",
-//   Genre: "Drama, Romance",
-//   Director: "James Cameron",
-//   }
+const Movie = mongoose.model('Movie', new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 255
+  },
+  released: {
+    type: Date,
+  },
+  director: {
+    type: String,
+    required: false
+  },
+  genre: {
+    type: String,
+    required: false
+  },
+  userId: {
+    type: Number
+  }
+}));
+
+exports.Movie = Movie; 

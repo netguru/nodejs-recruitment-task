@@ -1,23 +1,31 @@
-const jwt = require("jsonwebtoken");
+const { MongoMemoryServer } = require('mongodb-memory-server');
+const mongoose = require('mongoose');
 const request = require('supertest');
+const jwt = require("jsonwebtoken");
 const app = require('../../server');
-const Movie = require('../../models').Movie;
-const MovieCreateTrack = require('../../models').MovieCreateTrack;
 
 describe('Movie Endpoint', () => {
-    beforeEach(() => {
-      jest.setTimeout(10000);
+    let mongo;
+    beforeAll( async () => {
+        process.env.JWT_SECRET = 'SECRET';
+        mongo = await MongoMemoryServer.create();
+        const mongoUri = mongo.getUri()
+        await mongoose.connect(mongoUri);
     });
-    afterEach(async () => { 
-        await Movie.destroy({
-            where: {},
-            truncate: true
-        })
-        await MovieCreateTrack.destroy({
-            where: {},
-            truncate: true
-        })
+
+    beforeEach(async () => {
+        const collections = await mongoose.connection.db.collections();
+
+        for (let collection of collections) {
+            await collection.deleteMany({});
+        }
     });
+
+    afterAll( async () => {
+        await mongo.stop();
+        await mongoose.connection.close();
+    });
+
     describe('Create Movie /post', () => {
       let token; 
       let title; 

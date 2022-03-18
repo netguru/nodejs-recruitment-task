@@ -1,5 +1,18 @@
 # Movie service
 
+## Technology stack
+
+As the name suggests, this repository is built on top of Node.js and Express.js and MongoDB
+
+#### Server side
+
+- Node.js - evented I/O for the backend
+- Express.js - Fast, unopinionated, minimalist web framework for Node.js
+- MongoDB - The application data platform for NoSQL databases
+- Mongoose - mongoose
+- Jest - JavaScript testing framework
+- Super Test - Super test API testing framework
+
 
 ## Run locally
 
@@ -39,14 +52,13 @@ Response
 
 ```
 {
-    "id": 17,
     "userId": 123,
+    "_id": "62341281c575566a846854f5",
     "title": "Titanic",
     "released": "1997-12-18T18:00:00.000Z",
     "genre": "Drama, Romance",
     "director": "James Cameron",
-    "updatedAt": "2022-03-17T15:53:44.759Z",
-    "createdAt": "2022-03-17T15:53:44.759Z"
+    "__v": 0
 }
 ```
 
@@ -66,14 +78,13 @@ Response
 ```
 [
     {
-        "id": 17,
+        "userId": 123,
+        "_id": "62341281c575566a846854f5",
         "title": "Titanic",
         "released": "1997-12-18T18:00:00.000Z",
         "genre": "Drama, Romance",
         "director": "James Cameron",
-        "userId": 123,
-        "createdAt": "2022-03-17T15:53:44.759Z",
-        "updatedAt": "2022-03-17T15:53:44.759Z"
+        "__v": 0
     }
 ]
 ```

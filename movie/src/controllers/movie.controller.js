@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { checkMonthlyMovieCreateAccess } = require("../helpers/movieTrackDataCheck")
-const Movie = require('../models').Movie;
-const MovieCreateTrack = require('../models').MovieCreateTrack;
+const { Movie } = require('../models/movie.model');
+const { MovieCreateTrack } = require('../models/movieCreateTrack.model');
 
 exports.create = async (req, res) => {
   let currentMonth = new Date().getMonth() + 1;
@@ -15,12 +15,13 @@ exports.create = async (req, res) => {
   }
 
   if (!req.body.title) {
-    return res.status(400).send({message: "Title Required!"});
+    return res.status(400).send({message: "Movie title reequired."});
   }
-  
-  const movieData = {
+
+  const movieData = new Movie({
     userId: req.user.userId
-  };
+  });
+
   let newMovie;
 
   try {
@@ -36,7 +37,7 @@ exports.create = async (req, res) => {
     } else {
       return res.status(404).send({message: 'movie not found.'})
     }
-    newMovie = await Movie.create(movieData)
+    newMovie = await movieData.save()
     if(req.user.role === 'basic'){
       await checkMovieCreateDataRecord(req.user.userId, currentMonth, currentYear)
     }
@@ -50,9 +51,8 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  const condition = { userId: req.user.userId };
   try {
-    const movies = await Movie.findAll({ where: condition });
+    const movies = await Movie.find({ userId: req.user.userId }).exec();
     res.send(movies);
   } catch(ex) {
     res.status(500).send({
@@ -64,18 +64,17 @@ exports.findAll = async (req, res) => {
 
 
 async function checkMovieCreateDataRecord(userId, currentMonth, currentYear){
-  let checkTrachDataExist = await MovieCreateTrack.findOne({ where: { month: currentMonth, year: currentYear, userId: userId  } });
-      if(checkTrachDataExist){
-        await MovieCreateTrack.update({count: checkTrachDataExist.count + 1 }, {
-          where: { id: checkTrachDataExist.id }
-        })
+  let checkTrachDataExist = await MovieCreateTrack.findOne({ where: { month: currentMonth, year: currentYear, userId: userId  } }).exec();;
+    console.log(checkTrachDataExist)    
+  if(checkTrachDataExist){
+        await MovieCreateTrack.findOneAndUpdate({_id :checkTrachDataExist._id}, {$inc : {count : 1}}).exec();
       } else {
-        const movieCreateTrackData = {
+        const movieCreateTrackData = new MovieCreateTrack({
           month: currentMonth,
           year: currentYear,
           count: 1,
           userId: userId
-        };
-        await MovieCreateTrack.create(movieCreateTrackData)
+        });
+        let d = await movieCreateTrackData.save()
       }
 }
