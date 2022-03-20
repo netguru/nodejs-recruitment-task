@@ -106,12 +106,6 @@ Dockerize the movie api and run it in the background
 $ docker-compose up -d
 ```
 
-Dockerize the movie api
-
-```bash
-$ docker-compose up -d
-```
-
 Stop the movie api
 
 ```bash
