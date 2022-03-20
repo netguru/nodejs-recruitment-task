@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  mongo_db:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - published: ${APP_PORT:-4000}
+        target: 4000
+    volumes:
+      - .:/app/
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URI: mongodb://mongo_db:27017
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}
