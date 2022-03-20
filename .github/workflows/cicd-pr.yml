@@ -54,8 +54,14 @@ jobs:
         cache: 'npm'
         cache-dependency-path: movie/package-lock.json
 
+    - name: Start Docker for Mongodb
+      run: docker run -d -p 27017:27017 mongo
+
     - name: npm install and test
       run: |
         npm install
         npm run test
+      env: |
+        JWT_SECRET:secret
+        DATABASE_URI: mongodb://0.0.0.0:27017
 
