@@ -6,13 +6,6 @@ on:
   pull_request:
     branches: [master, feature/cicd-pr]
 
-env:
-  JWT_SECRET=secret
-  DATABASE_URI=mongodb://0.0.0.0:27017
-  DB_NAME=register_movie
-  OMDB_API_KEY=7104c460
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,11 +22,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        
+    - name: Start Docker for Mongodb
+      run: docker run -d -p 27017:27017 mongo
 
     - name: npm install and test
       run: |
         npm install
         npm test
+
+    env:
+      JWT_SECRET=secret
+      DATABASE_URI=mongodb://0.0.0.0:27017
+      DB_NAME=register_movie
+      OMDB_API_KEY=7104c460
 
 
 
