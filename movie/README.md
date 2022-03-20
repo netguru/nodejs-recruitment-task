@@ -119,7 +119,7 @@ $ docker-compose down
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file.
 
 `JWT_SECRET`, `PORT`, `DATABASE_URI`, `DB_NAME`, `OMDB_API_KEY`
 
@@ -135,8 +135,7 @@ Default `PORT` for Movie Service is 4000.
 
 #### DATABASE_URI
 
-The URI that lets you connect to a MongoDB service either in your local machine or 
-in the cloud
+The URI that lets you connect to a MongoDB service either in your local machine.
 
 #### DB_NAME
 
@@ -151,8 +150,8 @@ Default `DB_NAME` is `register_movie`.
 #### OMDB_API_KEY
 
 `OMDb API The Open Movie Database` is a free API where you can search for 
-movie information. To be able to pull data from there database, you need an 
-API Key that authorized you to get a movie data in there platform.
+movie information. To be able to pull data from their database, you need an 
+API Key that authorized you to get a movie data in their platform.
 You can create your own API Key in [here](https://omdbapi.com/apikey.aspx).
 
 ## Running Tests
