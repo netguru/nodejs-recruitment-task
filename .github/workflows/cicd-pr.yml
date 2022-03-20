@@ -30,11 +30,6 @@ jobs:
       run: |
         npm install
         npm run test
-      env: |
-        JWT_SECRET=secret
-        DATABASE_URI=mongodb://0.0.0.0:27017
-        DB_NAME=register_movie
-        OMDB_API_KEY=7104c460
 
 
 
