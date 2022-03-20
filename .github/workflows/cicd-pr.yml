@@ -7,12 +7,12 @@ on:
     branches: [master, feature/cicd-pr]
 
 jobs:
-  build:
+  auth-build:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./movie
+        working-directory: ./auth
 
     strategy:
       matrix:
@@ -26,9 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-
-    - name: Start Docker for Mongodb
-      run: docker run -d -p 27017:27017 mongo
+        cache-dependency-path: auth/package-log.json
 
     - name: npm install and test
       run: |
