@@ -4,9 +4,9 @@
 
 List of technologies to create the movie api
 
-**Server:** [Node](https://nodejs.org/en/), [Express](https://expressjs.com/)
+**Server:** [Node](https://nodejs.org/en/), [Express](https://expressjs.com/), [Mongoose](https://mongoosejs.com/)
 
-**Database:** [MongoDB](https://docs.mongodb.com/), [Mongoose](https://mongoosejs.com/)
+**Database:** [MongoDB](https://docs.mongodb.com/)
 
 **Test:** [Jest](https://jestjs.io/), [Supertest](https://github.com/visionmedia/supertest)
 
@@ -149,10 +149,10 @@ Default `DB_NAME` is `register_movie`.
 
 #### OMDB_API_KEY
 
-`OMDb API The Open Movie Database` is a free API where you can search for 
+`OMDb API The Open Movie Database` is a free API service where you can search for 
 movie information. To be able to pull data from their database, you need an 
 API Key that authorized you to get a movie data in their platform.
-You can create your own API Key in [here](https://omdbapi.com/apikey.aspx).
+You can create your own API Key [here](https://omdbapi.com/apikey.aspx).
 
 ## Running Tests
 
