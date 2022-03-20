@@ -58,7 +58,7 @@ List of technologies to create the movie api
         "title": "The Batman"
     }'
 
-    #### Response
+#### Response
 
     {
         "success": true,
@@ -79,27 +79,44 @@ List of technologies to create the movie api
 Clone the project
 
 ```bash
-  git clone <repository link>
+$ git clone <repository link>
 ```
 
 Go to the movie directory
 
 ```bash
-  cd <project directory>/movie
+$ cd <project directory>/movie
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+$ npm install
 ```
 
 Start the server
 
 ```bash
-  npm run start
+$ npm run start
 ```
 
+Dockerize the movie api and run it in the background
+
+```bash
+$ docker-compose up -d
+```
+
+Dockerize the movie api
+
+```bash
+$ docker-compose up -d
+```
+
+Stop the movie api
+
+```bash
+$ docker-compose down
+```
 
 ## Environment Variables
 
