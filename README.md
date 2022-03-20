@@ -74,6 +74,11 @@ List of technologies to create the movie api
             }
         ]
     }
+
+#### NOTE
+- `Basic` users are restricted to create 5 movies per month (calendar month). 
+- `Premium` users have no limits in creating movies.
+
 ## Run Locally
 
 Clone the project
