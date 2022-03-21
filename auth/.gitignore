@@ -1,2 +1,2 @@
-.aws-sam/
 node_modules/
+coverage

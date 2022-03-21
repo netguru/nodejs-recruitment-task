@@ -1,0 +1,48 @@
+@hostname = localhost
+@hostAuth = {{hostname}}:3000
+@hostMovie = {{hostname}}:4000
+@contentType = application/json
+
+
+### Authenticate user for basic user
+# @name auth
+POST http://{{hostAuth}}/auth
+Content-Type: {{contentType}}
+
+{
+    "username": "basic-thomas",
+    "password": "sR-_pcoow-27-6PAwCD8"
+}
+
+
+### Authenticate user for premium user
+# @name auth
+POST http://{{hostAuth}}/auth
+Content-Type: {{contentType}}
+
+{
+    "username": "premium-jim",
+    "password": "GBLtTyq3E_UNjFnpo9m6"
+}
+
+
+###
+
+@authToken = {{auth.response.body.token}}
+
+### Get the list of movies by user
+# @name getMovies
+GET http://{{hostMovie}}/movies
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+
+### Create a movie by user
+# @name createMovie
+POST http://{{hostMovie}}/movies
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Spider-Man: No Way Home"
+}

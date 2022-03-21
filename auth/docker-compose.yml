@@ -1,10 +1,10 @@
-version: "3.2"
+version: "3.9"
 services:
-  app:
-    command: node src/server.js
+  api:
     build:
       context: .
       dockerfile: Dockerfile
+    command: npm run start
     ports:
       - published: ${APP_PORT:-3000}
         target: 3000

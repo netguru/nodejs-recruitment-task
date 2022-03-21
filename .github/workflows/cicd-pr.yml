@@ -1,0 +1,64 @@
+name: CICD-PR
+
+on:
+  push:
+    branches: [master, feature/cicd-pr]
+  pull_request:
+    branches: [master, feature/cicd-pr]
+
+jobs:
+  auth-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./auth
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: auth/package-lock.json
+
+    - name: npm install and test
+      run: |
+        npm install
+        npm run test
+
+  movie-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./movie
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: movie/package-lock.json
+
+    - name: Start Docker for Mongodb
+      run: docker run -d -p 27017:27017 mongo
+
+    - name: npm install and test
+      run: |
+        npm install
+        npm run test
+
