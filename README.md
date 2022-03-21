@@ -24,7 +24,7 @@ List of technologies to create the movie api
 
 #### Request
 
-    curl --location --request POST 'http://localhost:4000/movies' \
+    curl --location --request GET 'http://localhost:4000/movies' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token>'
 
