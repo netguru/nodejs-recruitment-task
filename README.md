@@ -1,3 +1,5 @@
+to run the project
+  run docker-compose up --build -d
 # Node.js recruitment task
 
 We'd like you to build a simple Movie API. It should provide two endpoints:

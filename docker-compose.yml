@@ -1,14 +1,24 @@
 version: "3.2"
 services:
-  app:
-    command: node src/server.js
+  authentication:
     build:
-      context: .
+      context: ./services/auth/.
       dockerfile: Dockerfile
     ports:
-      - published: ${APP_PORT:-3000}
+      - published: 3000
         target: 3000
-    volumes:
-      - .:/app/
-    environment:
-      JWT_SECRET: ${JWT_SECRET}
+    env_file: ./services/auth/.env
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - published: 27017
+        target: 27017
+  movies: 
+    build:
+        context: ./services/movies/.
+        dockerfile: Dockerfile
+    ports:
+      - published: 5000
+        target: 5000
+    env_file: ./services/movies/.env
