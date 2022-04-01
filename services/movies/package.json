@@ -1,0 +1,24 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "Movies service ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "movies",
+    "api"
+  ],
+  "author": "Fawas kareem",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "mongoose": "^6.2.9"
+  }
+}
