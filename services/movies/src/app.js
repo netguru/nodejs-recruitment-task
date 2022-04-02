@@ -3,10 +3,15 @@ const dotenv = require('dotenv');
 const mongooose = require('mongoose');
 const createError = require('http-errors');
 const routes = require('./movies.route');
-
 dotenv.config();
+console.log(process.env.API_KEY);
 
 const app = express();
+
+mongooose
+    .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('db connected'))
+    .catch((error) => console.error(error));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
