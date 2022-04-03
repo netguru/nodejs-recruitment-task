@@ -7,7 +7,7 @@ const mongooose = require('mongoose');
 describe('Movie repo', () => {
     beforeEach(() => {
         mongooose
-            .connect('mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true })
+            .connect('mongodb+srv://phawazzzy:netguru-task123@cluster0.axuiz.mongodb.net/movies?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => console.log('test db connected'))
             .catch((error) => console.error(error));
     });
