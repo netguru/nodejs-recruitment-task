@@ -29,6 +29,7 @@ jobs:
         
     - name: install and test
       run: | 
+        pwd
         npm install
         npm test
       env: 
