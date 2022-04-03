@@ -38,6 +38,16 @@ class MoviesRepository {
             throw new Error(error);
         }
     }
+
+    static async deleteMany(data) {
+        try {
+            const res = await Movies.deleteMany({ user: data.userId });
+            return res;
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
+    }
 }
 
 module.exports = MoviesRepository;

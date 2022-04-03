@@ -65,7 +65,7 @@ class MoviesService {
             const movies = await MoviesRepository.findAll({ user: user.userId });
             return {
                 status: true,
-                statusCode: 201,
+                statusCode: 200,
                 message: 'Successfully fetched user movies',
                 data: movies,
                 error: null
