@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "chai-jest": "^1.0.2",
     "chai-jest-mocks": "^1.2.4",
     "chai-spies": "^1.0.0",
