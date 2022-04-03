@@ -4,7 +4,7 @@
   "description": "Movies service ",
   "main": "src/app.js",
   "scripts": {
-    "test": "NODE_ENV=test  ./node_modules/mocha/bin/mocha src/test/**/* --timeout 60000",
+    "test": "NODE_ENV=test API_KEY=1709cc9f  ./node_modules/mocha/bin/mocha src/test/**/* --timeout 60000",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
