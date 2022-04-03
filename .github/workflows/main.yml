@@ -38,5 +38,8 @@ jobs:
         npm test
       env: 
         CI: true
+        PORT: 8000
+        JWT_SECRET: secret
+        API_KEY: 1709cc9f
     
       
