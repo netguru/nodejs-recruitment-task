@@ -16,7 +16,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: /home/runner/work/nodejs-recruitment-task/services/movie
+        working-directory: ${{github.workspace}}/services/movie
 
     strategy:
       matrix:
