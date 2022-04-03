@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const { assert } = require('joi');
 const MovieHelper = require('../../helpers/movies.helper');
 
 describe('Movies helper', () => {
