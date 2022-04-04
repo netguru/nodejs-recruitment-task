@@ -2,15 +2,21 @@ const { expect, assert } = require('chai');
 const chai = require('chai');
 const mocha = require('mocha');
 const MoviesRepository = require('../../repository/movies.repository');
-const mongooose = require('mongoose');
+const mongoose = require('mongoose');
 
 describe('Movie repo', () => {
-    beforeEach(() => {
-        mongooose
-            .connect('mongodb+srv://phawazzzy:netguru-task123@cluster0.axuiz.mongodb.net/movies?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => console.log('test db connected'))
-            .catch((error) => console.error(error));
-    });
+    // const db = mongoose.connect(' mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    // beforeEach(() => {
+    //     // mongoose
+    //     //     .connect(' mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true })
+    //     //     .then(() => console.log('test db connected'))
+    //     //     .catch((error) => console.error(error));
+    //     // const db = mongoose.connect(' mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    // });
+
+    // afterEach(async () => {
+    //     await db.disconnect();
+    // });
 
     describe('Create data', () => {
         it('creates record', async () => {

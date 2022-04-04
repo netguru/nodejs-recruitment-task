@@ -6,22 +6,40 @@ const app = require('../../app');
 chai.use(chaiHttp);
 
 const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTY0OTAxMzIyMiwiZXhwIjoxNjQ5MDE1MDIyLCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.lflsg3EwuQoQ2MsTYGLHiJmt0FBiq8_p6_qCk84V7Kc';
-
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTY0OTAzMDkyNCwiZXhwIjoxNjQ5MDMyNzI0LCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.i4LL28dMakHgyKwLB032A0iCbc_TDPr-Sb3rgqPP7Kg';
+const notoken = '';
 describe('movie endpoints', () => {
     beforeEach(() => {});
-    it('should throw error if user is not autheticated', (done) => {
+    it('should create movie for authenticated user', (done) => {
         chai.request(app)
             .post('/movies')
             .auth(token, { type: 'bearer' })
             .set({
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                Authorization: `Bearer ${token}`
             })
             .send({
                 title: 'amazing spider man'
             })
             .end((err, res) => {
-                expect(res.status).to.eq(200);
+                expect(res.status).to.eq(201);
+                done();
+            });
+    });
+
+    it('should not create movie for un-authenticated', (done) => {
+        chai.request(app)
+            .post('/movies')
+            .auth(token, { type: 'bearer' })
+            .set({
+                'content-type': 'application/json',
+                Authorization: `Bearer ${notoken}`
+            })
+            .send({
+                title: 'amazing spider man'
+            })
+            .end((err, res) => {
+                expect(res.status).to.eq(401);
                 done();
             });
     });
