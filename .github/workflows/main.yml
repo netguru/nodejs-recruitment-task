@@ -38,3 +38,4 @@ jobs:
         npm test
       env: 
         CI: true
+        MONGO_URL: mongodb+srv://phawazzzy:netguru-task123@cluster0.axuiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
