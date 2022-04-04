@@ -34,7 +34,6 @@ class MoviesRepository {
             const res = await Movies.create(data);
             return res;
         } catch (error) {
-            console.log(error);
             throw new Error(error);
         }
     }
