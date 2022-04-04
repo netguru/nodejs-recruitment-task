@@ -4,7 +4,6 @@ const mongooose = require('mongoose');
 const createError = require('http-errors');
 const routes = require('./movies.route');
 dotenv.config();
-console.log(process.env.API_KEY);
 
 const app = express();
 
