@@ -97,7 +97,7 @@ $ git clone <repository link>
 Go to the movie directory
 
 ```bash
-$ cd <project directory>/movie
+$ cd <project directory>/services/movies
 ```
 
 Install dependencies
