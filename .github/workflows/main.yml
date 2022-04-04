@@ -1,0 +1,41 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Run test CI
+
+on:
+  push:
+    branches: [ master]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    
+    defaults:
+      run:
+        working-directory: ${{github.workspace}}/services/movies
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+      
+    - name: using node js
+      uses: actions/setup-node@v2.1.5
+      with: 
+        node-version: ${{ matrix.node-version }}
+        
+    - name: install and test
+      run: |
+        npm install
+        npm test
+      env: 
+        CI: true
+        MONGO_URL: mongodb+srv://phawazzzy:netguru-task123@cluster0.axuiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
