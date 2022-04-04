@@ -5,7 +5,7 @@ const MoviesRepository = require('../../repository/movies.repository');
 const mongoose = require('mongoose');
 
 describe('Movie repo', () => {
-    // const db = mongoose.connect(' mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    // const db = mongoose.connect('mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true });
     // beforeEach(() => {
     //     // mongoose
     //     //     .connect(' mongodb://localhost:27017/movies_test', { useNewUrlParser: true, useUnifiedTopology: true })

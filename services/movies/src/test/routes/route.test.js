@@ -5,6 +5,7 @@ const app = require('../../app');
 
 chai.use(chaiHttp);
 
+// this token is valid for only 30 mins so the test might fails
 const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTY0OTAzMDkyNCwiZXhwIjoxNjQ5MDMyNzI0LCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.i4LL28dMakHgyKwLB032A0iCbc_TDPr-Sb3rgqPP7Kg';
 const notoken = '';
