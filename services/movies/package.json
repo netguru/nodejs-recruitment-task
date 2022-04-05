@@ -1,0 +1,33 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "Movies service ",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "NODE_ENV=test API_KEY=1709cc9f  ./node_modules/mocha/bin/mocha src/test/**/* --timeout 60000",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "movies",
+    "api"
+  ],
+  "author": "Fawas kareem",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "chai-jest": "^1.0.2",
+    "chai-jest-mocks": "^1.2.4",
+    "chai-spies": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^9.2.2",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.9"
+  }
+}
