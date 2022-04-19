@@ -1,6 +1,10 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const { authFactory, AuthError } = require("./auth");
+const Movie = require("../model/movie");
+const dotenv = require("dotenv");
+dotenv.config()
 
 const PORT = 3000;
 const { JWT_SECRET } = process.env;
@@ -13,6 +17,43 @@ const auth = authFactory(JWT_SECRET);
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.json());
+mongoose.connect(
+  process.env.DB_CONNECTION_STRING, 
+  { useUnifiedTopology: true },
+  (res, req) => {
+  console.log("Connected to the DB");
+})
+
+const customMiddleware = (req, res, next) => {
+  console.log("Welcome to my custom middleware");
+  next();
+}
+
+app.use(customMiddleware);
+
+app.get("/", (req, res) => {
+  res.send("First Request !!!");
+})
+
+app.get("/movies", (req, res) => {
+  let movies = ["EEE", "DDD", "TTT"];
+  res.send({
+    movies: movies,
+  });
+})
+
+app.post("/create_movie", async (req, res)=> {
+   console.log(req.body);
+   try {
+    const mymovie = new Movie(req.body);
+     await mymovie.save();
+    res.send(mymovie);
+   } catch(err) {
+     res.send({ message: error });
+   }
+   
+})
 
 app.post("/auth", (req, res, next) => {
   if (!req.body) {
