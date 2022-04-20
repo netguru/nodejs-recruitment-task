@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const { authFactory, AuthError } = require("./auth");
-const Movie = require("../model/movie");
-const MovieList = require("../model/movieList");
+const Movie = require("../schema/movie");
+const MovieList = require("../schema/movieList");
 const request = require('request');
 const dotenv = require("dotenv");
 dotenv.config()
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 app.get("/movies", async (req, res) => {
   // request(`http://www.omdbapi.com/?t&apikey=${OMDB_API_KEY}`, (error, response, body) => {
     try {
-      let movies = await Movies.find();
+      let movies = await Movie.find();
       // let movies = movie.find(req.body.title)
       if (movies) {
           res.send({

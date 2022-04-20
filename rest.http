@@ -1,3 +1,13 @@
 GET http://localhost:3000/movies
-POST http://localhost:3000/create_movie
- 
+
+
+POST http://localhost:3000/movies
+
+Content-Type: application/json
+
+{
+    "title" : "Batman",
+    "released": "23 Jun 1989",
+    "genre": "Action, Adventure",
+    "director": "Tim Burton"
+}
