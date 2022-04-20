@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const { authFactory, AuthError } = require("./auth");
 const Movie = require("../model/movie");
+const MovieList = require("../model/movieList");
+const request = require('request');
 const dotenv = require("dotenv");
 dotenv.config()
 
 const PORT = 3000;
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, API_KEY } = process.env;
 
 if (!JWT_SECRET) {
   throw new Error("Missing JWT_SECRET env var. Set it and restart the server");
@@ -15,15 +17,17 @@ if (!JWT_SECRET) {
 
 const auth = authFactory(JWT_SECRET);
 const app = express();
-
+app.use("/movie", Movie);
 app.use(bodyParser.json());
 app.use(express.json());
-mongoose.connect(
-  process.env.DB_CONNECTION_STRING, 
-  { useUnifiedTopology: true },
-  (res, req) => {
-  console.log("Connected to the DB");
-})
+
+mongoose
+  .connect(process.env.MONGO_PROD_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("Database connected!"))
+  .catch(err => console.log(err));
 
 const customMiddleware = (req, res, next) => {
   console.log("Welcome to my custom middleware");
@@ -33,24 +37,44 @@ const customMiddleware = (req, res, next) => {
 app.use(customMiddleware);
 
 app.get("/", (req, res) => {
-  res.send("First Request !!!");
+  res.send("index");
 })
 
-app.get("/movies", (req, res) => {
-  let movies = ["EEE", "DDD", "TTT"];
-  res.send({
-    movies: movies,
-  });
-})
 
-app.post("/create_movie", async (req, res)=> {
-   console.log(req.body);
+app.get("/movies", async (req, res) => {
+  // request(`http://www.omdbapi.com/?t&apikey=${OMDB_API_KEY}`, (error, response, body) => {
+    try {
+      let movies = await Movies.find();
+      // let movies = movie.find(req.body.title)
+      if (movies) {
+          res.send({
+              // movies: movies
+              data: movies
+          })
+      }
+  } catch (err) {
+      // return res.status(400).json({ err: "Movies are not defined" });
+      return res.status(400).json(err.message);
+  }
+})
+// }) 
+
+app.post("/movies", async (req, res)=> {
+  console.log(req.body);
+  const title = req.body.title
+  request({
+    url : `http://www.omdbapi.com/?t=${title}&apikey=${process.env.API_KEY}`,
+    json: true
+  }, (err, response, body) => {
+    console.log(body);
+    console.log(JSON.stringify(body, undefined, 4));
+  }) 
    try {
-    const mymovie = new Movie(req.body);
-     await mymovie.save();
-    res.send(mymovie);
+    const myMovie = new Movie(req.body);
+     await myMovie.save();
+    res.send(myMovie);
    } catch(err) {
-     res.send({ message: error });
+    res.status(400).json({message: err.message})
    }
    
 })
