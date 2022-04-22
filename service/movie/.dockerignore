@@ -1,0 +1,17 @@
+node_modules
+.gitignore
+package-lock.json
+
+
+tempdockerinstructions.txt
+
+.eslintrc.json
+.eslintignore
+.prettierrc
+
+
+
+
+
+Dockerfile
+docker-compose*

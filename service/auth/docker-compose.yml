@@ -3,8 +3,8 @@ services:
   app:
     command: node src/server.js
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../..
+      dockerfile: ../movie/Dockerfile
     ports:
       - published: ${APP_PORT:-3000}
         target: 3000
