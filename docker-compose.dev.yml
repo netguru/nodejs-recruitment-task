@@ -1,8 +1,8 @@
 version: "3"
 services:
-  movies:
+  movie:
     build:
-      context: .
+      context: ./service/movie/.
       args:
         NODE_ENV: development
     volumes:

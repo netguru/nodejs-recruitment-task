@@ -1,10 +1,11 @@
 
 const app = require("../app");
-const Path = require("path");
-require("dotenv").config({ path: Path.resolve(__dirname + "/../.env") });
+const path = require('path');
+
+require("dotenv").config({ path: path.resolve(__dirname, '../../.env') });
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const dbURL = process.env.MONGODB_URL;
 const options = {
     useNewUrlParser: true,

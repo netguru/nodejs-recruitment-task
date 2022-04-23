@@ -8,3 +8,5 @@ const router = express.Router();
 router.get(constants.routes.movie.get, MovieController.get)
 router.get(constants.routes.movie.create, MovieController.create)
 
+module.exports = router;
+
