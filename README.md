@@ -36,7 +36,7 @@ This project aims to use RestFul Back end Nodejs and Express.js framework where 
 | 1.  | Docker Desktop       |  4.7.0 (77141)   | Web Application Production    |
 | 2.  | Visual Studio Code        | 1.55.2  | My Personal Choice    |
 | 3.  | Express                     | 4.17.1  | To run side server|
-| 4.  | Node                      | 1.0.0. | To run backend server |
+| 4.  | Node                      | 1.0.0 | To run backend server |
 | 5.  | MongoDB Server            | 4.2     | To run mongoDB server |
 | 6.  | Desktop Web Application| Any Version Supported | Default on Windows or MacOS and its not mobile-friendly |
 | 7.  | PostMan API            | 9.15.11       | To use API Requests |
@@ -51,32 +51,32 @@ This project aims to use RestFul Back end Nodejs and Express.js framework where 
    1. It would allows users to create a by using any title fo the movie.
    2. After using title the movie can able to fetch that matched movie from OMDb API but if it not get from API it would create a new movie and added into API and saved all movies into MongoDB Database. By posting request into `POSTMAN API` or `Download VS-Code REST Client Extension` and Go to this url:  `http://localhost:3000/movies`
   ```
-    {
+  {
     "title" : "Batman",
     "released": "23 Jun 1989",
     "genre": "Action, Adventure",
     "director": "Tim Burton"
-    }
+  }
   ```
    3. If you want to create movie please `Register` because we use Authentication to secure our users data. Check this by posting request: `http://localhost:3000/auth/register`.
   
   For example:
    ```
-     {
+  {
     "id": 123,
     "role": "basic",
     "name": "Basic Thomas",
     "username": "basic-thomas",
     "password": "sR-_pcoow-27-6PAwCD8"
-    }
+  }
   ```
    4. Then Please Log In to create your own movie by posting request `http://localhost:3000/auth/login`. For example,
 
    ```
-    {
+  {
     "username": "basic-thomas",
     "password": "sR-_pcoow-27-6PAwCD8"
-    }
+  }
 
    ```
 
@@ -90,9 +90,8 @@ This project aims to use RestFul Back end Nodejs and Express.js framework where 
 Authorization: Bearer <token>
 ```
 
-Moreover, postman when the user logged in with the token the user can post in the url `http://localhost:3000/auth/movies`.
+Moreover, `Postman API` when the user logged in with the token the user can post in the url `http://localhost:3000/auth/movies`.
 # Authorization service
-
 
 Also use JWT token to authorize as a users and it is located in `.env` file in the project directory. 
 
@@ -221,4 +220,3 @@ Response
 - Test my code using Jest for Unit Testing.
 - Read the README file where I had explain about the project setup.
 - I had push my work into CircleCI and created a sample CI/CD Pipelines to run the tests. For example
-
