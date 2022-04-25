@@ -1,41 +1,35 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
-
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
-  node: circleci/node@4.7
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
+  node: circleci/node@4.7.0
+jobs:
+  build_and_test:
+    docker:
+      - image: cimg/node:17.2.0
+    env:
+      JWT_SECRET: secret
+      MONGO_PROD_URI: "mongodb+srv://movie-api-islam:nodeislam@cluster0.ovd64.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    steps:
+      - checkout
+      - node/install-packages:
           pkg-manager: npm
-        build_and_test: # this can be any name you choose
-          docker:
-            - image: cimg/node:17.2.0
-          steps:
-            - checkout
-            - node/install-packages:
-                pkg-manager: npm
-            - run:
-                command: npm run test
-                name: Run tests
-            - run:
-                command: npm run build
-                name: Build app
-            - persist_to_workspace:
-                root: ~/src/server.js
-                paths:
+      - run:
+          command: npm test
+          name: Run tests
+      - run:
+          command: npm build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/nodejs-recruitment-task
+          paths:
             - .
 
-
-
+workflows:
+  build-and-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - feature-1
+                - master
+                - main
