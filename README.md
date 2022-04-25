@@ -36,7 +36,7 @@ This project aims to use RestFul Back end Nodejs and Express.js framework where 
 | 1.  | Docker Desktop       |  4.7.0 (77141)   | Web Application Production    |
 | 2.  | Visual Studio Code        | 1.55.2  | My Personal Choice    |
 | 3.  | Express                     | 4.17.1  | To run side server|
-| 4.  | Node                      | 10.13.0 | To run backend server |
+| 4.  | Node                      | 1.0.0. | To run backend server |
 | 5.  | MongoDB Server            | 4.2     | To run mongoDB server |
 | 6.  | Desktop Web Application| Any Version Supported | Default on Windows or MacOS and its not mobile-friendly |
 | 7.  | PostMan API            | 9.15.11       | To use API Requests |
