@@ -1,0 +1,43 @@
+GET http://localhost:3000/movies
+
+POST http://localhost:3000/movies
+
+Content-Type: application/json
+
+{
+    "title" : "Batman",
+    "released": "23 Jun 1989",
+    "genre": "Action, Adventure",
+    "director": "Tim Burton"
+}
+
+POST http://localhost:3000/auth/register
+
+{
+    "id": 123,
+    "role": "basic",
+    "name": "Basic Thomas",
+    "username": "basic-thomas",
+    "password": "sR-_pcoow-27-6PAwCD8"
+}
+
+POST http://localhost:3000/auth/login
+
+{
+    "username": "basic-thomas",
+    "password": "sR-_pcoow-27-6PAwCD8"
+}
+
+
+POST http://localhost:3000/auth/movies
+
+{
+    "username": "Testing Movie",
+    "password": "sseeeee",
+    "title" : "User Log In Created Movie 2",
+    "released" : "23 April 2022",
+    "genre": "Trying 3 MD3",
+    "director": "myself 3"
+}
+
+
