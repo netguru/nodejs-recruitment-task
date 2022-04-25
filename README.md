@@ -3,6 +3,18 @@
 ## Project: RESTFUL MOVIE API
  ![javascript](https://img.shields.io/badge/%20%20JavaScript-%20%20%20%20730L-f1e05a.svg) ![docker](https://img.shields.io/badge/%20%20DOCKER-%20%20%20%20164L-e34c26.svg)           ![javascript](https://badges.aleen42.com/src/javascript.svg) ![npm](https://badges.aleen42.com/src/npm.svg)
   ![node](https://badges.aleen42.com/src/node.svg) ![github](https://badges.aleen42.com/src/github.svg)  ![CircleCI](https://img.shields.io/badge/circle%20ci-%23161616.svg?style=for-the-badge&logo=circleci&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)  ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![Mac OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)  ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)  ![Trueosiris Rules](https://img.shields.io/badge/trueosiris-rules-f08060) [![Docker Pulls](https://badgen.net/docker/pulls/trueosiris/godaddypy?icon=docker&label=pulls)](https://hub.docker.com/r/trueosiris/godaddypy/) [![Docker Stars](https://badgen.net/docker/stars/trueosiris/godaddypy?icon=docker&label=stars)](https://hub.docker.com/r/trueosiris/godaddypy/)  [![Docker Image Size](https://badgen.net/docker/size/trueosiris/godaddypy?icon=docker&label=image%20size)](https://hub.docker.com/r/trueosiris/godaddypy/)  ![Github stars](https://badgen.net/github/stars/trueosiris/docker-godaddypy?icon=github&label=stars) ![Github forks](https://badgen.net/github/forks/trueosiris/docker-godaddypy?icon=github&label=forks) ![Github issues](https://img.shields.io/github/issues/TrueOsiris/docker-godaddypy)  ![Github last-commit](https://img.shields.io/github/last-commit/TrueOsiris/docker-godaddypy)
+
+#### Project Can be found in here :
+ **[Live version](http://localhost:3000)**
+
+<br/>
+<p align="center">
+	
+<img src="https://user-images.githubusercontent.com/57604500/165084736-8e6424e8-d986-4a14-a448-be0897877b64.png" width=656>
+<br />
+<h3 align="center">👨🏻‍💻 RestFul Movie API Backend</h3>
+</p>
+
 ### Project Description
 
 This project aims to use RestFul Back end Nodejs and Express.js framework where it is a back-end frameworks to fit a differential equation to the Movie API APPLICATION with users movie data. This would allow us to create movies for our users and our user also can able to see all movies lists. This would be to authenticate securely and done separately for basic and premium users usage rate limitation per day or per month. The results would be displayed on http://localhost:3000. It has a movie list.
