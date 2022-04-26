@@ -1,6 +1,6 @@
 name: Node.js CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   build:
@@ -9,20 +9,15 @@ jobs:
 
     strategy:
       matrix:
-        work-dir: [service/movie]
-        node-version: [12.x]
+        work-dir: [ service/movie ]
+        node-version: [ 12.x ]
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-
-      -name: Start Auth service
-       run:  docker run
+          node-version: ${{ matrix.node }}
 
       - name: Start Docker for Mongodb
         run: docker run -d -p 27017:27017 mongo
