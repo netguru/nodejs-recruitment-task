@@ -11,6 +11,9 @@ services:
     environment:
       - NODE_ENV=development
       - JWT_SECRET=secret
+      - MONGODB_URL_TEST=mongodb://root:example@localhost:27017
+      - MONGODB_URL=mongodb://root:example@mongo:27017
+
     command: npm run dev
 
 
