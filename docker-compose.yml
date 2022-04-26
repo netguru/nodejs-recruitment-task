@@ -6,16 +6,18 @@ services:
     ports:
       - published: 3000
         target: 3000
-#    env_file: ./service/auth/.env
+    #    env_file: ./service/auth/.env
     environment:
       JWT_SECRET: secret
 
   movie:
     build:
-     context: ./service/movie/.
+      context: ./service/movie/.
     ports:
       - published: 8080
         target: 8080
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo
@@ -25,6 +27,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo-db:/data/db
+    ports:
+      - '27017:27017'
 
 volumes:
   mongo-db:

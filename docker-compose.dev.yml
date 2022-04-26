@@ -6,10 +6,11 @@ services:
       args:
         NODE_ENV: development
     volumes:
-      - ./:/app:ro
-      - /app/node_modules
+      - ./service/movie/./:/src/app:ro
+      - /scr/app/node_modules
     environment:
       - NODE_ENV=development
+      - JWT_SECRET=secret
     command: npm run dev
 
 

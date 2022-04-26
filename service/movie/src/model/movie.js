@@ -19,8 +19,12 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    createdBy: {
-        type: String,
+    userId: {
+        type: Number,
+        required: true
+    },
+    added:{
+        type: Date,
         required: true
     }
 });
