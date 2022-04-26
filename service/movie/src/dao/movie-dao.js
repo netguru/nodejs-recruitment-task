@@ -3,7 +3,6 @@ const movieErrors = require("../error/movie-error")
 
 const movieDao = {
     getMoviesByUser:  function (userId) {
-        // return Movie.find({userId});
         return Movie.aggregate([
             {$match: {userId}},
             {$project:{_id: 0, __v: 0}}

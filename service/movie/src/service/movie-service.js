@@ -24,7 +24,6 @@ const movieService = {
             userId: user.userId,
             added: currentDate
         };
-
         await movieDao.create(movie);
         return {Title, Released, Genre, Director, userId: user.userId};
     }

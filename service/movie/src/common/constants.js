@@ -5,7 +5,6 @@ const constants = {
             create: "/create",
             get: "/get",
         }
-
     },
 };
 

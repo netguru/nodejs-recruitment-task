@@ -15,6 +15,7 @@ const options = {
 async function startServer() {
     try {
         await mongoose.connect(dbURL, options);
+
         await app.listen(PORT);
         console.log(`Server successfully running on http://localhost:${PORT}/`);
     } catch (e) {

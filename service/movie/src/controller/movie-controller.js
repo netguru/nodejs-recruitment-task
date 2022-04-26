@@ -14,7 +14,7 @@ const movieController = {
         }
         try {
             const movie = await movieService.create(value.title, req.user);
-            res.status(200).send(movie);
+            res.status(201).send(movie);
         } catch (e) {
             next(e, req, res);
         }
