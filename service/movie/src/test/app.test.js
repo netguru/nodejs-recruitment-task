@@ -20,10 +20,9 @@ chai.use(chaiHttp);
 let token;
 const notoken = '';
 describe('app endpoints', () => {
-    let connection;
     beforeAll(async () => {
         try {
-            mongoose.connect(dbURL, {
+            await mongoose.connect(dbURL, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
@@ -36,14 +35,14 @@ describe('app endpoints', () => {
     });
 
     afterAll(async () => {
-        connection.close();
+        await mongoose.connection.close()
     });
 
     beforeEach(async () => {
-        await Movie.deleteMany({userId: 123});
     });
 
     afterEach(async () => {
+        await Movie.deleteMany({userId: 123});
     });
     it('should create movie for authenticated user', (done) => {
         chai.request(app)

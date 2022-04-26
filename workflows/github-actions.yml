@@ -1,0 +1,36 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        work-dir: [service/movie]
+        node-version: [10.x, 12.x]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Start Docker for Mongodb
+        run: docker run -d -p 27017:27017 mongo
+
+      - name: Install npm packages
+        run: npm install
+        working-directory: ${{ matrix.work-dir }}
+
+      - name: Run `npm test`
+        run: npm test
+        working-directory: ${{ matrix.work-dir }}
+        env:
+          CI: true
+          MONGODB_URI: mongodb://root:example@localhost:27017
