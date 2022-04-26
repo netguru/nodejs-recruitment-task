@@ -23,16 +23,6 @@ jobs:
       - name: Build docker images
         run:  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-      #      - name: Build auth
-#        run: docker build -t local ./service/auth/
-#
-#      - name: Run auth
-#        run: docker run -it -v $PWD:/srv -w/srv local make test
-
-
-#      - name: Start Docker for Mongodb
-#        run: docker run -d -p 27017:27017 mongo
-
       - name: Install npm packages
         run: npm install
         working-directory: ${{ matrix.work-dir }}
