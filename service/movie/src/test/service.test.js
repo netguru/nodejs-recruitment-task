@@ -21,7 +21,6 @@ describe("movie service tests", () => {
         username: "premium-jim",
         password: "GBLtTyq3E_UNjFnpo9m6",
     }
-    let connection;
 
     const movies = [{title: "mad max"}, {title: "batman"},
         {title: "spider-man"}, {title: "harry potter"},
@@ -29,7 +28,7 @@ describe("movie service tests", () => {
 
     beforeAll(async () => {
         try {
-            mongoose.connect(dbURL, {
+            await mongoose.connect(dbURL, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             });
@@ -39,15 +38,16 @@ describe("movie service tests", () => {
     });
 
     afterAll(async () => {
-        connection.close();
+        await mongoose.connection.close();
     });
 
     beforeEach(async () => {
-        await Movie.deleteMany({userId: basicUser.userId});
-        await Movie.deleteMany({userId: premiumUser.userId});
+
     });
 
     afterEach(async () => {
+        await Movie.deleteMany({userId: basicUser.userId});
+        await Movie.deleteMany({userId: premiumUser.userId});
     });
 
     it("should create new movie and save it to db", async () => {
@@ -101,6 +101,7 @@ describe("movie service tests", () => {
         await movieService.create(movies[4].title, user)
         await movieService.create(movies[5].title, user)
     }
+
     //TODO: rework helper function
 });
 
