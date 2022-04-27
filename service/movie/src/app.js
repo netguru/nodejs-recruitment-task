@@ -3,9 +3,7 @@ const logger = require("morgan");
 const movieRouter = require("./router/movie-router");
 const constants = require("./common/constants");
 
-
 const cors = require("cors");
-require("dotenv").config();
 
 const app = express();
 app.use(cors());

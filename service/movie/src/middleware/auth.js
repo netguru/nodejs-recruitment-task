@@ -1,10 +1,7 @@
 const jwt = require("jsonwebtoken");
-const path = require("path");
 const authErrors = require("../error/auth-error");
-require("dotenv").config({path: path.resolve(__dirname, '../../.env')});
 
-const tokenSecret = process.env.JWT_SECRET || "secret";
-//TODO secret
+const tokenSecret = process.env.JWT_SECRET;
 
 function authMiddleware(req, res, next) {
     let authHeader = req.headers.authorization;

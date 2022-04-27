@@ -1,7 +1,7 @@
 const movieErrors = require("../error/movie-error");
 
 const axios = require("axios");
-const apikey = "5686dfa6";
+const apikey = process.env.OMDb_API_KEY;
 const request = {
     getMovieDetails: async function (title) {
         const movie = await axios.get(`http://www.omdbapi.com/?t=${title}&apikey=${apikey}`);

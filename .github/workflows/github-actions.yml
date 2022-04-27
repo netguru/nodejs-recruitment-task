@@ -1,6 +1,6 @@
 name: Node.js CI
 
-on: [ push ]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -36,4 +36,6 @@ jobs:
         working-directory: ${{ matrix.work-dir }}
         env:
           CI: true
-          MONGODB_URL_TEST: mongodb://root:example@localhost:27017
+          MONGODB_URL: mongodb://root:example@localhost:27017
+          JWT_SECRET: secret
+          OMDb_API_KEY: 5686dfa6

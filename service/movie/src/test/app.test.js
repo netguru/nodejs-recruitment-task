@@ -5,10 +5,7 @@ const app = require('../app');
 const mongoose = require("mongoose");
 const axios = require("axios")
 const Movie = require("../model/movie");
-const path = require("path");
-
-require("dotenv").config({path: path.resolve(__dirname, '../../.env')});
-const dbURL = process.env.MONGODB_URL_TEST;
+const dbURL = process.env.MONGODB_URL;
 
 const user = {
     username: "basic-thomas",

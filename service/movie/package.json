@@ -6,8 +6,6 @@
   "scripts": {
     "start": "node src/bin/server.js",
     "dev": "nodemon src/bin/server.js",
-    "dev-container": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-    "prod-container": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
     "test": "jest src/test/** "
   },
   "author": "",

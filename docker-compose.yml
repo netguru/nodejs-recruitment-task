@@ -6,7 +6,6 @@ services:
     ports:
       - published: 3000
         target: 3000
-    #    env_file: ./service/auth/.env
     environment:
       JWT_SECRET: secret
 

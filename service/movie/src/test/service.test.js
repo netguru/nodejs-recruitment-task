@@ -1,7 +1,5 @@
-const path = require('path');
-require("dotenv").config({path: path.resolve(__dirname, '../../.env')});
 const mongoose = require("mongoose");
-const dbURL = process.env.MONGODB_URL_TEST;
+const dbURL = process.env.MONGODB_URL;
 const movieService = require("../service/movie-service");
 const Movie = require("../model/movie");
 const errors = require('../error/movie-error')
