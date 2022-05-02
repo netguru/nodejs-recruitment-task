@@ -1,2 +1,5 @@
 .aws-sam/
-node_modules/
+services/auth/node_modules/
+services/movies/.env
+services/movies/node_modules
+.idea

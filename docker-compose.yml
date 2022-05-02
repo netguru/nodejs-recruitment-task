@@ -3,12 +3,37 @@ services:
   app:
     command: node src/server.js
     build:
-      context: .
+      context: ./services/auth
       dockerfile: Dockerfile
     ports:
-      - published: ${APP_PORT:-3000}
-        target: 3000
+      - "3000:3000"
     volumes:
-      - .:/app/
+      - ./services/auth/:/app/
     environment:
-      JWT_SECRET: ${JWT_SECRET}
+      JWT_SECRET: secret
+
+  movies:
+    command: node src/index.js
+    build:
+      context: ./services/movies/.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    volumes:
+      - ./services/movies/:/app/
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-db:/data/db
+    ports:
+      - '27017:27017'
+
+volumes:
+  mongo-db:

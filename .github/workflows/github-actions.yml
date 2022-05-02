@@ -1,0 +1,31 @@
+name: GitHub Actions
+on: [push, pull_request]
+jobs:
+  Git-Workflows:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        movie: [services/movies]
+        auth: [ services/auth]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 12.x
+      - name: Docker Compose
+        run: docker-compose up -d
+      - name: Install node modules in movies
+        run: npm install
+        working-directory: ${{ matrix.movie }}
+      - name: Install node modules in auth
+        run: npm install
+        working-directory: ${{ matrix.auth }}
+      - name: Run tests
+        run: npm run test
+        working-directory: ${{ matrix.movie }}
+        env:
+          CI: true
+          MONGODB_URL: mongodb://root:example@localhost:27017
+          JWT_SECRET: secret
+          OMDB_API_KEY: 444cfd06
+          OMDB_URL: http://www.omdbapi.com/
