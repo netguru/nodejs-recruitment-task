@@ -18,6 +18,9 @@ services:
     build:
       context: ./services/movies/.
       dockerfile: Dockerfile
+    ports:
+      - published: 8080
+        target: 8080
     depends_on:
       - mongo
     volumes:

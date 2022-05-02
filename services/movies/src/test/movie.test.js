@@ -65,15 +65,13 @@ describe('movies tests', () => {
   });
 
   it('should not return an error if a premium user tries to create more than 5 movies', async () => {
-    console.log('create movies');
     await createTestMovies(premiumUser);
 
     try {
       await MovieService.createMovie('X-Men', premiumUser);
-      console.log('find movies by user id');
+
       const movies = await MovieRepository.findByUserId(premiumUser.userId);
 
-      console.log(movies);
       expect(movies.length).toEqual(6);
     } catch (e) {
       console.log(e);
