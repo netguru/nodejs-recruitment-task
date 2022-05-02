@@ -25,3 +25,7 @@ jobs:
         working-directory: ${{ matrix.movie }}
         env:
           CI: true
+          MONGODB_URL: mongodb://root:example@localhost:27017
+          JWT_SECRET: secret
+          OMDB_API_KEY: 444cfd06
+          OMDB_URL: http://www.omdbapi.com/
