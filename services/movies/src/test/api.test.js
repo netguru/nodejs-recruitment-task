@@ -56,7 +56,7 @@ describe('api tests', () => {
 
   it('should return all the movies for an authenticated user', async () => {
     await createTestMovies(premiumUser);
-    console.log('first api test');
+
     const response = await request(server)
       .get('/movies')
       .auth(token, { type: 'bearer' })

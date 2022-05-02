@@ -6,21 +6,19 @@ services:
       context: ./services/auth
       dockerfile: Dockerfile
     ports:
-      - published: 3000
-        target: 3000
+      - "3000:3000"
     volumes:
       - ./services/auth/:/app/
     environment:
       JWT_SECRET: secret
 
   movies:
-#    command: node src/index.js
+    command: node src/index.js
     build:
       context: ./services/movies/.
       dockerfile: Dockerfile
     ports:
-      - published: 8080
-        target: 8080
+      - "8080:8080"
     depends_on:
       - mongo
     volumes:
