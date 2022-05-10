@@ -4,6 +4,7 @@ declare global {
       NODE_ENV: string;
       PORT: string;
       SECRET: string;
+      OMDB_API_KEY: string;
     }
   }
 }

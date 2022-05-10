@@ -1,4 +1,5 @@
 import {
+  Action,
   RoutingControllersOptions,
   useContainer,
   useExpressServer,
@@ -13,6 +14,8 @@ import { Container as TypeormContainer } from "typeorm-typedi-extensions";
 import { Container } from "typedi";
 import path from "path";
 import express from "express";
+import { UserRole } from "./types";
+import { userDataFromRequest } from "./utils/userDataFromRequest";
 
 export const bootstrapApp = async (
   dbConnectionOptions: ConnectionOptions,
@@ -35,6 +38,20 @@ export const bootstrapApp = async (
     controllers: [path.join(`${__dirname}/controllers/*.{js,ts}`)],
     defaultErrorHandler: false,
     middlewares: [path.join(`${__dirname}/middlewares/*.{js,ts}`)],
+    authorizationChecker: (action: Action, roles: UserRole[]): boolean => {
+      const userData = userDataFromRequest(action.request);
+      if (!userData) return false;
+
+      if (userData && !roles.length) return true;
+      if (userData && roles.every((role) => userData.role === role))
+        return true;
+      return false;
+    },
+    currentUserChecker: (action: Action) => {
+      const userData = userDataFromRequest(action.request);
+
+      return userData;
+    },
   };
   let app = express();
 

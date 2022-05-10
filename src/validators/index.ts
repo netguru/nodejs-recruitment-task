@@ -7,3 +7,8 @@ export class LoginUserBody {
   @IsString()
   password!: string;
 }
+
+export class SaveMovieBody {
+  @IsString()
+  title!: string;
+}
