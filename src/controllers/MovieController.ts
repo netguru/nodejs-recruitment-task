@@ -7,6 +7,7 @@ import {
   Post,
   UseBefore,
 } from "routing-controllers";
+import { OpenAPI } from "routing-controllers-openapi";
 import { Inject, Service } from "typedi";
 import { MovieMiddleware } from "../middlewares/MovieModdleware";
 import { MovieService } from "../services/MovieService";
@@ -25,16 +26,33 @@ export class MovieController {
   @UseBefore(MovieMiddleware)
   @Post("/")
   @Authorized()
+  @OpenAPI({
+    summary: "Saves a movie in database",
+    security: [
+      {
+        bearerAuth: [""],
+      },
+    ],
+  })
   async saveMovie(
     @Body() { title }: SaveMovieBody,
     @CurrentUser({ required: true }) user: TokenPayload
   ) {
     const movie = await this.omdbService.searchByTitle(title);
-    await this.movieService.saveMovie(movie, user.userId);
-    return "ok";
+    const { id, userId, createdAt, updatedAt, ...rest } =
+      await this.movieService.saveMovie(movie, user.userId);
+    return rest;
   }
 
   @Get("/")
+  @OpenAPI({
+    summary: "Returns a list of all movies by a user",
+    security: [
+      {
+        bearerAuth: [""],
+      },
+    ],
+  })
   async getMovies(@CurrentUser({ required: true }) user: TokenPayload) {
     return this.movieService.getMovies(user.userId);
   }

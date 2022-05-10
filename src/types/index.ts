@@ -1,3 +1,5 @@
+import { IsString } from "class-validator";
+
 export enum UserRole {
   basic = "basic",
   premium = "premium",
@@ -45,3 +47,8 @@ export type OMDBApiResponse = {
   Response: string;
   Error?: string;
 };
+
+export class LoginResponse {
+  @IsString()
+  token: string;
+}

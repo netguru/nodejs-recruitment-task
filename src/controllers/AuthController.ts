@@ -1,7 +1,9 @@
 import { Response } from "express";
 import { Body, Controller, Post, Res } from "routing-controllers";
+import { OpenAPI, ResponseSchema } from "routing-controllers-openapi";
 import { Inject, Service } from "typedi";
 import { AuthService } from "../services/AuthService";
+import { LoginResponse } from "../types";
 import { AuthError } from "../utils/errors";
 import { LoginUserBody } from "../validators";
 
@@ -14,6 +16,8 @@ export class AuthController {
   ) {}
 
   @Post("/login")
+  @OpenAPI({ summary: "Returns a signed JWT" })
+  @ResponseSchema(LoginResponse)
   async login(
     @Body() { username, password }: LoginUserBody,
     @Res() response: Response
