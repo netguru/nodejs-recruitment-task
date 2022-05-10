@@ -49,4 +49,10 @@ export class MovieService {
     }
     return movie;
   }
+
+  async getMovies(userId: number) {
+    return this.movieRepository.find({
+      userId,
+    });
+  }
 }

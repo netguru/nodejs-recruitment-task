@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   CurrentUser,
+  Get,
   Post,
   UseBefore,
 } from "routing-controllers";
@@ -31,5 +32,10 @@ export class MovieController {
     const movie = await this.omdbService.searchByTitle(title);
     await this.movieService.saveMovie(movie, user.userId);
     return "ok";
+  }
+
+  @Get("/")
+  async getMovies(@CurrentUser({ required: true }) user: TokenPayload) {
+    return this.movieService.getMovies(user.userId);
   }
 }
