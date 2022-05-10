@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Service } from "typedi";
-import { UserType } from "../types";
+import { UserRole, UserType } from "../types";
 import { AuthError } from "../utils/errors";
 
 @Service()
@@ -8,14 +8,14 @@ export class AuthService {
   private static users: UserType[] = [
     {
       id: 123,
-      role: "basic",
+      role: UserRole.basic,
       name: "Basic Thomas",
       username: "basic-thomas",
       password: "sR-_pcoow-27-6PAwCD8",
     },
     {
       id: 434,
-      role: "premium",
+      role: UserRole.premium,
       name: "Premium Jim",
       username: "premium-jim",
       password: "GBLtTyq3E_UNjFnpo9m6",
