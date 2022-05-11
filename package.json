@@ -6,12 +6,12 @@
     "watch": "tsc -w",
     "dev": "nodemon dist/app.js",
     "test:unit": "cross-env NODE_ENV=test jest --testPathPattern=unit --config ./jest.config.js",
-    "test:integration": "cross-env NODE_ENV=test jest --testPathPattern=integration --config ./jest.config.js",
     "test:coverage": "yarn test:unit --coverage",
     "test:e2e": "cross-env NODE_ENV=test jest --testPathPattern=e2e --runInBand --config ./jest.config.js",
-    "test": "yarn test:unit && yarn test:integration && yarn test:e2e",
+    "test": "yarn test:unit && yarn test:e2e",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ormconfig.js",
-    "gen-env": "gen-env-types .env.example -o src/types/env.d.ts -e ."
+    "gen-env": "gen-env-types .env.example -o src/types/env.d.ts -e .",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -45,6 +45,7 @@
     "@types/swagger-ui-express": "^4.1.3",
     "cross-env": "^7.0.3",
     "gen-env-types": "^1.3.4",
+    "husky": "^8.0.1",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",
     "supertest": "^6.2.3",
