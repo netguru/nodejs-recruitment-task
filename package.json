@@ -5,6 +5,8 @@
   "scripts": {
     "watch": "tsc -w",
     "dev": "nodemon dist/app.js",
+    "start": "node dist/app.js",
+    "build": "tsc",
     "test:unit": "cross-env NODE_ENV=test jest --testPathPattern=unit --config ./jest.config.js",
     "test:coverage": "yarn test:unit --coverage",
     "test:e2e": "cross-env NODE_ENV=test jest --testPathPattern=e2e --runInBand --config ./jest.config.js",
