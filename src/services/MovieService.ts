@@ -1,4 +1,6 @@
+import log from "loglevel";
 import { Service } from "typedi";
+import { getConnection, Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";
 import { Movie } from "../models/MoviesModel";
 import { UserMovieAgg } from "../models/UserMovieAgg";
@@ -16,38 +18,55 @@ export class MovieService {
   ) {}
 
   async saveMovie(movieData: OMDBApiResponse, userId: number) {
-    let movie = new Movie();
-    movie.title = movieData.Title;
-    movie.userId = userId;
-    movie.director = movieData.Director;
-    movie.genre = movieData.Genre;
-    movie.released = new Date(movieData.Released);
-    movie = await this.movieRepository.save(movie);
+    const queryRunner = getConnection().createQueryRunner();
+    await queryRunner.startTransaction();
+    const movieRepo = queryRunner.manager.getCustomRepository<
+      Repository<Movie>
+    >(this.movieRepository as any);
+    const userMovieAggRepo = queryRunner.manager.getCustomRepository<
+      Repository<UserMovieAgg>
+    >(this.userMovieAggRepository as any);
+    try {
+      let movie = new Movie();
+      movie.title = movieData.Title;
+      movie.userId = userId;
+      movie.director = movieData.Director;
+      movie.genre = movieData.Genre;
+      movie.released = new Date(movieData.Released);
+      movie = await movieRepo.save(movie);
 
-    const d = new Date(),
-      year = d.getFullYear(),
-      month = d.getMonth();
-    const agg = await this.userMovieAggRepository.findOne({
-      userId,
-      year,
-      month,
-    });
-    if (!agg) {
-      await this.userMovieAggRepository.save({
+      const d = new Date(),
+        year = d.getFullYear(),
+        month = d.getMonth();
+      const agg = await userMovieAggRepo.findOne({
         userId,
         year,
         month,
-        numMovies: 1,
       });
-    } else {
-      await this.userMovieAggRepository.update(
-        { userId },
-        {
-          numMovies: agg.numMovies + 1,
-        }
-      );
+      if (!agg) {
+        await userMovieAggRepo.save({
+          userId,
+          year,
+          month,
+          numMovies: 1,
+        });
+      } else {
+        await userMovieAggRepo.update(
+          { userId },
+          {
+            numMovies: agg.numMovies + 1,
+          }
+        );
+      }
+      await queryRunner.commitTransaction();
+      return movie;
+    } catch (error) {
+      log.error(error);
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
     }
-    return movie;
   }
 
   async getMovies(userId: number) {
