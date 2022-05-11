@@ -29,5 +29,7 @@ jobs:
         run: |
           touch .env
           echo SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo PORT="" >> .env
+          echo OMDB_API_KEY="" >> .env
       - name: Run tests
         run: npx cross-env NODE_ENV=CI yarn test
