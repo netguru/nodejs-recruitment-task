@@ -1,7 +1,7 @@
 import log from "loglevel";
 import { Service } from "typedi";
-import { getConnection, Repository } from "typeorm";
-import { InjectRepository } from "typeorm-typedi-extensions";
+import { Connection, Repository } from "typeorm";
+import { InjectConnection, InjectRepository } from "typeorm-typedi-extensions";
 import { Movie } from "../models/MoviesModel";
 import { UserMovieAgg } from "../models/UserMovieAgg";
 import { MovieRepository } from "../repository/MessageRepository";
@@ -11,6 +11,8 @@ import { OMDBApiResponse } from "../types";
 @Service()
 export class MovieService {
   constructor(
+    @InjectConnection()
+    private connection: Connection,
     @InjectRepository(Movie)
     private movieRepository: MovieRepository,
     @InjectRepository(UserMovieAgg)
@@ -18,7 +20,7 @@ export class MovieService {
   ) {}
 
   async saveMovie(movieData: OMDBApiResponse, userId: number) {
-    const queryRunner = getConnection().createQueryRunner();
+    const queryRunner = this.connection.createQueryRunner();
     await queryRunner.startTransaction();
     const movieRepo = queryRunner.manager.getCustomRepository<
       Repository<Movie>
