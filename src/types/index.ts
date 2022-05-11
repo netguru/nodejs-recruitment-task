@@ -34,7 +34,7 @@ export type OMDBApiResponse = {
   Country: string;
   Awards: string;
   Poster: string;
-  Ratings: { Source: string; value: string }[];
+  Ratings: { Source: string; Value: string }[];
   Metascore: string;
   imdbRating: string;
   imdbVotes: string;

@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString, MinLength } from "class-validator";
 
 export class LoginUserBody {
   @IsString()
@@ -10,5 +10,6 @@ export class LoginUserBody {
 
 export class SaveMovieBody {
   @IsString()
+  @MinLength(1)
   title!: string;
 }

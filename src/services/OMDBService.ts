@@ -22,7 +22,7 @@ export class OMDBService {
           t: title,
         },
       });
-      log.debug("response from omdb:", resp);
+      log.debug("response from omdb:", resp.data);
       if (resp.data.Error) {
         throw new APIError(resp.data.Error, 404);
       }
