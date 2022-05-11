@@ -1,5 +1,69 @@
 # Node.js recruitment task
 
+### Technologies used
+
+1. Typescript
+2. [Routing-controllers](https://github.com/typestack/routing-controllers) + Express.js
+3. [Typeorm](https://github.com/typeorm/typeorm/)
+4. SQLite
+5. Jest
+6. Docker
+
+### Setup
+
+1. Clone repo
+
+```bash
+git clone https://github.com/abhi12299/nodejs-recruitment-task
+```
+
+2. Install dependencies using `yarn`.
+3. Create `.env` file from `.env.example` and populate env variables.
+
+```bash
+cp .env.example .env
+```
+
+4. Compile typescript files to javascript by running this command in one terminal session.
+
+```bash
+yarn watch
+```
+
+5. Open a new terminal session and start the development server
+
+```bash
+yarn dev
+```
+
+6. Run tests using
+
+```bash
+yarn test:unit # unit tests
+yarn test:e2e # end-to-end tests
+yarn test # run all tests
+yarn test:coverage # coverage report
+```
+
+### Production Deployment
+
+Since this project uses `docker-compose`, the server can be easily started in production mode by using the command below:
+
+```bash
+APP_PORT=8080 NODE_ENV=production JWT_SECRET=<jwt-secret> OMDB_API_KEY=<your-api-key> docker-compose up -d
+```
+
+Now you can visit http://localhost:8080 on your machine to access the APIs. **Swagger documentation** can be found at http://localhost:8080/docs
+
+### Environment Variables
+
+1. Set `NODE_ENV` to either `"development"` or `"production"`.
+2. Set `PORT` to whatever port you want the server to listen on.
+3. Set `SECRET` to JWT secret key.
+4. Set `OMDB_API_KEY` to the OMDB API key, which can be obtained from https://omdbapi.com/
+
+---
+
 We'd like you to build a simple Movie API. It should provide two endpoints:
 
 1. `POST /movies`
