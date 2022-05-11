@@ -8,6 +8,8 @@
 4. SQLite
 5. Jest
 6. Docker
+7. Swagger OpenAPI
+8. [Husky](https://typicode.github.io/husky/#/)
 
 ### Setup
 
