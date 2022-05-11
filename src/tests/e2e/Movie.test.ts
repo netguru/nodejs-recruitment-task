@@ -8,7 +8,9 @@ import { MAX_MOVIES_BASIC_PER_MONTH } from "../../constants";
 import { getApp } from "../utils/getApp";
 import axios from "axios";
 
-config({ allowEmptyValues: true });
+if (process.env.NODE_ENV !== "CI") {
+  config({ allowEmptyValues: true });
+}
 
 // here OMDB's api key is used
 // hence we mock axios so actual API call is not made
