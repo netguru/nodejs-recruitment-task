@@ -1,2 +1,6 @@
 .aws-sam/
 node_modules/
+.env
+dist/
+*.db
+yarn-error.log

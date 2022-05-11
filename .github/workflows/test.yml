@@ -1,0 +1,35 @@
+name: Netguru Nodejs assignment
+on:
+  push:
+    branches:
+      - master
+      - ci
+  pull_request:
+    branches:
+      - master
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        version: [16.10.0, 17]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.version }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - run: npm install -g yarn
+      - run: yarn
+      - name: Create .env file
+        run: |
+          touch .env
+          echo SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo PORT="" >> .env
+          echo OMDB_API_KEY="" >> .env
+      - name: Run tests
+        run: npx cross-env NODE_ENV=CI yarn test
