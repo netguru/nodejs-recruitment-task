@@ -25,4 +25,4 @@ jobs:
           cache-dependency-path: yarn.lock
       - run: npm install -g yarn
       - run: yarn
-      - run: npx cross-env NODE_ENV=CI yarn test
+      - run: npx cross-env NODE_ENV=CI SECRET=anyrandomstring yarn test

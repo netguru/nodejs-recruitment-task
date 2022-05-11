@@ -8,7 +8,7 @@ import { MAX_MOVIES_BASIC_PER_MONTH } from "../../constants";
 import { getApp } from "../utils/getApp";
 import axios from "axios";
 
-if (process.env.NODE_ENV === "CI") {
+if (["CI", "test"].includes(process.env.NODE_ENV)) {
   config({ allowEmptyValues: true });
 }
 
