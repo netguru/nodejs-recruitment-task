@@ -6,16 +6,25 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "lint": "eslint **/*.{js,jsx}",
+    "lint:fix": "eslint **/*.{js,jsx} --fix"
   },
   "keywords": [],
   "author": "Woshikuzzaman Anik",
-  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "helmet": "^5.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.1.5",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2"
   }
 }
