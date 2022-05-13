@@ -8,6 +8,8 @@ RUN npm install
 
 COPY ./src ./src
 
+COPY .env ./
+
 EXPOSE 3002
 
 CMD ["npm", "start"]
