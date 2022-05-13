@@ -7,7 +7,7 @@ services:
       - auth
       - movies
     ports:
-      - 5050:80
+      - 8888:80
 
   auth:
     build: ./auth
