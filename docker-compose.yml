@@ -1,14 +1,26 @@
-version: "3.2"
+version: "3.8"
+
 services:
-  app:
-    command: node src/server.js
-    build:
-      context: .
-      dockerfile: Dockerfile
+  nginx:
+    build: ./nginx
+    links:
+      - auth
+      - movies
     ports:
-      - published: ${APP_PORT:-3000}
-        target: 3000
+      - 5050:80
+
+  auth:
+    build: ./auth
+
+  movies:
+    build: ./movies
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:latest
     volumes:
-      - .:/app/
-    environment:
-      JWT_SECRET: ${JWT_SECRET}
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
