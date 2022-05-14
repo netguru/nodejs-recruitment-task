@@ -1,0 +1,29 @@
+name: Netguru Nodejs CI
+
+on:
+  push:
+    branches: ['master', 'development']
+  pull_request:
+    branches: ['master', 'development']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        movie: [services/movie]
+
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install node modules for movie service
+        working-directory: ${{ matrix.movie }}
+        run: npm install
+
+    - name: Run test case for movie service
+        working-directory: ${{ matrix.movie }}
+        run: npm test
