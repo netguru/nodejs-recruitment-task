@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const { isProduction, siteOriginURL } = require('./config');
-const { fileLogger, Console } = require('./helper/errorLogger');
+const { fileLogger, Console } = require('./helper');
 const urlConfig = require('./router/urlConfig');
 const dbConnection = require('./database/connection');
 
@@ -28,10 +28,14 @@ server.use((req, res) => {
 });
 
 // server error
-server.use((err, req, res) => {
-	fileLogger(err.message);
+// eslint-disable-next-line no-unused-vars
+server.use((error, req, res, next) => {
+	fileLogger.error({
+		label: 'internal server error',
+		message: error.stack,
+	});
 
-	res.status(500).json({ error: 'internal server error' });
+	res.status(500).send({ error: 'internal server error' });
 });
 
 dbConnection(() => {

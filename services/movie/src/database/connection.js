@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { mongoDbUrl } = require('../config');
-const { fileLogger } = require('../helper/errorLogger');
+const { fileLogger } = require('../helper');
 
 module.exports = async connect => {
 	try {

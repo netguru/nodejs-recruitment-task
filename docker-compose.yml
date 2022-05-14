@@ -6,6 +6,9 @@ services:
     links:
       - auth
       - movie
+    depends_on:
+      - auth
+      - movie
     ports:
       - 8888:80
 

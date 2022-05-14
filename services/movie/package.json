@@ -13,10 +13,12 @@
   "keywords": [],
   "author": "Woshikuzzaman Anik",
   "dependencies": {
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "helmet": "^5.0.2",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.3",
     "winston": "^3.7.2",
