@@ -5,15 +5,17 @@ services:
     build: ./nginx
     links:
       - auth
-      - movies
+      - movie
     ports:
       - 8888:80
 
   auth:
-    build: ./auth
+    build: ./services/auth
 
-  movies:
-    build: ./movies
+  movie:
+    build: ./services/movie
+    depends_on:
+      - mongo
     links:
       - mongo
 

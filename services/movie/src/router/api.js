@@ -4,13 +4,13 @@ module.exports = [
 	{
 		path: '/movies',
 		method: 'get',
-		controller: 'movies',
+		controller: 'movie',
 		middleware: [authTokenValidation],
 	},
 	{
 		path: '/movies',
 		method: 'post',
-		controller: 'movies',
+		controller: 'movie',
 		middleware: [authTokenValidation],
 	},
 ];

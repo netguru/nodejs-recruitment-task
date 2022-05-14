@@ -2,4 +2,4 @@
 
 . "$(dirname -- "$0")/base.sh"
 
-npm run lint:fix --prefix movies
+npm run lint:fix --prefix services/movie
