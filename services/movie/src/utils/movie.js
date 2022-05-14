@@ -4,9 +4,9 @@ const { basicUserMovieUploadCount } = require('../config');
 module.exports = {
 	isUserAllowToCreateMovie: async user => {
 		if (user.hasBasicAccess) {
-			const movieCount = await findUserCurrentMonthMovieList(user.userId);
+			const movieList = await findUserCurrentMonthMovieList(user.userId);
 
-			return movieCount?.length < basicUserMovieUploadCount;
+			return movieList?.length < basicUserMovieUploadCount;
 		}
 
 		// for premium user

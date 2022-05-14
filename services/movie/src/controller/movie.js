@@ -25,21 +25,19 @@ module.exports = {
 			});
 		}
 
-		const { title } = req.routeData;
-
-		// check if the movie already create for this user
-		if (await findMovieByTitleAndUserId(title, userData.userId)) {
-			return res.status(400).json({
-				message: 'Already have this movie in list',
-			});
-		}
-
 		// fetch movie data
-		const movieDetails = await omdbAPI.getDetails(title);
+		const movieDetails = await omdbAPI.getDetails(req.routeData.title);
 
 		if (!movieDetails) {
 			return res.status(404).json({
 				message: 'Movie not found',
+			});
+		}
+
+		// check if the movie already exist for this user
+		if (await findMovieByTitleAndUserId(movieDetails.Title, userData.userId)) {
+			return res.status(400).json({
+				message: 'Already have this movie in list',
 			});
 		}
 
@@ -55,6 +53,7 @@ module.exports = {
 			return res.status(201).json(movieObj);
 		}
 
+		// if system fail to create movie
 		res.status(424).json({
 			message: 'unable to create movie data',
 		});
