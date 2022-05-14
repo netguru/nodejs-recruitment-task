@@ -1,7 +1,7 @@
 const WinstonDailyRotateFile = require('winston-daily-rotate-file');
 const { createLogger, format, transports } = require('winston');
 const { resolve } = require('path');
-const { isProduction } = require('../config');
+const { isDevelopment } = require('../config');
 
 // use for production
 const fileLogger = createLogger({
@@ -22,7 +22,8 @@ const fileLogger = createLogger({
 	],
 });
 
-if (!isProduction) {
+// error will not log on the console in the production environment
+if (isDevelopment) {
 	fileLogger.add(
 		new transports.Console({
 			format: format.combine(

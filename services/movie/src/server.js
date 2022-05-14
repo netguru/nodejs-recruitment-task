@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const { isProduction, siteOriginURL } = require('./config');
-const { fileLogger, Console } = require('./helper/errorLogger');
+const { fileLogger, Console } = require('./helper');
 const urlConfig = require('./router/urlConfig');
 const dbConnection = require('./database/connection');
 

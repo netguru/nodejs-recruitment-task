@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const server = require('./server');
-const { Console } = require('./helper/errorLogger');
+const { Console } = require('./helper');
 const { port } = require('./config');
 
 server.listen(port, () => {
