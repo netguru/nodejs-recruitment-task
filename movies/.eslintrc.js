@@ -9,4 +9,7 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 	},
+	rules: {
+		'consistent-return': 0,
+	},
 };
