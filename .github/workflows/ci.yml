@@ -14,7 +14,7 @@ jobs:
       matrix:
         node-version: [16.x]
         movie: [services/movie]
-        
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -22,9 +22,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install node modules for movie service
-          working-directory: ${{ matrix.movie }}
-          run: npm install
+        working-directory: ${{ matrix.movie }}
+        run: npm install
 
       - name: Run test case for movie service
-          working-directory: ${{ matrix.movie }}
-          run: npm test
+        working-directory: ${{ matrix.movie }}
+        run: npm test
