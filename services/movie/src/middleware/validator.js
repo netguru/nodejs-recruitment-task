@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const { isDevelopment } = require('../config');
 
 // multiple rule set can pass in validator function it will merge all the rule set
 const validator = (...validationRules) => {
@@ -15,7 +14,9 @@ const validator = (...validationRules) => {
 	return (req, res, next) => {
 		const joiSchema = Joi.object(allRules);
 
-		req.validationResult = joiSchema.validate(req.routeData);
+		req.validationResult = joiSchema.validate(req.routeData, {
+			abortEarly: false,
+		});
 
 		next();
 	};
@@ -24,17 +25,14 @@ const validator = (...validationRules) => {
 const checkValidationResult = (req, res, next) => {
 	if (req.validationResult) {
 		if (req.validationResult.error) {
-			const returnData = {
-				...req.validationResult.error.details[0].context,
-				message: req.validationResult.error.details[0].message,
-			};
+			const validationError = {};
 
-			if (isDevelopment) {
-				returnData.details = { ...req.validationResult.error.details[0] };
-			}
+			req.validationResult.error.details?.forEach(({ message, context }) => {
+				validationError[context.key] = message;
+			});
 
 			// send error to the client
-			return res.status(422).json(returnData);
+			return res.status(422).json(validationError);
 		}
 
 		// replace with validated data

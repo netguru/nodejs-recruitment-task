@@ -1,4 +1,4 @@
-const { authTokenValidation, validator } = require('../middleware');
+const { authTokenValidation, validator, userType } = require('../middleware');
 const { movieTitle } = require('../validation');
 
 module.exports = [
@@ -12,6 +12,6 @@ module.exports = [
 		path: '/movies',
 		method: 'post',
 		controller: 'movie',
-		middleware: [authTokenValidation, validator(movieTitle)],
+		middleware: [authTokenValidation, validator(movieTitle), userType],
 	},
 ];

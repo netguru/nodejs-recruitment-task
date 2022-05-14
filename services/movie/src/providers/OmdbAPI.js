@@ -2,7 +2,7 @@ const { ErrorHandler, omdbAPIRequest } = require('../helper');
 
 class OmdbAPI extends ErrorHandler {
 	async getDetails(title) {
-		const [result, error] = this.asyncError(
+		const [result, error] = await this.asyncError(
 			omdbAPIRequest({
 				method: 'get',
 				params: {
@@ -11,8 +11,9 @@ class OmdbAPI extends ErrorHandler {
 			})
 		);
 
-		if (error) {
-			return {};
+		// if result have error or response false in it's object, in that case movie not available
+		if (error || result?.Error || result.Response === 'False') {
+			return null;
 		}
 
 		return result;

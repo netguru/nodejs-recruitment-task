@@ -7,4 +7,5 @@ module.exports = {
 	mongoDbUrl: process.env.MONGODB_URL,
 	omdbUrl: process.env.OMDB_URL,
 	omdbApiKey: process.env.OMDB_API_KEY,
+	basicUserMovieUploadCount: 5,
 };

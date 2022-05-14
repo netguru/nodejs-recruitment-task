@@ -30,7 +30,8 @@ if (isDevelopment) {
 				format.timestamp(),
 				format.colorize(),
 				format.printf(
-					info => `${info.timestamp} ${info.level}: ${info.message}`
+					info =>
+						`${info.timestamp} ${info.level}  [${info.label}]: ${info.message}`
 				)
 			),
 		})
