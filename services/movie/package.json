@@ -7,6 +7,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "lint": "eslint **/*.{js,jsx}",
     "lint:fix": "eslint **/*.{js,jsx} --fix"
   },
@@ -29,9 +31,12 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.1.5",
+    "eslint-plugin-jest": "^26.2.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.0",
+    "mongodb-memory-server": "^8.5.2",
     "nodemon": "^2.0.16",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "supertest": "^6.2.3"
   }
 }

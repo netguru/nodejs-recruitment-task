@@ -1,3 +1,6 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+
 const express = require('express');
 const { asyncController } = require('../helper');
 const { getRouteData, checkValidationResult } = require('../middleware');
@@ -8,7 +11,7 @@ const router = express.Router();
 
 module.exports = (api = API) => {
 	api.forEach(async ({ method, controller, path, middleware = [] }) => {
-		const handler = (await import(`../controller/${controller}.js`)).default;
+		const handler = require(`../controller/${controller}.js`);
 
 		const middlewareList = [getRouteData, ...middleware, checkValidationResult];
 

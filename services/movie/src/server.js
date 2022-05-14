@@ -2,9 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const { isProduction, siteOriginURL } = require('./config');
-const { fileLogger, Console } = require('./helper');
+const { fileLogger } = require('./helper');
 const urlConfig = require('./router/urlConfig');
-const dbConnection = require('./database/connection');
 
 const server = express();
 
@@ -36,10 +35,6 @@ server.use((error, req, res, next) => {
 	});
 
 	res.status(500).send({ error: 'internal server error' });
-});
-
-dbConnection(() => {
-	Console.info('Database connected');
 });
 
 module.exports = server;
