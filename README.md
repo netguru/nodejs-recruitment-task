@@ -16,24 +16,25 @@ A node.js based simple Movie API service which will store you favorite movie lis
 - Nginx - API gateway.
 - Docker - Containerize the application.
 - Docker-compose - Up and running the full applicatin stack together.
+- GitHub Action - CI pipe line to test the code. 
+
+Nginx works as a API gateway, So all reaquest come to the nginx and it will route the request to appropite endpoint. Like if user request for /auth it will redirect the request to auth service.
 
 ## Run Project Locally
 ### Prerequisites
 
-You need to have `docker`, `docker-compose` and Node.js (16 LTS) installed on your computer to run the service
+You need to have `docker`, `docker-compose` and `Node.js (16 LTS)` installed on your computer to run the service
 
 ### Steps
 
 1. Clone this repository.
-2. Go to the auth service in services directory and run `npm i` to necessary packages.
-3. Copy the `.sample.env` file and paste it same directory as `.env`.
-4. Set the `JWT_SECRET` key.
-5. Node move to the movie service in services directory and run `npm i` to necessary packages.
-6. Copy the `.sample.env` file and paste it same directory as `.env`.
-7. Set necessary keys. Important set the same `JWT_SECRET` key as in the auth service.
-8. Move to the root of the project and run `docker-compose build`
-9. When the build is complete run `docker-compose up -d`.
-10. By defaul server will run on [localhost:8888](http://localhost:8888).
+2. Go to the auth service in services directory and copy the `.sample.env` file, paste it in same directory as `.env`.
+3. Set the `JWT_SECRET` key.
+4. Node move to the movie service in services directory and copy the `.sample.env` file and paste it in same directory as `.env`.
+5. Set the `OMDB_URL`, `OMDB_API_KEY` and `JWT_SECRET`. Important: set the same `JWT_SECRET` key as in the auth service.
+6. Move to the root of the project directory and run `docker-compose build`
+7. When the build is complete run `docker-compose up -d`.
+8. By defaul server will run on [localhost:8888](http://localhost:8888).
 
 ## API Documentation
 
@@ -63,7 +64,7 @@ username: 'premium-jim'
 password: 'GBLtTyq3E_UNjFnpo9m6'
 ```
 
-## Request Example
+## Request Response Example
 
 To authorize user call use the following `curl`.
 
