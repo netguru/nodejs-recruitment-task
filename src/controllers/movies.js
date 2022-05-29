@@ -12,9 +12,7 @@ const movieRequestDetails = require('../utils/movieRequest.js')
 */
 exports.createMovie = async(req,res)=>{
 
-  console.log("run1")
   let {Title, Released, Genre, Director} = await movieRequestDetails(req.body.Title,res);
-  console.log("run2")
 
   const user = req.user;
   const currentDate = new Date();
@@ -89,13 +87,14 @@ exports.createMovie = async(req,res)=>{
  */
 exports.getMovie = async (req, res,next) => {
 
-  console.log("req.user : ",req.user.userId)
     try {
-      const movies = await Movie.find({userId:req.user.userId }).select({ _id: 0, __v: 0 }).exec();;
-      console.log("movies : ",movies)
 
+      const movies = await Movie.find({userId:req.user.userId }).select({ _id: 0, __v: 0 }).exec();;
       res.status(200).send(movies);
+
     } catch (e) {
+
       next(e, req, res);
+      
     }
 }
