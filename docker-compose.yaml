@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nodejs-recruitment-task:
+    build:
+      context: .
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    command: npm run start
+    container_name: nodejs-recruitment-task
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    tty: true
+    ports:
+      - "3005:3005"
+    depends_on:
+       - postgres
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+
+  postgres:
+    image: postgres
+    container_name: db
+    restart: always
+    tty: true
+    environment:
+      POSTGRES_DATABASE: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pgpwd
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+       - ./postgres:/var/lib/postgres

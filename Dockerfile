@@ -1,11 +1,35 @@
-FROM node:14.15-alpine
+# Base
+FROM node:14-alpine AS base
 
-WORKDIR /app
+ARG NPM_TOKEN
 
-COPY ./package.json ./package-lock.json ./
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
 RUN npm install
 
-RUN mkdir ./src
-COPY ./src ./src
+COPY src src
+COPY prisma prisma
+COPY tsconfig*.json ./
 
-CMD ["node", "./src/server.js"]
+RUN npm run build
+
+# Production
+FROM node:14-alpine AS production
+
+ARG NODE_ENV
+
+WORKDIR /usr/src/app
+
+COPY --from=base /usr/src/app/package*.json ./
+
+RUN npm install -g prisma
+RUN npm install --only=production
+
+COPY --from=base /usr/src/app/dist ./dist
+COPY --from=base /usr/src/app/prisma ./prisma
+
+RUN echo $NODE_ENV
+
+CMD npm run start

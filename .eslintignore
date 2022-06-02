@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+dist/
+storybook-static/
+public/
+gtm/
+aws-exports.js
+amplify/
