@@ -14,7 +14,7 @@ export default class MovieService {
     @Inject('USER_REPOSITORY') private readonly prismaUserRepository: PrismaUserRepository
   ) {}
 
-  async movie(payloadMovie:any, userId: any): Promise<any | null> {
+  async movieProccessing(payloadMovie:any, userId: number): Promise<any | null> {
     try {
       const movieDetails = await this.getMovieOmdb.getMovieByTitle(payloadMovie);
 
@@ -33,9 +33,19 @@ export default class MovieService {
       }
 
     } catch (error) {
-      this.logger.error('Error on create Movie');
+      this.logger.error('Error on create movie processing');
       this.logger.error(error);
-      throw Error('Error on create Movie');
+      throw Error('Error on create movie processing');
+    }
+  }
+
+  async movieGetAll(userId: number): Promise<any | null> {
+    try {
+      return await this.prismaMoviesRepository.getCustomerData(userId);;
+    } catch (error) {
+      this.logger.error('Error on get Movie by userId');
+      this.logger.error(error);
+      throw Error('Error on get Movie by userId');
     }
   }
 }

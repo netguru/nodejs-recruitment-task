@@ -1,65 +1,71 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { createMock } from 'ts-auto-mock';
-// import { Logger } from 'nestjs-pino';
-// import { ConfigService } from '@nestjs/config';
-// import AuthService from './movie.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { createMock, createHydratedMock } from 'ts-auto-mock';
+import { Logger } from 'nestjs-pino';
+import OmdbService from './omdb.service';
+// import AddressInput from '../interface/address-input.interface'
 
-// describe('AuthCodeService', () => {
-//   let service: AuthService;
+describe('IntegrationsService', () => {
+  let omdbService: OmdbService;
 
-//   beforeEach(async () => {
-//     jest.spyOn(Logger.prototype, 'debug').mockImplementation(() => 'Error');
-//     service = createMock<AuthService>();
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [
-//         {
-//           provide: Logger,
-//           useValue: 'Error',
-//         },
-//         ConfigService,
-//         AuthService,
-//       ],
-//     }).compile();
+  beforeAll(async () => {
+    omdbService = createMock<OmdbService>();
+    jest.spyOn(Logger.prototype, 'debug').mockImplementation(() => 'Error');
 
-//     service = module.get<AuthService>(AuthService);
-//   });
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        {
+          provide: Logger,
+          useValue: 'Error',
+        },
+        {
+          provide: OmdbService,
+          useValue: omdbService,
+        },
+      ],
+    }).compile();
 
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
+    omdbService = module.get<OmdbService>(OmdbService);
+  });
 
-//   const data = {
-//     username: '',
-//     password: '',
-//   }
+  it('should be defined', () => {
+    expect(OmdbService).toBeDefined();
+  });
 
-//   const token = {
-//     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTY1NDE3ODk3MywiZXhwIjoxNjU0MTgwNzczLCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.d5d6Qbr8iUpSZQ6NwsxAz6GFOzLEawvx0Naxu0UirEE"
-//   };
+  const payloadMock = createHydratedMock<any>({
+    title: 'spider man'
+  });
 
-//   describe('test auth controller', () => {
-//     it('pass arguments and see the function be called', async () => {
-//       const spy = jest.spyOn(service, 'auth').mockResolvedValue(token);
-//       await service.auth(data.username, data.password);
-//       expect(spy).toBeCalledTimes(1);
-//       expect(spy).toBeCalledWith(data);
-//     });
+  const response = createHydratedMock<any>({
+    "Title": "Thor",
+    "Year": "2011",
+    "Rated": "PG-13",
+    "Released": "06 May 2011",
+    "Runtime": "115 min",
+    "Genre": "Action, Adventure, Fantasy",
+    "Director": "Kenneth Branagh",
+    "Writer": "Ashley Miller, Zack Stentz, Don Payne",
+    "Actors": "Chris Hemsworth, Anthony Hopkins, Natalie Portman",
+    "Plot": "The powerful but arrogant god Thor is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders."
+  });
 
-//     const errValidation = {
-//       message: new Error('Error on create auth'),
-//     };
+  it('should pass payload to omdb with success', async () => {
+    const spy = jest.spyOn(omdbService, 'getMovieByTitle').mockResolvedValue(response);
+    const responseCall = await omdbService.getMovieByTitle(payloadMock);
+    expect(spy).toBeCalledWith(payloadMock);
+    expect(responseCall).toEqual(response);
+  });
 
-//     it('failed on validation cache and payload from li', async () => {
-//       jest.spyOn(service, 'auth').mockRejectedValue(errValidation);
-//       let expectedError: Error;
+  const errOmdb = 'Error calling omdb to get movie by title.';
+  it('return error when get address data', async () => {
+    jest.spyOn(omdbService, 'getMovieByTitle').mockRejectedValue(new Error(errOmdb));
+    let expectedError: Error;
 
-//       try {
-//         await service.auth(data.username, data.password);
-//       } catch (error) {
-//         expectedError = error;
-//       }
+    try {
+      await omdbService.getMovieByTitle(payloadMock);
+    } catch (error) {
+      expectedError = error;
+    }
 
-//       expect(expectedError.message).toStrictEqual(errValidation.message);
-//     });
-//   });
-// });
+    expect(expectedError).toStrictEqual(new Error(errOmdb));
+  });
+});

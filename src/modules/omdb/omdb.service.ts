@@ -11,7 +11,7 @@ export default class GetMovieOmdb {
     private readonly configService: ConfigService,
   ) {}
 
-  public async getMovieByTitle(data: any){
+  public async getMovieByTitle(data: string){
     try {
       const omdbUrl = this.configService.get('OMDB');
       const key = this.configService.get('API_KEY_OMDB');

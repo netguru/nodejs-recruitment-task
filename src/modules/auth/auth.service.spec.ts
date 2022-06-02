@@ -40,9 +40,9 @@ describe('AuthCodeService', () => {
   describe('test auth controller', () => {
     it('pass arguments and see the function be called', async () => {
       const spy = jest.spyOn(service, 'auth').mockResolvedValue(token);
-      await service.auth(data.username, data.password);
+      await service.auth(data.username, data);
       expect(spy).toBeCalledTimes(1);
-      expect(spy).toBeCalledWith(data);
+      expect(spy).toBeCalledWith(data.username, data);
     });
 
     const errValidation = {
@@ -54,7 +54,7 @@ describe('AuthCodeService', () => {
       let expectedError: Error;
 
       try {
-        await service.auth(data.username, data.password);
+        await service.auth(data.username, data);
       } catch (error) {
         expectedError = error;
       }

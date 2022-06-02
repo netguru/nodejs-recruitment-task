@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 import { sign } from "jsonwebtoken";
+import AuthInterface from './interface/auth-input.interface'
 
 const users = [
   {
@@ -26,7 +27,7 @@ export default class AuthService {
     private readonly logger: Logger
   ) {}
 
-  async auth(secret, payload): Promise<any | null> {
+  async auth(secret: string, payload: AuthInterface): Promise<any | null> {
     try {
       const user = users.find((u) => u.username === payload.username);
 
@@ -34,7 +35,7 @@ export default class AuthService {
         throw new Error("invalid username or password");
       }
 
-      return sign(
+      const token = sign(
         {
           userId: user.id,
           name: user.name,
@@ -47,6 +48,8 @@ export default class AuthService {
           expiresIn: 30 * 60,
         }
       );
+
+      return token;
     } catch (error) {
       this.logger.error('Error on create auth');
       this.logger.error(error);

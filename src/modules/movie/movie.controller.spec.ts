@@ -1,59 +1,41 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { createMock } from 'ts-auto-mock';
-// import Moviecontroller from './movie.controller';
-// import MovieService from './movie.service';
-// import { FastifyReply } from 'fastify';
+import { Test, TestingModule } from '@nestjs/testing';
+import { createMock } from 'ts-auto-mock';
+import Moviecontroller from './movie.controller';
+import MovieService from './movie.service';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
-// describe('MovieControllerController', () => {
-//   let authcontroller: Moviecontroller;
-//   let authService: MovieService;
+describe('MovieControllerController', () => {
+  let moviecontroller: Moviecontroller;
+  let movieService: MovieService;
 
-//   beforeEach(async () => {
-//     authService = createMock<MovieService>();
-//     const module: TestingModule = await Test.createTestingModule({
-//       controllers: [Moviecontroller],
-//       providers: [
-//         {
-//           provide: MovieService,
-//           useValue: authService,
-//         }
-//       ],
-//     }).compile();
+  beforeEach(async () => {
+    movieService = createMock<MovieService>();
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [Moviecontroller],
+      providers: [
+        {
+          provide: MovieService,
+          useValue: movieService,
+        }
+      ],
+    }).compile();
 
-//     authcontroller = module.get<Moviecontroller>(Moviecontroller);
-//     authService = module.get<MovieService>(MovieService);
-//   });
+    moviecontroller = module.get<Moviecontroller>(Moviecontroller);
+    movieService = module.get<MovieService>(MovieService);
+  });
 
-//   it('should be defined', () => {
-//     expect(authcontroller).toBeDefined();
-//   });
+  it('should be defined', () => {
+    expect(moviecontroller).toBeDefined();
+  });
 
-//   const token = {
-//     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywibmFtZSI6IkJhc2ljIFRob21hcyIsInJvbGUiOiJiYXNpYyIsImlhdCI6MTY1NDE3ODk3MywiZXhwIjoxNjU0MTgwNzczLCJpc3MiOiJodHRwczovL3d3dy5uZXRndXJ1LmNvbS8iLCJzdWIiOiIxMjMifQ.d5d6Qbr8iUpSZQ6NwsxAz6GFOzLEawvx0Naxu0UirEE"
-//   };
-//   const data = {
-//     username: '',
-//     password: '',
-//   }
-//   const fastifyReplyMock = createMock<FastifyReply>();
+  const fastifyReplyMock = createMock<FastifyReply>();
+  const fastifyRequestMock = createMock<FastifyRequest>();
+  let res:any
 
-//   it('should call controller', async () => {
-//     const spy = jest.spyOn(authcontroller, 'authController').mockResolvedValue(token);
-//     await authcontroller.authController(fastifyReplyMock, data);
-//     expect(spy).toBeCalledTimes(1);
-//     expect(spy).toBeCalledWith(fastifyReplyMock, data);
-//   });
-
-//   it('should call movie service', async () => {
-//     const spy = jest.spyOn(authService, 'movie');
-//     await authcontroller.authController(fastifyReplyMock, data);
-//     expect(spy).toBeCalledTimes(1);
-//   });
-
-//   it('should call movie status service', async () => {
-//     const spy = jest.spyOn(authService, 'movie');
-//     jest.spyOn(authService, 'movie').mockResolvedValue({ success: 'ERROR' });
-//     await authcontroller.authController(fastifyReplyMock, data);
-//     expect(spy).toBeCalledTimes(1);
-//   });
-// });
+  it('should call controller', async () => {
+    const spy = jest.spyOn(moviecontroller, 'movieControllerCreate').mockResolvedValue(res);
+    await moviecontroller.movieControllerCreate(fastifyReplyMock, fastifyRequestMock, {title: 'sa'});
+    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledWith(fastifyReplyMock, fastifyRequestMock, {title: 'sa'});
+  });
+});

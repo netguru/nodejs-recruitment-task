@@ -1,17 +1,17 @@
-import { Controller, Post, HttpStatus, Res } from '@nestjs/common';
-import { Payload } from '@nestjs/microservices';
+import { Controller, Post, HttpStatus, Res, Body} from '@nestjs/common';
 import AuthService from './auth.service';
 import 'dotenv/config';
 import { FastifyReply } from 'fastify';
+import AuthInterface from './interface/auth-input.interface'
 
-@Controller()
+@Controller('/auth')
 export default class Authcontroller {
   constructor(
     private readonly appService: AuthService
   ) {}
 
-  @Post('/auth')
-  async authController(@Res() response: FastifyReply, @Payload() body): Promise<any> {
+  @Post()
+  async authController(@Body() body: AuthInterface, @Res() response: FastifyReply): Promise<any> {
     try {
       const { JWT_SECRET } = process.env;
 

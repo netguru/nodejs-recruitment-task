@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import PrismaService from '../../prisma/prisma.service';
-
+import AuthRepo from '../interface/auth-repo.interface'
 @Injectable()
 export default class PrismaUsersRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getCustomerData(data: any): Promise<Partial<any>> {
+  async getCustomerData(data: Partial<AuthRepo>): Promise<Partial<any>> {
     try {
       return await this.prismaService.users.findFirst({
         where: {
@@ -17,7 +17,7 @@ export default class PrismaUsersRepository {
     }
   }
 
-  async createUser(data: any): Promise<Partial<any>> {
+  async createUser(data: AuthRepo){
     try {
       return await this.prismaService.users.create({
         data:{
@@ -33,7 +33,7 @@ export default class PrismaUsersRepository {
     }
   }
 
-  async update(userId, numMovies): Promise<Partial<any>> {
+  async update(userId: number, numMovies: number){
     try {
       return await this.prismaService.users.update({
         data:{
