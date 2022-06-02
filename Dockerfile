@@ -1,8 +1,6 @@
 # Base
 FROM node:14-alpine AS base
 
-ARG NPM_TOKEN
-
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -17,8 +15,6 @@ RUN npm run build
 
 # Production
 FROM node:14-alpine AS production
-
-ARG NODE_ENV
 
 WORKDIR /usr/src/app
 

@@ -1,4 +1,3 @@
-// TODO: fix the issues and remove this eslint exception
 /* eslint-disable */
 import { Controller, Get } from '@nestjs/common';
 

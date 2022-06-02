@@ -11,24 +11,22 @@ generator client {
 }
 
 model Movies {
-  id        Int      @id @default(autoincrement())
-  Users     Users    @relation(fields: [user_id], references: [user_id])
-  user_id   Int      @unique
-  title     String
-  released  DateTime
-  genre     String
-  director  String
-  creat_at  DateTime
-  update_at DateTime
+  id            Int      @id @default(autoincrement())
+  user_id       Int
+  title         String
+  released      DateTime
+  genre         String
+  director      String
+  created_at    DateTime
+  updated_at    DateTime?
 }
 
 model Users {
-  id         Int      @id @default(autoincrement())
-  user_id    Int      @unique
-  year       Int
-  month      Int
-  num_movies Int
-  creat_at   DateTime
-  update_at  DateTime
-  Movies     Movies[]
+  id             Int      @id @default(autoincrement())
+  user_id        Int      @unique
+  year           Int
+  month          Int
+  num_movies     Int
+  created_at     DateTime
+  updated_at     DateTime?
 }
