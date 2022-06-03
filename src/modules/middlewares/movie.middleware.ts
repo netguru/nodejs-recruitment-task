@@ -1,18 +1,20 @@
-import { NextFunction, Response } from "express";
-import { ExpressMiddlewareInterface } from "routing-controllers";
-import { ApiHandle } from "../utils/errors-handle";
-import { userDataToCheck } from "../utils/userDataToCheck";
-import { MAX_MOVIES_PER_MONTH_BASIC } from "../constants";
-import PrismaUsersRepository from '../auth/repository/user.repository'
+import { NextFunction, Response } from 'express';
+import { ExpressMiddlewareInterface } from 'routing-controllers';
+import { ApiHandle } from '../utils/errors-handle';
+import { userDataToCheck } from '../utils/userDataToCheck';
+import PrismaUsersRepository from '../auth/repository/user.repository';
 import PrismaService from '../prisma/prisma.service';
+
 const prismaService = new PrismaService();
+const MAX_MOVIES_PER_MONTH_BASIC = 5;
+const BAD_REQUEST = 400;
 
 export default class MovieMiddleware implements ExpressMiddlewareInterface {
-
+  // eslint-disable-next-line class-methods-use-this
   async use(request: any, _response: Response, next: NextFunction) {
     const userData = userDataToCheck(request);
     if (!userData) {
-      next(new ApiHandle("please login first!", 400));
+      next(new ApiHandle('please login first!', BAD_REQUEST));
       return;
     }
     if (userData.role === 'premium') {
@@ -36,7 +38,7 @@ export default class MovieMiddleware implements ExpressMiddlewareInterface {
       next(
         new ApiHandle(
           "It's not possible to save more than 5 movies. Wait until next month or upgrade to premium.",
-          400
+          BAD_REQUEST
         )
       );
       return;
