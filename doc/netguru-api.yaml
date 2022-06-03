@@ -1,0 +1,209 @@
+openapi: 3.0.0
+servers:
+  - url: 'localhost:3005'
+info:
+  description: >-
+    NetGuru apis.
+  version: 1.0.0
+  title: NetGuru
+tags:
+  - name: auth
+  - name: movie
+paths:
+  /auth:
+    post:
+      tags:
+        - auth
+      summary: Receive auth payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthApi'
+      responses:
+        200:
+          description: Auth response
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2NTQyMTM5MDMsImV4cCI6MTY1NDIxNTcwMywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.caFHlfuzFdpxrn2iisdW3W2NJU1-rJJ_DQv2ON-z24k"
+        404:
+          description: Not Founded
+          content:
+            application/json:
+              schema:
+                properties:
+                  statusCode:
+                    description: Error Code
+                    type: integer
+                    example: 404
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Cannot POST /auth'
+                  error:
+                    description: Error
+                    type: string
+                    example: 'Not Found'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Internal Server Error'
+  /movie:
+    post:
+      tags:
+        - "movie"
+      parameters:
+        - name: "Authorization"
+          in: header
+          required: true
+          schema:
+            type: string
+            example : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2NTQyMTM5MDMsImV4cCI6MTY1NDIxNTcwMywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.caFHlfuzFdpxrn2iisdW3W2NJU1-rJJ_DQv2ON-z24k"
+            description: "bearer token"
+      summary: Receive movie payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieApi'
+      responses:
+        200:
+          description: No Body returned for response
+        404:
+          description: Not Founded
+          content:
+            application/json:
+              schema:
+                properties:
+                  statusCode:
+                    description: Error Code
+                    type: integer
+                    example: 404
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Cannot POST /movie'
+                  error:
+                    description: Error
+                    type: string
+                    example: 'Not Found'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Internal Server Error'
+    get:
+      tags:
+        - "movie"
+      parameters:
+        - name: "Authorization"
+          in: header
+          required: true
+          schema:
+            type: string
+            example : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2NTQyMTM5MDMsImV4cCI6MTY1NDIxNTcwMywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.caFHlfuzFdpxrn2iisdW3W2NJU1-rJJ_DQv2ON-z24k"
+            description: "bearer token"
+      summary: Receive movie payload
+      responses:
+        200:
+          description: Auth response
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: number
+                    example: 6
+                  user_id:
+                    type: number
+                    example: 434
+                  title:
+                    type: string
+                    example: Thor
+                  released:
+                    type: string
+                    format: date
+                    example: "2011-05-06T03:00:00.000Z"
+                  genre:
+                    type: string
+                    example: "Action, Adventure, Fantasy"
+                  director:
+                    type: string
+                    example: "Kenneth Branagh"
+                  created_at:
+                    type: string
+                    format: date
+                    example: "2011-05-06T03:00:00.000Z"
+                  updated_at:
+                    type: string
+                    format: date
+                    example: "2011-05-06T03:00:00.000Z"
+        404:
+          description: Not Founded
+          content:
+            application/json:
+              schema:
+                properties:
+                  statusCode:
+                    description: Error Code
+                    type: integer
+                    example: 404
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Cannot POST /movie'
+                  error:
+                    description: Error
+                    type: string
+                    example: 'Not Found'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    description: Error Message
+                    type: string
+                    example: 'Internal Server Error'
+components:
+  schemas:
+    AuthApi:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example:
+            "premium-jim"
+        password:
+          type: string
+          example: "GBLtTyq3E_UNjFnpo9m6"
+    MovieApi:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          example:
+            "spider man"

@@ -1,0 +1,3 @@
+const MAX_MOVIES_PER_MONTH_BASIC = 5;
+
+export default MAX_MOVIES_PER_MONTH_BASIC;

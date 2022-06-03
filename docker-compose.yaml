@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  nodejs-recruitment-task:
+    build:
+      context: .
+    command: npm run start
+    container_name: nodejs-recruitment-task
+    tty: true
+    ports:
+      - "3005:3005"
+    depends_on:
+       - postgres
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgresql://postgres:pgpwd@db:5432/postgres
+      OMDB: ${OMDB}
+      API_KEY_OMDB: ${API_KEY_OMDB}
+      NODE_ENV: ${NODE_ENV}
+
+  postgres:
+    image: postgres
+    container_name: db
+    restart: always
+    tty: true
+    environment:
+      POSTGRES_DATABASE: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pgpwd
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+       - ./postgres:/var/lib/postgres

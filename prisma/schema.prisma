@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Movies {
+  id            Int      @id @default(autoincrement())
+  user_id       Int
+  title         String
+  released      DateTime
+  genre         String
+  director      String
+  created_at    DateTime
+  updated_at    DateTime?
+}
+
+model Users {
+  id             Int      @id @default(autoincrement())
+  user_id        Int      @unique
+  year           Int
+  month          Int
+  num_movies     Int
+  created_at     DateTime
+  updated_at     DateTime?
+}
