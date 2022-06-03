@@ -4,14 +4,8 @@ services:
   nodejs-recruitment-task:
     build:
       context: .
-      args:
-        NPM_TOKEN: ${NPM_TOKEN}
     command: npm run start
     container_name: nodejs-recruitment-task
-    working_dir: /usr/src/app
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
     tty: true
     ports:
       - "3005:3005"
@@ -19,6 +13,10 @@ services:
        - postgres
     environment:
       JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgresql://postgres:pgpwd@db:5432/postgres
+      OMDB: ${OMDB}
+      API_KEY_OMDB: ${API_KEY_OMDB}
+      NODE_ENV: ${NODE_ENV}
 
   postgres:
     image: postgres

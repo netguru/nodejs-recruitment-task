@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
+RUN npm install -g @nestjs/cli
 
 COPY src src
 COPY prisma prisma
@@ -22,6 +23,7 @@ COPY --from=base /usr/src/app/package*.json ./
 
 RUN npm install -g prisma
 RUN npm install --only=production
+RUN npm install -g @nestjs/cli
 
 COPY --from=base /usr/src/app/dist ./dist
 COPY --from=base /usr/src/app/prisma ./prisma
