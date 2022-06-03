@@ -38,3 +38,7 @@ This is the NetGuru Challenge project.
   * CI/CD github actions
 ### Swagger Doc
   * Check the swagger documentation on folder doc.
+
+### What i would do if i have more time
+  * Improve the tests
+  * Improve the typescript interface and avoid all any

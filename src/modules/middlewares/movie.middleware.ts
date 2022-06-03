@@ -14,7 +14,7 @@ export default class MovieMiddleware implements ExpressMiddlewareInterface {
   async use(request: any, _response: Response, next: NextFunction) {
     const userData = userDataToCheck(request);
     if (!userData) {
-      next(new ApiHandle('please login first!', BAD_REQUEST));
+      next(new ApiHandle('You need be logged to access this Api!', BAD_REQUEST));
       return;
     }
     if (userData.role === 'premium') {
