@@ -5,7 +5,7 @@ This is the NetGuru Challenge project.
 # Swagger image
   Check the swagger file to understand the api behavior.
 <img
-    src="https://i.ibb.co/M5j5hgb/Screen-Shot-2022-06-03-at-10-25-12-AM.png"
+    src="https://i.ibb.co/6sdgwrQ/Screen-Shot-2022-06-03-at-2-12-36-PM.png"
     alt="Swagger Page of that application"
     title="Swagger Page of that application" />
 
