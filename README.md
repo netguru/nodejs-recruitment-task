@@ -1,11 +1,11 @@
 # Movie Challenge
 
-This is the Movie Challenge project.
+This is the NetGuru Challenge project.
 
 # Swagger image
   Check the swagger file to understand the api behavior.
 <img
-    src="https://i.ibb.co/Yc3wxMN/Screen-Shot-2022-06-03-at-10-20-59-AM.png"
+    src="https://i.ibb.co/M5j5hgb/Screen-Shot-2022-06-03-at-10-25-12-AM.png"
     alt="Swagger Page of that application"
     title="Swagger Page of that application" />
 
