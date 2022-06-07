@@ -1,4 +1,4 @@
-# Node.js recruitment task
+# Node.js + Docker movie project
 
 # Technology stack
 
