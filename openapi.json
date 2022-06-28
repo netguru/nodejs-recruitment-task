@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NetGuru task",
+    "description": "API documentation for task",
+    "version": ""
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoint"
+    },
+    {
+      "name": "Movie",
+      "description": "Movie endpoints"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+        "parameters": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/authRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid payload"
+          }
+        }
+      }
+    },
+    "/movie/create": {
+      "post": {
+        "tags": ["Movie"],
+        "summary": "Create movies",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's info object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/movieCreateReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/movieCreateRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "No details about the movie were found. Please, refine the request"
+          },
+          "409": {
+            "description": "Such movie already exists/ Monthly movie addition limit is reached"
+          }
+        }
+      }
+    },
+    "/movie/get": {
+      "post": {
+        "tags": ["Movie"],
+        "summary": "Get movies by used",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MovieGetRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "authRequest": {
+        "type": "object",
+        "required": ["password", "login"],
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "login": {
+            "type": "string",
+            "description": "User's login",
+            "example": "kolya23"
+          }
+        }
+      },
+      "authResponse": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string",
+            "description": "User's login",
+            "example": "kolya23"
+          }
+        }
+      },
+      "movieCreateReq": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Movie title",
+            "example": "Batman"
+          }
+        }
+      },
+      "movieCreateRes": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "Title": {
+            "type": "string",
+            "description": "Movie title",
+            "example": "Batman"
+          },
+          "Released": {
+            "type": "string",
+            "description": "Date of release",
+            "example": "07 Feb 2014"
+          },
+          "Genre": {
+            "type": "string",
+            "description": "Genres",
+            "example": "Animation, Action, Adventure"
+          },
+          "Director": {
+            "type": "string",
+            "description": "Director",
+            "example": "Christopher Miller, Phil Lord"
+          },
+          "userId": {
+            "type": "string",
+            "description": "id",
+            "example": "123"
+          }
+        }
+      },
+      "MovieGetRes": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string",
+            "description": "Movie title",
+            "example": "Batman"
+          },
+          "Released": {
+            "type": "string",
+            "description": "Date of release",
+            "example": "07 Feb 2014"
+          },
+          "Genre": {
+            "type": "string",
+            "description": "Genres",
+            "example": "Animation, Action, Adventure"
+          },
+          "Director": {
+            "type": "string",
+            "description": "Director",
+            "example": "Christopher Miller, Phil Lord"
+          },
+          "userId": {
+            "type": "string",
+            "description": "id",
+            "example": "123"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
