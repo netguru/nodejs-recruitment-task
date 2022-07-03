@@ -1,4 +1,4 @@
 import healthcheckUseCases from "@app/logic/use-case/healthcheck";
-import userUseCases from "@app/logic/use-case/user";
+import movieUseCases from "@app/logic/use-case/movie";
 
-export default [...healthcheckUseCases, ...userUseCases];
+export default [...healthcheckUseCases, ...movieUseCases];

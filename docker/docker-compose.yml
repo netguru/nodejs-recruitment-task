@@ -21,6 +21,7 @@ services:
       - DB_PASSWORD
       - JWT_SECRET
       - AUTH_SERVICE_API_URL
+      - OMDB_API_KEY
     ports:
       - "3001:80"
     depends_on:
