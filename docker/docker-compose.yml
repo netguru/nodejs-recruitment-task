@@ -7,6 +7,7 @@ services:
     environment:
       - NODE_ENV=production
       - JWT_SECRET
+    command: ["node", "./src/server.js"]
 
   movies-service:
     image: movies-service
@@ -27,6 +28,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    command: ["yarn", "start:dist"]
 
   db:
     image: postgres:14.2

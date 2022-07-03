@@ -1,7 +1,7 @@
 dist.docker.compose = -f docker/docker-compose.yml
 build.docker.compose = -f docker/docker-compose.yml -f docker/docker-compose.build.yml
 dev.docker.compose = --env-file=.env -f docker/docker-compose.yml -f docker/docker-compose.dev.yml
-test.docker.compose = --env-file=.env -f docker/docker-compose.yml -f docker/docker-compose.test.yml
+test.docker.compose = --env-file=.env -f docker/docker-compose.yml -f docker/docker-compose.dev.yml -f docker/docker-compose.test.yml
 
 ####
 
@@ -55,3 +55,6 @@ dev.logs:
 
 test.up:
 	docker compose $(test.docker.compose) up
+
+test.down:
+	docker compose $(test.docker.compose) down

@@ -1,6 +1,5 @@
-#!/bin/bash
-set -eo pipefail
-shopt -s nullglob
+#!/bin/sh
+set -e
 
 echo "NODE_ENV: ${NODE_ENV}"
 
