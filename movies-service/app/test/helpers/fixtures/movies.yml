@@ -1,0 +1,9 @@
+entity: Movie
+items:
+  movies_{1..100}:
+    title: "Scary Movie ($current)"
+    releasedAt: "{{date.past}}"
+    genre: "Thriller/Comedy"
+    director: "Ben Stiler"
+    createdAt: "{{date.past}}"
+    createdBy: 300 # user to test it with

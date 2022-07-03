@@ -1,4 +1,8 @@
 // Code in this file is responsible for loading fixtures from yaml files
+
+// I know this might be hard to believe, but I wrote this whole class because
+// there were some bugs and slowdowns in typeorm fixtures package
+
 import { faker } from "@faker-js/faker";
 import fs from "fs";
 import path from "path";

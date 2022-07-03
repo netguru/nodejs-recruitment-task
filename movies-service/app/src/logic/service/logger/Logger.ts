@@ -12,7 +12,6 @@ export class Logger {
   private effectiveLogLevels: string[];
 
   public constructor(configuration: Configuration) {
-    console.log(configuration.logLevel);
     this.effectiveLogLevels = Logger.getEffectiveLogLevels(configuration.logLevel);
   }
 
