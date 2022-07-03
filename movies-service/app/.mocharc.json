@@ -1,0 +1,17 @@
+{
+  "allow-uncaught": false,
+  "bail": false,
+  "async-only": false,
+  "check-leaks": true,
+  "exit": true,
+  "global": ["fixtures"],
+  "slow": 100,
+  "jobs": 1,
+  "isWorker": true,
+  "recursive": true,
+  "require": ["tsconfig-paths/register", "ts-node/register"],
+  "extension": ["ts", "js", "json"],
+  "spec": ["test/e2e/**/*.e2e-spec.ts", "test/unit/**/*.spec.ts"],
+  "package": "../package.json",
+  "timeout": 20000
+}

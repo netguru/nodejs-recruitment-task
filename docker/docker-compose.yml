@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  auth-service:
+    image: auth-service
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 5s
+      timeout: 5s
+      retries: 50
+
+  movies-service:
+    image: movies-service
+    environment:
+      - NODE_ENV=production
+      - DEBUG_MODE=0
+      - LOG_LEVEL=error
+      - DB_HOST
+      - DB_PORT
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - JWT_SECRET
+    ports:
+      - "3001:80"
+    depends_on:
+      db:
+        condition: service_healthy
+      auth-service:
+        condition: service_healthy
+
+  db:
+    image: postgres:14.2
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 50

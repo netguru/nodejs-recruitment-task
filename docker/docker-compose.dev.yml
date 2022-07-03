@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+  auth-service:
+    build:
+      context: ../auth-service
+      dockerfile: ../auth-service/Dockerfile
+    volumes:
+      - .:/app/
+    environment:
+      - NODE_ENV=development
+
+  movies-service:
+    build:
+      context: ../movies-service
+      dockerfile: ../movies-service/Dockerfile
+    command: ["yarn", "start:dev"]
+    volumes:
+      - ../app:/var/www
+      - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+      - ./test-entrypoint.sh:/usr/local/bin/test-entrypoint.sh
+      - /var/www/node_modules
+    environment:
+      - NODE_ENV=development

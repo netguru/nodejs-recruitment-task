@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  auth-service:
+    build:
+      context: ../auth-service
+      dockerfile: ../auth-service/Dockerfile
+
+  movies-service:
+    build:
+      context: ../movies-service
+      dockerfile: ../movies-service/Dockerfile
