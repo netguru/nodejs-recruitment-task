@@ -3,11 +3,15 @@ import { ApiExtraModels, ApiOkResponse, ApiTags, getSchemaPath } from "@nestjs/s
 
 import {TokenRequest} from "@app/model/auth/TokenRequest";
 import {TokenResponse} from "@app/model/auth/TokenResponse";
+import {AuthServiceApiClient} from "@app/logic/service/auth/AuthServiceApiClient";
 
 @ApiTags("Auth")
 @Controller("/auth")
 @ApiExtraModels(TokenRequest, TokenResponse)
 export class TokenController {
+
+  constructor(private readonly authServiceApiClient: AuthServiceApiClient) { }
+
   @Post("/token")
   @ApiOkResponse({
     status: 200,
@@ -16,7 +20,7 @@ export class TokenController {
       $ref: getSchemaPath(TokenResponse),
     },
   })
-  async token(@Body() _request: TokenRequest): Promise<void> {
-    // todo
+  async token(@Body() request: TokenRequest): Promise<TokenResponse> {
+    return this.authServiceApiClient.getToken(request);
   }
 }

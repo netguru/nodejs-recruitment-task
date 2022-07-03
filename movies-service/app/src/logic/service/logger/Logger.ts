@@ -12,13 +12,16 @@ export class Logger {
   private effectiveLogLevels: string[];
 
   public constructor(configuration: Configuration) {
+    console.log(configuration.logLevel);
     this.effectiveLogLevels = Logger.getEffectiveLogLevels(configuration.logLevel);
   }
+
+  // yes i know its not the perfect logging solution, normally things would go to separate service
 
   public error(source: Source, message: string): void {
     if (this.effectiveLogLevels.includes("error")) {
       // eslint-disable-next-line no-console
-      console.error(prettyPrint(source, chalk.red(message)));
+      console.log(prettyPrint(source, chalk.red(message)));
     }
   }
 
@@ -32,21 +35,21 @@ export class Logger {
   public warn(source: Source, message: string): void {
     if (this.effectiveLogLevels.includes("warn")) {
       // eslint-disable-next-line no-console
-      console.warn(prettyPrint(source, chalk.yellow(message)));
+      console.log(prettyPrint(source, chalk.yellow(message)));
     }
   }
 
   public debug(source: Source, message: string): void {
     if (this.effectiveLogLevels.includes("debug")) {
       // eslint-disable-next-line no-console
-      console.debug(prettyPrint(source, chalk.blue(message)));
+      console.log(prettyPrint(source, chalk.blue(message)));
     }
   }
 
   public trace(source: Source, message: string): void {
     if (this.effectiveLogLevels.includes("trace")) {
       // eslint-disable-next-line no-console
-      console.trace(prettyPrint(source, chalk.gray(message)));
+      console.log(prettyPrint(source, chalk.gray(message)));
     }
   }
 

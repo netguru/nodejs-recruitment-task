@@ -12,14 +12,15 @@ services:
     image: movies-service
     environment:
       - NODE_ENV=production
-      - DEBUG_MODE=0
-      - LOG_LEVEL=error
+      - DEBUG_MODE
+      - LOG_LEVEL
       - DB_HOST
       - DB_PORT
       - DB_NAME
       - DB_USER
       - DB_PASSWORD
       - JWT_SECRET
+      - AUTH_SERVICE_API_URL
     ports:
       - "3001:80"
     depends_on:
