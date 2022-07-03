@@ -1,0 +1,11 @@
+version: 2.1
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # build images
+     - run: docker compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml build
+     # run tests
+     - run: cp .env.test .env
+     - run: docker compose --env-file=.env -f docker/docker-compose.yml -f docker/docker-compose.test.yml up
