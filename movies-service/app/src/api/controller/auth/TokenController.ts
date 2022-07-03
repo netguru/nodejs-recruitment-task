@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import {ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath} from "@nestjs/swagger";
+import { ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath } from "@nestjs/swagger";
 
 import { AuthServiceApiClient } from "@app/logic/service/auth/AuthServiceApiClient";
 import { TokenRequest } from "@app/model/auth/TokenRequest";

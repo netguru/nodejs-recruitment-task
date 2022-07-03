@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
-import {ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath} from "@nestjs/swagger";
+import { ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath } from "@nestjs/swagger";
 import { Request as ExpressRequest, Response as ExpressResponse } from "express";
 
 import { AuthenticatedUserGuard } from "@app/api/guard/AuthenticatedUserGuard";

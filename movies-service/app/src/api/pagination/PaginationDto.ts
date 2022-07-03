@@ -1,8 +1,8 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Expose, Type } from "class-transformer";
 import { IsNumber, IsOptional, Max, Min } from "class-validator";
 
 import { PaginationData } from "@app/model/common/PaginationData";
-import {ApiProperty} from "@nestjs/swagger";
 
 export class PaginationDto implements PaginationData {
   @ApiProperty()
