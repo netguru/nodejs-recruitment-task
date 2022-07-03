@@ -1,3 +1,4 @@
-import { default as UserPresenters } from "@app/api/presenter/user";
+import { default as userPresenters } from "@app/api/presenter/user";
+import { default as moviePresenters } from "@app/api/presenter/movie";
 
-export default [...UserPresenters];
+export default [...userPresenters, ...moviePresenters];

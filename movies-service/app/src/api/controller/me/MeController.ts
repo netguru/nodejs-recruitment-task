@@ -1,5 +1,4 @@
-import * as Nest from "@nestjs/common";
-import { Req } from "@nestjs/common";
+import { Req, Get, UseGuards, Controller } from "@nestjs/common";
 import { ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath } from "@nestjs/swagger";
 import { Request as ExpressRequest } from "express";
 
@@ -11,14 +10,14 @@ import {ReadMeData} from "@app/model/user/ReadMeData";
 @ApiTags("Me")
 @ApiExtraModels(ReadMeData)
 @ApiBearerAuth()
-@Nest.UseGuards(AuthenticatedUserGuard)
-@Nest.Controller("/me")
+@UseGuards(AuthenticatedUserGuard)
+@Controller("/me")
 export class MeController {
   constructor(
     private readonly mePresenter: MePresenter
   ) {}
 
-  @Nest.Get()
+  @Get()
   @ApiOperation({ summary: "Get logged user details" })
   @ApiOkResponse({
     description: "Logged user details",
