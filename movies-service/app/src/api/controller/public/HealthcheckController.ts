@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import {ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 
 import { GetHealthcheckResult } from "@app/logic/use-case/healthcheck/GetHealthcheckResult";
 
@@ -9,8 +9,9 @@ export class HealthcheckController {
   constructor(private readonly getHealthcheckResult: GetHealthcheckResult) {}
 
   @Get("/healthcheck")
+  @ApiOperation({ summary: "Check health" })
   @ApiOkResponse({
-    description: "Healthcheck",
+    description: "Healthcheck - returns 200 and that's it",
   })
   healthcheck(): string {
     return this.getHealthcheckResult.get();

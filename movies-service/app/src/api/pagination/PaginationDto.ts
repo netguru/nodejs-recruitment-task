@@ -2,8 +2,10 @@ import { Expose, Type } from "class-transformer";
 import { IsNumber, IsOptional, Max, Min } from "class-validator";
 
 import { PaginationData } from "@app/model/common/PaginationData";
+import {ApiProperty} from "@nestjs/swagger";
 
 export class PaginationDto implements PaginationData {
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   @IsOptional()
@@ -11,6 +13,7 @@ export class PaginationDto implements PaginationData {
   @Expose()
   page: number;
 
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   @Max(200)

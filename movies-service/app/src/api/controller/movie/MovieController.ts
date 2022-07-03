@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query, Req, Res, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiTags, getSchemaPath } from "@nestjs/swagger";
+import {ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath} from "@nestjs/swagger";
 import { Request as ExpressRequest, Response as ExpressResponse } from "express";
 
 import { AuthenticatedUserGuard } from "@app/api/guard/AuthenticatedUserGuard";
@@ -17,7 +17,7 @@ import { User } from "@app/model/user/User";
 @Controller("/movies")
 @ApiBearerAuth()
 @UseGuards(AuthenticatedUserGuard)
-@ApiExtraModels(ReadMovieData, CreateMovieData)
+@ApiExtraModels(ReadMovieData, CreateMovieData, PaginationDto)
 export class MovieController {
   constructor(
     private readonly createMovie: CreateMovie,
@@ -26,9 +26,10 @@ export class MovieController {
   ) {}
 
   @Post("/")
+  @ApiOperation({ summary: "Create a movie based on title" })
   @ApiOkResponse({
     status: 200,
-    description: "Movie created",
+    description: "Created movie",
     schema: {
       $ref: getSchemaPath(ReadMovieData),
     },
@@ -39,11 +40,15 @@ export class MovieController {
   }
 
   @Get("/")
+  @ApiOperation({ summary: "Get logged user movies" })
   @ApiOkResponse({
     status: 200,
-    description: "Movie created",
+    description: "List of user movies",
     schema: {
-      $ref: getSchemaPath(ReadMovieData),
+      type: "array",
+      items: {
+        $ref: getSchemaPath(ReadMovieData),
+      },
     },
   })
   async list(
