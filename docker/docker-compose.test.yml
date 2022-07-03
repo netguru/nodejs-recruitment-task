@@ -3,5 +3,8 @@ services:
   movies-service:
     entrypoint: ["test-entrypoint.sh"]
     command: ["yarn", "test"]
+    volumes:
+      - ../movies-service/app:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=test
