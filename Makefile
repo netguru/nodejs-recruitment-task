@@ -11,6 +11,9 @@ build:
 ####
 
 dist.up:
+	docker compose $(dist.docker.compose) up
+
+dist.upd:
 	docker compose $(dist.docker.compose) up -d
 
 dist.down:
@@ -22,9 +25,15 @@ dist.start:
 dist.stop:
 	docker compose $(dist.docker.compose) stop
 
+dist.logs:
+	docker compose $(dist.docker.compose) logs
+
 ####
 
 dev.up:
+	docker compose $(dev.docker.compose) up
+
+dev.upd:
 	docker compose $(dev.docker.compose) up -d
 
 dev.down:
@@ -38,6 +47,9 @@ dev.stop:
 
 dev.shell:
 	docker compose $(dev.docker.compose) exec movies-service sh
+
+dev.logs:
+	docker compose $(dev.docker.compose) logs
 
 ####
 

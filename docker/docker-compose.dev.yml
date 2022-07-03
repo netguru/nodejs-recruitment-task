@@ -5,7 +5,7 @@ services:
       context: ../auth-service
       dockerfile: ../auth-service/Dockerfile
     volumes:
-      - .:/app/
+      - ../auth-service:/app/
     environment:
       - NODE_ENV=development
 
@@ -15,9 +15,9 @@ services:
       dockerfile: ../movies-service/Dockerfile
     command: ["yarn", "start:dev"]
     volumes:
-      - ../app:/var/www
-      - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
-      - ./test-entrypoint.sh:/usr/local/bin/test-entrypoint.sh
-      - /var/www/node_modules
+      - ../movies-service/app:/app
+      - ../movies-service/docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+      - ../movies-service/docker/test-entrypoint.sh:/usr/local/bin/test-entrypoint.sh
+      - /app/node_modules
     environment:
       - NODE_ENV=development

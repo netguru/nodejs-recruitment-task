@@ -7,11 +7,6 @@ services:
     environment:
       - NODE_ENV=production
       - JWT_SECRET
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 5s
-      timeout: 5s
-      retries: 50
 
   movies-service:
     image: movies-service
@@ -30,18 +25,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      auth-service:
-        condition: service_healthy
 
   db:
     image: postgres:14.2
     environment:
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 50

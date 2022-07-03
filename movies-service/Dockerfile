@@ -26,7 +26,7 @@ RUN yarn install --production && yarn link
 COPY --from=packer /var/www/dist $DIR/dist
 COPY app/ormconfig.js $DIR/
 
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker/docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["yarn", "start:dist"]
