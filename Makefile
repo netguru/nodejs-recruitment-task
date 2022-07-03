@@ -54,7 +54,7 @@ dev.logs:
 ####
 
 test.up:
-	docker compose $(test.docker.compose) up
+	docker compose $(test.docker.compose) up --abort-on-container-exit
 
 test.down:
 	docker compose $(test.docker.compose) down
