@@ -9,7 +9,7 @@ module.exports = {
     mocha: true,
   },
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: "module",
     project: "tsconfig.json",
   },
@@ -51,6 +51,7 @@ module.exports = {
           "enumMember",
         ],
         format: ["camelCase"],
+        leadingUnderscore: "allow",
       },
       {
         selector: ["class", "interface", "enum", "typeAlias"],

@@ -1,16 +1,15 @@
-import { Controller, Post, Body } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { ApiExtraModels, ApiOkResponse, ApiTags, getSchemaPath } from "@nestjs/swagger";
 
-import {TokenRequest} from "@app/model/auth/TokenRequest";
-import {TokenResponse} from "@app/model/auth/TokenResponse";
-import {AuthServiceApiClient} from "@app/logic/service/auth/AuthServiceApiClient";
+import { AuthServiceApiClient } from "@app/logic/service/auth/AuthServiceApiClient";
+import { TokenRequest } from "@app/model/auth/TokenRequest";
+import { TokenResponse } from "@app/model/auth/TokenResponse";
 
 @ApiTags("Auth")
 @Controller("/auth")
 @ApiExtraModels(TokenRequest, TokenResponse)
 export class TokenController {
-
-  constructor(private readonly authServiceApiClient: AuthServiceApiClient) { }
+  constructor(private readonly authServiceApiClient: AuthServiceApiClient) {}
 
   @Post("/token")
   @ApiOkResponse({

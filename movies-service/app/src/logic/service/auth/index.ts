@@ -1,3 +1,3 @@
-import {AuthServiceApiClient} from "@app/logic/service/auth/AuthServiceApiClient";
+import { AuthServiceApiClient } from "@app/logic/service/auth/AuthServiceApiClient";
 
 export default [AuthServiceApiClient];

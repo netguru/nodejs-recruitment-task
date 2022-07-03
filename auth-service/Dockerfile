@@ -8,7 +8,7 @@ RUN npm install
 RUN mkdir ./src
 COPY src ./src
 
-COPY docker/docker-entrypoint.sh /usr/local/bin/
+COPY docker/auth-entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["auth-entrypoint.sh"]
 CMD ["node", "./src/server.js"]

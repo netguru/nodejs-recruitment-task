@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import {UserRole} from "@app/model/user/User";
+
+import { UserRole } from "@app/model/user/User";
 
 export class ReadMeData {
   @ApiProperty()

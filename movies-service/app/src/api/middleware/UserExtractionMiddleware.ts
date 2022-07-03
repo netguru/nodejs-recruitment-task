@@ -1,9 +1,9 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { NextFunction, Request, Response } from "express";
+import { default as jwt } from "jsonwebtoken";
 
-import {Configuration} from "@app/logic/service/configuration/Configuration";
-import {default as jwt} from "jsonwebtoken";
-import {User} from "@app/model/user/User";
+import { Configuration } from "@app/logic/service/configuration/Configuration";
+import { User } from "@app/model/user/User";
 
 @Injectable()
 export class UserExtractionMiddleware implements NestMiddleware {
@@ -11,7 +11,7 @@ export class UserExtractionMiddleware implements NestMiddleware {
 
   async use(req: Request, _res: Response, next: NextFunction): Promise<void> {
     const bearer = req.headers.authorization;
-    if(bearer && bearer.startsWith("Bearer ")){
+    if (bearer && bearer.startsWith("Bearer ")) {
       const token = bearer.substring("Bearer ".length);
       try {
         const decoded = jwt.verify(token, this.configuration.jwtSecret);

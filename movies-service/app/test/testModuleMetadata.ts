@@ -1,10 +1,9 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import ormConfig from "@ormconfig";
-import { ConnectionOptions } from "typeorm";
 
 import { appModuleControllers, appModuleImports, appModuleProviders } from "@app/appModuleMetadata";
 
-const testEnvOrmConfig = ormConfig.getConfig("test") as ConnectionOptions;
+const testEnvOrmConfig = ormConfig.getConfig("test");
 
 export const testModuleMetadata = {
   controllers: appModuleControllers,

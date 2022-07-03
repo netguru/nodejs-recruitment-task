@@ -1,8 +1,8 @@
+import { Injectable } from "@nestjs/common";
 import chalk from "chalk";
 
 import { Configuration } from "@app/logic/service/configuration/Configuration";
 import { prettyPrint } from "@app/logic/service/logger/prettyPrint";
-import {Injectable} from "@nestjs/common";
 
 // eslint-disable-next-line
 type Source = any;

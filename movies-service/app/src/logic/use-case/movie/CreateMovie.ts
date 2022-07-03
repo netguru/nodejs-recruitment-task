@@ -1,10 +1,10 @@
-import {BadRequestException, Injectable} from "@nestjs/common";
-import {OMDBApiClient} from "@app/logic/service/omdb/OMDBApiClient";
-import {MovieRepository} from "@app/db/repository/MovieRepository";
-import {Movie} from "@app/db/entity/Movie";
-import {VerifyUserMovieQuota} from "@app/logic/use-case/movie/VerifyUserMovieQuota";
+import { BadRequestException, Injectable } from "@nestjs/common";
 
-import {User} from "@app/model/user/User";
+import { Movie } from "@app/db/entity/Movie";
+import { MovieRepository } from "@app/db/repository/MovieRepository";
+import { OMDBApiClient } from "@app/logic/service/omdb/OMDBApiClient";
+import { VerifyUserMovieQuota } from "@app/logic/use-case/movie/VerifyUserMovieQuota";
+import { User } from "@app/model/user/User";
 
 @Injectable()
 export class CreateMovie {
@@ -12,14 +12,14 @@ export class CreateMovie {
     private readonly omdbApiClient: OMDBApiClient,
     private readonly verifyUserMovieQuota: VerifyUserMovieQuota,
     private readonly movieRepository: MovieRepository
-  ) { }
+  ) {}
 
   async create(title: string, user: User): Promise<Movie> {
-    if(!(await this.verifyUserMovieQuota.canCreateMoreMovies(user))){
+    if (!(await this.verifyUserMovieQuota.canCreateMoreMovies(user))) {
       throw new BadRequestException("Movie quota depleted, please wait for new month or upgrade to Premium account");
     }
     const additionalData = await this.omdbApiClient.fetchDataByTitle(title);
-    if(!additionalData){
+    if (!additionalData) {
       throw new BadRequestException("Movie with following title not found in OMDB database");
     }
     const newMovie = new Movie();

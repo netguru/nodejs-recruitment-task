@@ -7,11 +7,7 @@ import { default as Repositories } from "@app/db/repository";
 import { default as Services } from "@app/logic/service";
 import { default as UseCases } from "@app/logic/use-case";
 
-export const appModuleProviders = [
-  ...Presenters,
-  ...UseCases,
-  ...Services,
-];
+export const appModuleProviders = [...Presenters, ...UseCases, ...Services];
 
 export const appModuleImports = [TypeOrmModule.forFeature([...Entities, ...Repositories])];
 

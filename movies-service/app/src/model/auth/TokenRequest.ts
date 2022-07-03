@@ -1,5 +1,5 @@
-import {IsString} from "class-validator";
-import {Expose} from "class-transformer";
+import { Expose } from "class-transformer";
+import { IsString } from "class-validator";
 
 export class TokenRequest {
   @Expose()

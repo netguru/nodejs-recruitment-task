@@ -1,12 +1,10 @@
 import ormConfig from "@ormconfig";
 import path from "path";
-import {Connection, ConnectionOptions, createConnection} from "typeorm";
-import {FixtureEntity, TypeormFixturesLoaderHelper} from "@app/logic/service/typeorm/TypeormFixturesLoaderHelper";
+import { Connection, createConnection } from "typeorm";
 
+import { FixtureEntity, TypeormFixturesLoaderHelper } from "@app/logic/service/typeorm/TypeormFixturesLoaderHelper";
 
-const testEnvOrmConfig = ormConfig.getConfig("test") as ConnectionOptions;
-
-const DEFAULT_FIXTURES_PATH = "./test/helpers/fixtures/";
+const testEnvOrmConfig = ormConfig.getConfig("test");
 
 export interface CreatedFixtures {
   [key: string]: any; // eslint-disable-line
@@ -15,10 +13,10 @@ export interface CreatedFixtures {
 let connection: Connection | undefined = undefined;
 
 export const loadFixtures = async (
-  fixturesPath: string = DEFAULT_FIXTURES_PATH
+  fixturesPath: string = "./test/helpers/fixtures/"
 ): Promise<Record<string, FixtureEntity>> => {
   try {
-    if(!connection) {
+    if (!connection) {
       connection = await createConnection({
         ...testEnvOrmConfig,
         dropSchema: true,
@@ -27,7 +25,7 @@ export const loadFixtures = async (
       });
     } else {
       await connection.dropDatabase();
-      await connection.runMigrations({transaction: "none"}); // mmm, speed
+      await connection.runMigrations({ transaction: "none" }); // mmm, speed
     }
     return await TypeormFixturesLoaderHelper.load(path.resolve(fixturesPath));
   } catch (e) {

@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 
 import { AbstractAsyncPresenter } from "@app/api/presenter/AbstractAsyncPresenter";
-import { User } from "@app/model/user/User";
 import { ReadMeData } from "@app/model/user/ReadMeData";
+import { User } from "@app/model/user/User";
 
 @Injectable()
 export class MePresenter extends AbstractAsyncPresenter<User, ReadMeData> {
