@@ -28,6 +28,8 @@ COPY app/ormconfig.js $DIR/
 
 COPY docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY docker/test-entrypoint.sh /usr/local/bin/test-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/test-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["yarn", "start:dist"]
