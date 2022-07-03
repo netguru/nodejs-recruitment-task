@@ -6,6 +6,7 @@ services:
       dockerfile: ../auth-service/Dockerfile
     volumes:
       - ../auth-service:/app/
+      - ../auth-service/docker/auth-entrypoint.sh:/usr/local/bin/auth-entrypoint.sh
     environment:
       - NODE_ENV=development
 
